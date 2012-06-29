@@ -44,6 +44,7 @@
 		<Unit filename="../include/XPG/DataTypes.hpp" />
 		<Unit filename="../include/XPG/DateTime.hpp" />
 		<Unit filename="../include/XPG/Event.hpp" />
+		<Unit filename="../include/XPG/Mutex.hpp" />
 		<Unit filename="../include/XPG/NativeTimers.hpp" />
 		<Unit filename="../include/XPG/Stopwatch.hpp" />
 		<Unit filename="../include/XPG/Thread.hpp" />
@@ -54,6 +55,7 @@
 		<Unit filename="../source/TickSpans.hpp" />
 		<Unit filename="../source/TimeSpan.cpp" />
 		<Unit filename="../source/linux/NativeTimers.cpp" />
+		<Unit filename="../source/unix/Mutex.cpp" />
 		<Unit filename="../source/unix/Thread.cpp" />
 		<Extensions>
 			<code_completion />

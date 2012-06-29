@@ -2,10 +2,12 @@
 #include <XPG/Stopwatch.hpp>
 #include <XPG/NativeTimers.hpp>
 #include <XPG/Thread.hpp>
+#include <XPG/Mutex.hpp>
 #include <iostream>
 using namespace std;
 
 const char* const Letters = "ABCDEF";
+XPG::Mutex mutex;
 
 void TestListener(void* data)
 {
@@ -23,7 +25,10 @@ void Talk(void* data)
     for (int i = 0; i < 4; ++i)
     {
         cout << "Greetings from thread " << *letter << endl;
-        XPG::Sleep(XPG::TimeSpan::FromSeconds(1));
+        XPG::Sleep(XPG::TimeSpan::FromMilliseconds(500));
+        mutex.Lock();
+        XPG::Sleep(XPG::TimeSpan::FromMilliseconds(500));
+        mutex.Unlock();
     }
 }
 
@@ -39,7 +44,7 @@ int main(int argc, char** argv)
     XPG::Thread a;
     a.Start(Talk, (void*)(Letters + 0));
 
-    XPG::Sleep(XPG::TimeSpan::FromMilliseconds(500));
+    //XPG::Sleep(XPG::TimeSpan::FromMilliseconds(500));
 
     XPG::Thread b;
     b.Start(Talk, (void*)(Letters + 1));

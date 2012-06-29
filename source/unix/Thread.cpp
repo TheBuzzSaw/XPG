@@ -16,7 +16,6 @@ namespace XPG
     static void* CreateThread(void* data)
     {
         ThreadMeta* meta = (ThreadMeta*)data;
-        *meta->running = true;
         meta->entry(meta->data);
         *meta->running = false;
         pthread_exit(0);
@@ -43,6 +42,8 @@ namespace XPG
             meta->entry = entry;
             meta->data = data;
 
+            _isRunning = true;
+
             switch (pthread_create(&meta->thread, NULL, CreateThread, meta))
             {
                 case 0:
@@ -52,6 +53,7 @@ namespace XPG
                 case EINVAL: // invalid attributes
                 case EPERM: // Caller does not have appropriate permission
                 default: // something else went wrong
+                    _isRunning = false;
                     break;
             }
         }
