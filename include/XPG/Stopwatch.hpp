@@ -1,5 +1,5 @@
-#ifndef STOPWATCH_HPP
-#define STOPWATCH_HPP
+#ifndef XpgStopwatchHpp
+#define XpgStopwatchHpp
 
 #include "TimeSpan.hpp"
 

@@ -1,5 +1,5 @@
-#ifndef TIMESPAN_HPP
-#define TIMESPAN_HPP
+#ifndef XpgTimeSpanHpp
+#define XpgTimeSpanHpp
 
 #include "DataTypes.hpp"
 #include <iostream>

@@ -8,7 +8,7 @@ void TestListener(void* inData)
 {
     XPG::Stopwatch stopwatch;
     stopwatch.Start();
-    Sleep(XPG::TimeSpan::FromMilliseconds(1500));
+    Sleep(XPG::TimeSpan::FromMilliseconds(250));
     cout << "timer slept for " << stopwatch.Elapsed() << endl;
     cout << "data: " << inData << endl;
 }

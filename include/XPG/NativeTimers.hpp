@@ -1,5 +1,5 @@
-#ifndef NATIVETIMERS_HPP
-#define NATIVETIMERS_HPP
+#ifndef XpgNativeTimersHpp
+#define XpgNativeTimersHpp
 
 #include "DateTime.hpp"
 

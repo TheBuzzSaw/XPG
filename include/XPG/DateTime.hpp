@@ -1,5 +1,5 @@
-#ifndef DATETIME_HPP
-#define DATETIME_HPP
+#ifndef XpgDateTimeHpp
+#define XpgDateTimeHpp
 
 #include "TimeSpan.hpp"
 
