@@ -37,20 +37,24 @@
 			<Add option="-fPIC" />
 		</Compiler>
 		<Linker>
+			<Add option="-pthread" />
 			<Add option="-fPIC" />
+			<Add library="rt" />
 		</Linker>
 		<Unit filename="../include/XPG/DataTypes.hpp" />
 		<Unit filename="../include/XPG/DateTime.hpp" />
 		<Unit filename="../include/XPG/Event.hpp" />
 		<Unit filename="../include/XPG/NativeTimers.hpp" />
 		<Unit filename="../include/XPG/Stopwatch.hpp" />
+		<Unit filename="../include/XPG/Thread.hpp" />
 		<Unit filename="../include/XPG/TimeSpan.hpp" />
+		<Unit filename="../source/DateTime.cpp" />
 		<Unit filename="../source/Event.cpp" />
-		<Unit filename="../source/Time/DateTime.cpp" />
-		<Unit filename="../source/Time/NativeTimersLinux.cpp" />
-		<Unit filename="../source/Time/Stopwatch.cpp" />
-		<Unit filename="../source/Time/TickSpans.hpp" />
-		<Unit filename="../source/Time/TimeSpan.cpp" />
+		<Unit filename="../source/Stopwatch.cpp" />
+		<Unit filename="../source/TickSpans.hpp" />
+		<Unit filename="../source/TimeSpan.cpp" />
+		<Unit filename="../source/linux/NativeTimers.cpp" />
+		<Unit filename="../source/unix/Thread.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
