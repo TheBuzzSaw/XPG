@@ -1,9 +1,11 @@
 #ifndef XpgEventHpp
 #define XpgEventHpp
 
+#include "Platform.hpp"
+
 namespace XPG
 {
-    class Event
+    XpgClass Event
     {
         public:
             typedef void (*Listener)(void*);

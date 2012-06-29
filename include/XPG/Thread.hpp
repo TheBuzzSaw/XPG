@@ -1,11 +1,12 @@
 #ifndef XpgThreadHpp
 #define XpgThreadHpp
 
+#include "Platform.hpp"
 #include "DataTypes.hpp"
 
 namespace XPG
 {
-    class Thread
+    XpgClass Thread
     {
         public:
             typedef void (* Entry)(void*);

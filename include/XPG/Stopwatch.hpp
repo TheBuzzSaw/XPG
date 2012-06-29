@@ -5,7 +5,7 @@
 
 namespace XPG
 {
-    class Stopwatch
+    XpgClass Stopwatch
     {
         public:
             Stopwatch();

@@ -1,12 +1,13 @@
 #ifndef XpgTimeSpanHpp
 #define XpgTimeSpanHpp
 
+#include "Platform.hpp"
 #include "DataTypes.hpp"
 #include <iostream>
 
 namespace XPG
 {
-    class TimeSpan
+    XpgClass TimeSpan
     {
         public:
             TimeSpan();

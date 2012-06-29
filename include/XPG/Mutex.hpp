@@ -1,9 +1,11 @@
 #ifndef XpgMutexHpp
 #define XpgMutexHpp
 
+#include "Platform.hpp"
+
 namespace XPG
 {
-    class Mutex
+    XpgClass Mutex
     {
         public:
             Mutex();

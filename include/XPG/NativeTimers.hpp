@@ -5,10 +5,10 @@
 
 namespace XPG
 {
-    void Sleep(TimeSpan timeSpan);
-    const DateTime GetNativeTime();
-    void ResetTimer();
-    const TimeSpan ReadTimer();
+    XpgFunction void Sleep(TimeSpan timeSpan);
+    XpgFunction const DateTime GetNativeTime();
+    XpgFunction void ResetTimer();
+    XpgFunction const TimeSpan ReadTimer();
 }
 
 #endif

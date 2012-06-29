@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="xpg-win32" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin\Debug\xpg-win32" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-DBUILD_DLL" />
+				</Compiler>
+				<Linker>
+					<Add library="user32" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin\Release\xpg-win32" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-Wall" />
+					<Add option="-DBUILD_DLL" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="user32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-DXpgBuild" />
+		</Compiler>
+		<Unit filename="..\include\XPG\DataTypes.hpp" />
+		<Unit filename="..\include\XPG\DateTime.hpp" />
+		<Unit filename="..\include\XPG\Event.hpp" />
+		<Unit filename="..\include\XPG\Mutex.hpp" />
+		<Unit filename="..\include\XPG\NativeTimers.hpp" />
+		<Unit filename="..\include\XPG\Platform.hpp" />
+		<Unit filename="..\include\XPG\Stopwatch.hpp" />
+		<Unit filename="..\include\XPG\Thread.hpp" />
+		<Unit filename="..\include\XPG\TimeSpan.hpp" />
+		<Unit filename="..\source\DateTime.cpp" />
+		<Unit filename="..\source\Event.cpp" />
+		<Unit filename="..\source\Stopwatch.cpp" />
+		<Unit filename="..\source\TickSpans.hpp" />
+		<Unit filename="..\source\TimeSpan.cpp" />
+		<Unit filename="..\source\windows\Mutex.cpp" />
+		<Unit filename="..\source\windows\NativeTimers.cpp" />
+		<Unit filename="..\source\windows\Thread.cpp" />
+		<Unit filename="..\source\windows\Windows.hpp" />
+		<Unit filename="main.cpp" />
+		<Unit filename="main.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

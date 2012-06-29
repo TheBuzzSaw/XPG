@@ -1,11 +1,12 @@
 #ifndef XpgDateTimeHpp
 #define XpgDateTimeHpp
 
+#include "Platform.hpp"
 #include "TimeSpan.hpp"
 
 namespace XPG
 {
-    class DateTime
+    XpgClass DateTime
     {
         public:
             DateTime();
