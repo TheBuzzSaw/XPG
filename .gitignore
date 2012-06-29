@@ -1,0 +1,14 @@
+.svn/
+CVS/
+
+*.a
+*.lib
+*.dll
+
+# Codeblocks nonsense
+obj/
+bin/
+*.o
+*.depend
+*.layout
+*.cbTemp
