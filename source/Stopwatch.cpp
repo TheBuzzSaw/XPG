@@ -1,5 +1,5 @@
 #include "../include/XPG/Stopwatch.hpp"
-#include "../include/XPG/NativeTimers.hpp"
+#include "../include/XPG/Clock.hpp"
 
 namespace XPG
 {

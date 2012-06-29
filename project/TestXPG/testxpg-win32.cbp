@@ -28,6 +28,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add directory="..\bin\Release" />
 				</Linker>
 			</Target>
 		</Build>
@@ -40,6 +41,15 @@
 		</Linker>
 		<Unit filename="main.cpp" />
 		<Extensions>
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
 			<code_completion />
 			<envvars />
 			<debugger />

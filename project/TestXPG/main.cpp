@@ -1,6 +1,6 @@
 #include <XPG/Event.hpp>
 #include <XPG/Stopwatch.hpp>
-#include <XPG/NativeTimers.hpp>
+#include <XPG/Clock.hpp>
 #include <XPG/Thread.hpp>
 #include <XPG/Mutex.hpp>
 #include <iostream>
@@ -20,6 +20,7 @@ void TestListener(void* data)
 
 void Talk(void* data)
 {
+    cout << "inside Talk()" << endl;
     const char* letter = (const char*)data;
 
     for (int i = 0; i < 4; ++i)
@@ -35,6 +36,13 @@ void Talk(void* data)
 int main(int argc, char** argv)
 {
     XPG::ResetTimer();
+
+    cout << XPG::DateTime(1601, 1, 1).Ticks() << endl;
+    cout << XPG::DateTime::UtcTime() << endl;
+    cout << XPG::HighResolutionUtcTime() << endl;
+    cout << XPG::DateTime::LocalTime() << endl;
+    cout << XPG::HighResolutionLocalTime() << endl;
+
     XPG::Event e;
     e.AddListener(TestListener);
     e.AddListener(TestListener, &e);
@@ -44,10 +52,16 @@ int main(int argc, char** argv)
     XPG::Thread a;
     a.Start(Talk, (void*)(Letters + 0));
 
+    if (a.IsRunning())
+        cout << "Thread A is running." << endl;
+
     //XPG::Sleep(XPG::TimeSpan::FromMilliseconds(500));
 
     XPG::Thread b;
     b.Start(Talk, (void*)(Letters + 1));
+
+    if (b.IsRunning())
+        cout << "Thread B is running." << endl;
 
     a.Join();
     b.Join();

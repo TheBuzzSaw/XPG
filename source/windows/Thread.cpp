@@ -44,8 +44,10 @@ namespace XPG
             ThreadMeta* meta = (ThreadMeta*)_native;
             meta->entry = entry;
             meta->data = data;
-            meta->handle = CreateThread(NULL, 0, ThreadMain, meta, 0, &meta->id);
-            _isRunning = true;
+            meta->handle = CreateThread(NULL, 0, ThreadMain, meta, 0,
+                &meta->id);
+
+            _isRunning = meta->handle != NULL;
         }
     }
 
