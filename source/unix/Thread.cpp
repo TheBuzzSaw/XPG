@@ -1,7 +1,10 @@
 #include "../../include/XPG/Thread.hpp"
 #include <pthread.h>
 #include <cerrno>
+#include <cstring>
 #include <cstdlib>
+
+#include <iostream>
 
 namespace XPG
 {
@@ -9,7 +12,7 @@ namespace XPG
     {
         pthread_t thread;
         Thread::Entry entry;
-        volatile bool* running;
+        volatile bool running;
         void* data;
     };
 
@@ -17,32 +20,38 @@ namespace XPG
     {
         ThreadMeta* meta = (ThreadMeta*)data;
         meta->entry(meta->data);
-        *meta->running = false;
+        meta->running = false;
         pthread_exit(0);
         return 0;
     }
 
-    Thread::Thread() : _isRunning(false)
+    Thread::Thread()
     {
-        _native = malloc(sizeof(ThreadMeta));
+        memset(_native, 0, sizeof(_native));
         ThreadMeta* meta = (ThreadMeta*)_native;
-        meta->running = &_isRunning;
+        meta->running = false;
     }
 
     Thread::~Thread()
     {
-        free(_native);
+    }
+
+    bool Thread::IsRunning() const
+    {
+        ThreadMeta* meta = (ThreadMeta*)_native;
+        return meta->running;
     }
 
     void Thread::Start(Thread::Entry entry, void* data)
     {
-        if (!_isRunning)
+        ThreadMeta* meta = (ThreadMeta*)_native;
+
+        if (!meta->running)
         {
-            ThreadMeta* meta = (ThreadMeta*)_native;
             meta->entry = entry;
             meta->data = data;
 
-            _isRunning = true;
+            meta->running = true;
 
             switch (pthread_create(&meta->thread, NULL, CreateThread, meta))
             {
@@ -53,7 +62,7 @@ namespace XPG
                 case EINVAL: // invalid attributes
                 case EPERM: // Caller does not have appropriate permission
                 default: // something else went wrong
-                    _isRunning = false;
+                    meta->running = false;
                     break;
             }
         }
@@ -61,9 +70,10 @@ namespace XPG
 
     void Thread::Join()
     {
-        if (_isRunning)
+        ThreadMeta* meta = (ThreadMeta*)_native;
+
+        if (meta->running)
         {
-            ThreadMeta* meta = (ThreadMeta*)_native;
             switch (pthread_join(meta->thread, NULL))
             {
                 case 0: break; // no error

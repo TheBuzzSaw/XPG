@@ -15,7 +15,7 @@ namespace XPG
             void Unlock();
 
         private:
-            void* _native;
+            char _native[64];
     };
 }
 

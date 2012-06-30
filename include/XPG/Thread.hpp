@@ -14,14 +14,12 @@ namespace XPG
             Thread();
             ~Thread();
 
-            inline bool IsRunning() const { return _isRunning; }
-
+            bool IsRunning() const;
             void Start(Entry entry, void* data = 0);
             void Join();
 
         private:
-            volatile bool _isRunning;
-            void* _native;
+            char _native[64];
     };
 }
 

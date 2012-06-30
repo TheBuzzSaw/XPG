@@ -6,7 +6,6 @@ namespace XPG
 {
     Mutex::Mutex()
     {
-        _native = malloc(sizeof(pthread_mutex_t));
         pthread_mutex_t* mutex = (pthread_mutex_t*)_native;
         pthread_mutex_init(mutex, NULL);
     }
@@ -15,7 +14,6 @@ namespace XPG
     {
         pthread_mutex_t* mutex = (pthread_mutex_t*)_native;
         pthread_mutex_destroy(mutex);
-        free(_native);
     }
 
     void Mutex::Lock()
