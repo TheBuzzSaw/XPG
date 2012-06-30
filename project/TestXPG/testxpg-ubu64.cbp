@@ -28,6 +28,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add directory="../bin/Release" />
 				</Linker>
 			</Target>
 		</Build>
