@@ -49,10 +49,12 @@ namespace XPG
         {
             meta->entry = entry;
             meta->data = data;
+            meta->running = true;
             meta->handle = CreateThread(NULL, 0, ThreadMain, meta, 0,
                 &meta->id);
 
-            meta->running = meta->handle != NULL;
+            if (meta->handle == NULL)
+                meta->running = false;
         }
     }
 
