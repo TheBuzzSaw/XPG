@@ -18,7 +18,7 @@
 #ifdef XpgStatic
 #   define XpgFunction extern
 #   define XpgClass class
-#else
+#elif defined(XpgPlatformWindows)
 #   ifdef XpgBuild
 #       define XpgFunction extern __declspec(dllexport)
 #       define XpgClass class __declspec(dllexport)
@@ -26,6 +26,9 @@
 #       define XpgFunction extern __declspec(dllimport)
 #       define XpgClass class __declspec(dllimport)
 #   endif
+#else
+#   define XpgFunction extern __attribute__ ((visibility("default")))
+#   define XpgClass class __attribute__ ((visibility("default")))
 #endif
 
 #endif

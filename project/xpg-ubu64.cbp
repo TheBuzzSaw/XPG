@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="XPG (ubu64)" />
+		<Option title="xpg-ubu64" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/libXPG" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/libxpg-ubu64" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -18,7 +18,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/libXPG" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/libxpg-ubu64" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -34,18 +34,15 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-fexceptions" />
 			<Add option="-fPIC" />
 		</Compiler>
-		<Linker>
-			<Add option="-pthread" />
-			<Add option="-fPIC" />
-			<Add library="rt" />
-		</Linker>
+		<Unit filename="../include/XPG/Clock.hpp" />
 		<Unit filename="../include/XPG/DataTypes.hpp" />
 		<Unit filename="../include/XPG/DateTime.hpp" />
 		<Unit filename="../include/XPG/Event.hpp" />
 		<Unit filename="../include/XPG/Mutex.hpp" />
-		<Unit filename="../include/XPG/NativeTimers.hpp" />
+		<Unit filename="../include/XPG/Platform.hpp" />
 		<Unit filename="../include/XPG/Stopwatch.hpp" />
 		<Unit filename="../include/XPG/Thread.hpp" />
 		<Unit filename="../include/XPG/TimeSpan.hpp" />
@@ -54,7 +51,7 @@
 		<Unit filename="../source/Stopwatch.cpp" />
 		<Unit filename="../source/TickSpans.hpp" />
 		<Unit filename="../source/TimeSpan.cpp" />
-		<Unit filename="../source/linux/NativeTimers.cpp" />
+		<Unit filename="../source/linux/Clock.cpp" />
 		<Unit filename="../source/unix/Mutex.cpp" />
 		<Unit filename="../source/unix/Thread.cpp" />
 		<Extensions>
