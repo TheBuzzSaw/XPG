@@ -37,6 +37,9 @@
 			<Add option="-fexceptions" />
 			<Add option="-fPIC" />
 		</Compiler>
+		<Linker>
+			<Add library="rt" />
+		</Linker>
 		<Unit filename="../include/XPG/Clock.hpp" />
 		<Unit filename="../include/XPG/DataTypes.hpp" />
 		<Unit filename="../include/XPG/DateTime.hpp" />

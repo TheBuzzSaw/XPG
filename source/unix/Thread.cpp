@@ -4,8 +4,6 @@
 #include <cstring>
 #include <cstdlib>
 
-#include <iostream>
-
 namespace XPG
 {
     struct ThreadMeta
@@ -28,8 +26,6 @@ namespace XPG
     Thread::Thread()
     {
         memset(_native, 0, sizeof(_native));
-        ThreadMeta* meta = (ThreadMeta*)_native;
-        meta->running = false;
     }
 
     Thread::~Thread()
@@ -38,7 +34,7 @@ namespace XPG
 
     bool Thread::IsRunning() const
     {
-        ThreadMeta* meta = (ThreadMeta*)_native;
+        const ThreadMeta* meta = (const ThreadMeta*)_native;
         return meta->running;
     }
 
