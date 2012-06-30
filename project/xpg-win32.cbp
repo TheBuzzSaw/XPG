@@ -61,8 +61,6 @@
 		<Unit filename="..\source\windows\Mutex.cpp" />
 		<Unit filename="..\source\windows\Thread.cpp" />
 		<Unit filename="..\source\windows\Windows.hpp" />
-		<Unit filename="main.cpp" />
-		<Unit filename="main.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
