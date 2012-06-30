@@ -6,7 +6,7 @@ namespace XPG
 {
     Mutex::Mutex()
     {
-        _native = malloc(sizeof(HANDLE));
+        memset(_native, 0, sizeof(_native));
         HANDLE* handle = (HANDLE*)_native;
         *handle = CreateMutex(NULL, FALSE, NULL);
     }
@@ -15,7 +15,6 @@ namespace XPG
     {
         HANDLE* handle = (HANDLE*)_native;
         CloseHandle(*handle);
-        free(_native);
     }
 
     void Mutex::Lock()

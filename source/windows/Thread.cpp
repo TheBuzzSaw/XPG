@@ -9,7 +9,7 @@ namespace XPG
     {
         DWORD id;
         HANDLE handle;
-        volatile bool* running;
+        volatile bool running;
         Thread::Entry entry;
         void* data;
     };
@@ -18,44 +18,50 @@ namespace XPG
     {
         ThreadMeta* meta = (ThreadMeta*)data;
         meta->entry(meta->data);
-        *meta->running = false;
+        meta->running = false;
         return 0;
     }
 
-    Thread::Thread() : _isRunning(false)
+    Thread::Thread()
     {
-        _native = malloc(sizeof(ThreadMeta));
-        memset(_native, 0, sizeof(ThreadMeta));
-        ThreadMeta* meta = (ThreadMeta*)_native;
-        meta->running = &_isRunning;
+        memset(_native, 0, sizeof(_native));
     }
 
     Thread::~Thread()
     {
         ThreadMeta* meta = (ThreadMeta*)_native;
-        CloseHandle(meta->handle);
-        free(_native);
+
+        if (meta->handle != NULL)
+            CloseHandle(meta->handle);
+    }
+
+    bool Thread::IsRunning() const
+    {
+        const ThreadMeta* meta = (const ThreadMeta*)_native;
+        return meta->running;
     }
 
     void Thread::Start(Thread::Entry entry, void* data)
     {
-        if (!_isRunning)
+        ThreadMeta* meta = (ThreadMeta*)_native;
+
+        if (!meta->running)
         {
-            ThreadMeta* meta = (ThreadMeta*)_native;
             meta->entry = entry;
             meta->data = data;
             meta->handle = CreateThread(NULL, 0, ThreadMain, meta, 0,
                 &meta->id);
 
-            _isRunning = meta->handle != NULL;
+            meta->running = meta->handle != NULL;
         }
     }
 
     void Thread::Join()
     {
-        if (_isRunning)
+        ThreadMeta* meta = (ThreadMeta*)_native;
+
+        if (meta->running)
         {
-            ThreadMeta* meta = (ThreadMeta*)_native;
             WaitForSingleObject(meta->handle, INFINITE);
         }
     }
