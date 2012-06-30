@@ -20,7 +20,6 @@ void TestListener(void* data)
 
 void Talk(void* data)
 {
-    cout << "inside Talk()" << endl;
     const char* letter = (const char*)data;
 
     for (int i = 0; i < 4; ++i)
@@ -52,19 +51,13 @@ int main(int argc, char** argv)
     XPG::Thread a;
     a.Start(Talk, (void*)(Letters + 0));
 
-    if (a.IsRunning())
-        cout << "Thread A is running." << endl;
-
-    //XPG::Sleep(XPG::TimeSpan::FromMilliseconds(500));
-
     XPG::Thread b;
     b.Start(Talk, (void*)(Letters + 1));
 
-    if (b.IsRunning())
-        cout << "Thread B is running." << endl;
-
     a.Join();
+    cout << "joined thread A" << endl;
     b.Join();
+    cout << "joined thread B" << endl;
 
     return 0;
 }

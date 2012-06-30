@@ -22,7 +22,7 @@ namespace XPG
         return 0;
     }
 
-    Thread::Thread()
+    Thread::Thread() : _isRunning(false)
     {
         _native = malloc(sizeof(ThreadMeta));
         memset(_native, 0, sizeof(ThreadMeta));
