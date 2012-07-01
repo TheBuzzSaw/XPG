@@ -89,7 +89,7 @@ namespace XPG
         if (!RegisterClassEx(&windowClass))
         {
             cerr << "failed on RegisterClassEx\n";
-            return;
+            //return;
         }
 
         DWORD exStyle = BaseExStyle | WS_EX_WINDOWEDGE;
@@ -106,6 +106,8 @@ namespace XPG
         }
 
         meta->deviceContext = GetDC(meta->window);
+        ShowWindow(meta->window, SW_SHOWNORMAL);
+        UpdateWindow(meta->window);
     }
 
     Window::~Window()
@@ -129,8 +131,7 @@ namespace XPG
     void Window::Run()
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        ShowWindow(meta->window, SW_SHOWNORMAL);
-        UpdateWindow(meta->window);
+
 
         BOOL result;
         MSG msg;

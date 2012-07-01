@@ -56,18 +56,23 @@ int main(int argc, char** argv)
     e.AddListener(TestListener, &cout);
     e.Fire();
 
-    MakeWindow(NULL);
-
     XPG::Thread a;
-    a.Start(Talk, (void*)(Letters + 0));
-
     XPG::Thread b;
+    XPG::Thread c;
+    XPG::Thread d;
+
+    c.Start(MakeWindow);
+    //d.Start(MakeWindow);
+
+    a.Start(Talk, (void*)(Letters + 0));
     b.Start(Talk, (void*)(Letters + 1));
 
     a.Join();
     cout << "joined thread A" << endl;
     b.Join();
     cout << "joined thread B" << endl;
+    c.Join();
+    d.Join();
 
     return 0;
 }

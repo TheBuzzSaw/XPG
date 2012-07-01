@@ -15,6 +15,17 @@ namespace XPG
             void Unlock();
 
         private:
+            Mutex(const Mutex& mutex)
+            {
+                // no copying
+            }
+
+            Mutex& operator=(const Mutex& mutex)
+            {
+                // no copying
+                return *this;
+            }
+
             char _native[64];
     };
 }

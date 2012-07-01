@@ -7,8 +7,23 @@ namespace XPG
     {
     }
 
+    Stopwatch::Stopwatch(const Stopwatch& stopwatch)
+    {
+        _isRunning = stopwatch._isRunning;
+        _elapsed = stopwatch._elapsed;
+        _start = stopwatch._start;
+    }
+
     Stopwatch::~Stopwatch()
     {
+    }
+
+    Stopwatch& Stopwatch::operator=(const Stopwatch& stopwatch)
+    {
+        _isRunning = stopwatch._isRunning;
+        _elapsed = stopwatch._elapsed;
+        _start = stopwatch._start;
+        return *this;
     }
 
     const TimeSpan Stopwatch::Elapsed() const
