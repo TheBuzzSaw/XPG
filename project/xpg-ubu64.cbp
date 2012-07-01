@@ -36,9 +36,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 			<Add option="-fPIC" />
+			<Add option="-DGLEW_STATIC" />
 		</Compiler>
 		<Linker>
 			<Add library="rt" />
+			<Add library="X11" />
+			<Add library="GL" />
 		</Linker>
 		<Unit filename="../include/XPG/Clock.hpp" />
 		<Unit filename="../include/XPG/DataTypes.hpp" />
@@ -55,6 +58,9 @@
 		<Unit filename="../source/Stopwatch.cpp" />
 		<Unit filename="../source/TickSpans.hpp" />
 		<Unit filename="../source/TimeSpan.cpp" />
+		<Unit filename="../source/glew.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../source/linux/Clock.cpp" />
 		<Unit filename="../source/linux/Window.cpp" />
 		<Unit filename="../source/unix/Mutex.cpp" />
