@@ -11,6 +11,9 @@ namespace XPG
             Window();
             ~Window();
 
+            void Run();
+            void SwapBuffers();
+
         private:
             char _native[128];
     };

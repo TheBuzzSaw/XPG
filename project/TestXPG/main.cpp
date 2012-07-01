@@ -33,9 +33,15 @@ void Talk(void* data)
     }
 }
 
+void MakeWindow(void* data)
+{
+    (void)data;
+    XPG::Window window;
+    window.Run();
+}
+
 int main(int argc, char** argv)
 {
-    XPG::Window window;
     XPG::ResetTimer();
 
     cout << XPG::DateTime(1601, 1, 1).Ticks() << endl;
@@ -49,6 +55,8 @@ int main(int argc, char** argv)
     e.AddListener(TestListener, &e);
     e.AddListener(TestListener, &cout);
     e.Fire();
+
+    MakeWindow(NULL);
 
     XPG::Thread a;
     a.Start(Talk, (void*)(Letters + 0));
