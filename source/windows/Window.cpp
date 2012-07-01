@@ -17,11 +17,14 @@ namespace XPG
         HDC deviceContext;
         HGLRC renderContext;
         RECT formerPosition;
+        Window* object;
     };
 
     static const char* const ClassName = "XPG";
     static const DWORD BaseStyle = WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
     static const DWORD BaseExStyle = WS_EX_APPWINDOW;
+
+    static size_t openWindowCount = 0;
 
     LRESULT CALLBACK WindowCallback(HWND window, UINT message, WPARAM wparam,
         LPARAM lparam)
@@ -34,8 +37,7 @@ namespace XPG
         switch (message)
         {
             case WM_CLOSE:
-                PostQuitMessage(0);
-                return 0;
+                meta->object->Close();
                 break;
         }
 
@@ -67,8 +69,25 @@ namespace XPG
         cout << "WindowMeta size " << sizeof(WindowMeta) << endl;
         assert(sizeof(WindowMeta) <= sizeof(_native));
         memset(_native, 0, sizeof(_native));
+
+        Open();
+    }
+
+    Window::~Window()
+    {
+        Close();
+    }
+
+    void Window::Open()
+    {
         WindowMeta* meta = (WindowMeta*)_native;
 
+        if (meta->object)
+        {
+            return;
+        }
+
+        meta->object = this;
         meta->instance = GetModuleHandle(NULL);
 
         WNDCLASSEX windowClass;
@@ -89,7 +108,6 @@ namespace XPG
         if (!RegisterClassEx(&windowClass))
         {
             cerr << "failed on RegisterClassEx\n";
-            //return;
         }
 
         DWORD exStyle = BaseExStyle | WS_EX_WINDOWEDGE;
@@ -108,9 +126,11 @@ namespace XPG
         meta->deviceContext = GetDC(meta->window);
         ShowWindow(meta->window, SW_SHOWNORMAL);
         UpdateWindow(meta->window);
+
+        ++openWindowCount;
     }
 
-    Window::~Window()
+    void Window::Close()
     {
         WindowMeta* meta = (WindowMeta*)_native;
 
@@ -125,14 +145,22 @@ namespace XPG
             {
                 cerr << "error on DestroyWindow\n";
             }
+
+            if (--openWindowCount < 1)
+                PostQuitMessage(0);
         }
+
+        memset(_native, 0, sizeof(_native));
+    }
+
+    void Window::SwapBuffers()
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        ::SwapBuffers(meta->deviceContext);
     }
 
     void Window::Run()
     {
-        WindowMeta* meta = (WindowMeta*)_native;
-
-
         BOOL result;
         MSG msg;
 
@@ -148,11 +176,5 @@ namespace XPG
                 DispatchMessage(&msg);
             }
         }
-    }
-
-    void Window::SwapBuffers()
-    {
-        WindowMeta* meta = (WindowMeta*)_native;
-        ::SwapBuffers(meta->deviceContext);
     }
 }

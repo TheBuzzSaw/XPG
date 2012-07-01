@@ -33,11 +33,10 @@ void Talk(void* data)
     }
 }
 
-void MakeWindow(void* data)
+void MakeWindow()
 {
-    (void)data;
-    XPG::Window window;
-    window.Run();
+    XPG::Window windows[3];
+    XPG::Window::Run();
 }
 
 int main(int argc, char** argv)
@@ -58,21 +57,16 @@ int main(int argc, char** argv)
 
     XPG::Thread a;
     XPG::Thread b;
-    XPG::Thread c;
-    XPG::Thread d;
-
-    c.Start(MakeWindow);
-    //d.Start(MakeWindow);
 
     a.Start(Talk, (void*)(Letters + 0));
     b.Start(Talk, (void*)(Letters + 1));
+
+    MakeWindow();
 
     a.Join();
     cout << "joined thread A" << endl;
     b.Join();
     cout << "joined thread B" << endl;
-    c.Join();
-    d.Join();
 
     return 0;
 }
