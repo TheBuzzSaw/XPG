@@ -3,6 +3,7 @@
 #include <XPG/Clock.hpp>
 #include <XPG/Thread.hpp>
 #include <XPG/Mutex.hpp>
+#include <XPG/Window.hpp>
 #include <iostream>
 using namespace std;
 
@@ -34,6 +35,7 @@ void Talk(void* data)
 
 int main(int argc, char** argv)
 {
+    XPG::Window window;
     XPG::ResetTimer();
 
     cout << XPG::DateTime(1601, 1, 1).Ticks() << endl;

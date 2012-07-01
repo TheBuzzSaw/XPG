@@ -49,12 +49,14 @@
 		<Unit filename="../include/XPG/Stopwatch.hpp" />
 		<Unit filename="../include/XPG/Thread.hpp" />
 		<Unit filename="../include/XPG/TimeSpan.hpp" />
+		<Unit filename="../include/XPG/Window.hpp" />
 		<Unit filename="../source/DateTime.cpp" />
 		<Unit filename="../source/Event.cpp" />
 		<Unit filename="../source/Stopwatch.cpp" />
 		<Unit filename="../source/TickSpans.hpp" />
 		<Unit filename="../source/TimeSpan.cpp" />
 		<Unit filename="../source/linux/Clock.cpp" />
+		<Unit filename="../source/linux/Window.cpp" />
 		<Unit filename="../source/unix/Mutex.cpp" />
 		<Unit filename="../source/unix/Thread.cpp" />
 		<Extensions>
