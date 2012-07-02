@@ -14,19 +14,28 @@ namespace XPG
             Array(const Array& array);
             ~Array();
 
-            T& operator[](size_t index);
-            const T& operator[](size_t index) const;
+            inline operator T*()
+            {
+                return static_cast<T*>(_block);
+            }
+
+            inline operator const T*() const
+            {
+                return static_cast<T*>(_block);
+            }
 
             inline size_t Size() const { return _size; }
             inline size_t Capacity() const { return _capacity; }
 
-            void Add(const T& value);
-            void Reserve(size_t capacity);
+            Array& operator=(const Array& array);
+
+            bool Add(const T& value);
+            bool Reserve(size_t capacity);
 
         private:
             void Copy(const Array& array);
             void Destroy();
-            void Expand();
+            bool Expand();
 
             void* _block;
             size_t _capacity;
@@ -54,48 +63,77 @@ namespace XPG
     }
 
     template<typename T>
-    T& Array<T>::operator[](size_t index)
+    Array<T>& Array<T>::operator=(const Array& array)
     {
-        T* target = static_cast<T*>(_block) + index;
-        return *target;
+        Destroy();
+        Copy(array);
+        return *this;
     }
 
     template<typename T>
-    const T& Array<T>::operator[](size_t index) const
+    bool Array<T>::Add(const T& value)
     {
-        const T* target = static_cast<const T*>(_block) + index;
-        return *target;
+        bool success = false;
+
+        if (_size < _capacity || Expand())
+        {
+            T* target = static_cast<T*>(_block) + _size++;
+            new (target) T(value);
+            success = true;
+        }
+
+        return success;
     }
 
     template<typename T>
-    void Array<T>::Add(const T& value)
+    bool Array<T>::Reserve(size_t capacity)
     {
-        if (_size == _capacity)
-            Expand();
+        bool success = true;
 
-        T* target = static_cast<T*>(_block) + _size;
-        new (target) T(value);
+        if (capacity > _capacity)
+        {
+            _capacity = capacity;
 
-        ++_size;
+            void* block = malloc(_capacity);
+
+            if (block)
+            {
+                memcpy(block, _block, _size * sizeof(T));
+                free(_block);
+                _block = block;
+            }
+            else
+            {
+                success = false;
+            }
+        }
+
+        return success;
     }
 
     template<typename T>
     void Array<T>::Copy(const Array& array)
     {
         _block = 0;
-        _size = array._size;
-        _capacity = _size;
+        _size = 0;
+        _capacity = 0;
 
-        if (_size)
+        if (array._size)
         {
-            _block = malloc(_size * sizeof(T));
+            _block = malloc(array._size * sizeof(T));
 
-            T* a = static_cast<T*>(_block);
-            const T* b = static_cast<const T*>(array._block);
-
-            for (size_t i = 0; i < _size; ++i)
+            if (_block)
             {
-                new (a++) T(*b++);
+                _size = array._size;
+                _capacity = _size;
+
+                T* a = static_cast<T*>(_block);
+                const T* b = static_cast<const T*>(array._block);
+
+                for (size_t i = 0; i < _size; ++i)
+                {
+                    new (a++) T(*b++);
+                }
             }
         }
     }
@@ -115,17 +153,9 @@ namespace XPG
     }
 
     template<typename T>
-    void Array<T>::Expand()
+    bool Array<T>::Expand()
     {
-        if (_capacity < 1)
-            _capacity = 1;
-        else
-            _capacity *= 2;
-
-        void* block = malloc(_capacity);
-        memcpy(block, _block, _size * sizeof(T));
-        free(_block);
-        _block = block;
+        return Reserve(_capacity < 1 ? 1 : _capacity * 2);
     }
 }
 

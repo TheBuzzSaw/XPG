@@ -12,7 +12,6 @@ namespace XPG
 {
     struct WindowMeta
     {
-        HINSTANCE instance;
         HWND window;
         HDC deviceContext;
         HGLRC renderContext;
@@ -20,7 +19,6 @@ namespace XPG
         Window* object;
     };
 
-    static const char* const ClassName = "XPG";
     static const DWORD BaseStyle = WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
     static const DWORD BaseExStyle = WS_EX_APPWINDOW;
 
@@ -38,6 +36,10 @@ namespace XPG
         {
             case WM_CLOSE:
                 meta->object->Close();
+                break;
+
+            case WM_PAINT:
+                cout << "WM_PAINT" << endl;
                 break;
         }
 
@@ -88,34 +90,13 @@ namespace XPG
         }
 
         meta->object = this;
-        meta->instance = GetModuleHandle(NULL);
-
-        WNDCLASSEX windowClass;
-        memset(&windowClass, 0, sizeof(windowClass));
-        windowClass.cbSize = sizeof(windowClass);
-        windowClass.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-        windowClass.lpfnWndProc = SetupCallback;
-        windowClass.cbClsExtra = 0;
-        windowClass.cbWndExtra = sizeof(WindowMeta*);
-        windowClass.hInstance = meta->instance;
-        windowClass.hIcon = LoadIcon(NULL, IDI_WINLOGO);
-        windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-        windowClass.hbrBackground = NULL;
-        windowClass.lpszMenuName = NULL;
-        windowClass.lpszClassName = ClassName;
-        windowClass.hIconSm = NULL;
-
-        if (!RegisterClassEx(&windowClass))
-        {
-            cerr << "failed on RegisterClassEx\n";
-        }
 
         DWORD exStyle = BaseExStyle | WS_EX_WINDOWEDGE;
         DWORD style = BaseStyle | WS_OVERLAPPEDWINDOW;
 
         meta->window = CreateWindowEx(exStyle, ClassName, "XPG Reborn",
-            style, CW_USEDEFAULT, 0, 640, 480, NULL, NULL, meta->instance,
-            meta);
+            style, CW_USEDEFAULT, 0, 640, 480, NULL, NULL,
+            GetInstanceModule(NULL), meta);
 
         if (!meta->window)
         {
@@ -153,28 +134,16 @@ namespace XPG
         memset(_native, 0, sizeof(_native));
     }
 
+    void Window::Draw()
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        assert(meta->object != NULL);
+        PostMessage(meta->window, WM_PAINT, 0, 0);
+    }
+
     void Window::SwapBuffers()
     {
         WindowMeta* meta = (WindowMeta*)_native;
         ::SwapBuffers(meta->deviceContext);
-    }
-
-    void Window::Run()
-    {
-        BOOL result;
-        MSG msg;
-
-        while ((result = GetMessage(&msg, NULL, 0, 0)) != 0)
-        {
-            if (result == -1)
-            {
-                cerr << "error on GetMessage\n";
-                break;
-            }
-            else
-            {
-                DispatchMessage(&msg);
-            }
-        }
     }
 }

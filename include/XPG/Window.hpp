@@ -13,9 +13,9 @@ namespace XPG
 
             void Open();
             void Close();
-            void SwapBuffers();
 
-            static void Run();
+            void Draw();
+            void SwapBuffers();
 
         private:
             char _native[128];
