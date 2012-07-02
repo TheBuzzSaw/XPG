@@ -67,7 +67,7 @@ namespace XPG
     Window::Window()
     {
         cout << "WindowMeta size " << sizeof(WindowMeta) << endl;
-        assert(sizeof(WindowMeta) <= sizeof(_native));
+        assert(sizeof(WindowMeta) <= sizeof(Window::_native));
         memset(_native, 0, sizeof(_native));
 
         Open();

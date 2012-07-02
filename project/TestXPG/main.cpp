@@ -4,6 +4,7 @@
 #include <XPG/Thread.hpp>
 #include <XPG/Mutex.hpp>
 #include <XPG/Window.hpp>
+#include <XPG/Array.hpp>
 #include <iostream>
 using namespace std;
 
@@ -42,6 +43,18 @@ void MakeWindow()
 int main(int argc, char** argv)
 {
     XPG::ResetTimer();
+
+    XPG::Array<int> array;
+    array.Add(13);
+    array.Add(39);
+    array.Add(-1);
+
+    cout << "array has capacity " << array.Capacity() << endl;
+
+    for (size_t i = 0; i < array.Size(); ++i)
+    {
+        cout << array[i] << endl;
+    }
 
     cout << XPG::DateTime(1601, 1, 1).Ticks() << endl;
     cout << XPG::DateTime::UtcTime() << endl;
