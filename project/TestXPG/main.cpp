@@ -96,7 +96,7 @@ int main(int argc, char** argv)
     XPG::Window window[2];
     window[0].SetTitle("XPG Main Window");
     window[1].SetTitle("XPG Mini Map");
-    c.Start(SendAsyncDrawCalls, window);
+    //c.Start(SendAsyncDrawCalls, window);
     application.Run();
 
     a.Join();

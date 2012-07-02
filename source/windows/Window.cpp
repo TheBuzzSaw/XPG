@@ -31,25 +31,26 @@ namespace XPG
         WindowMeta* meta = (WindowMeta*)GetWindowLongPtr(window,
             GWL_USERDATA);
 
-        assert(meta != NULL);
-
-        if (activeWindow != meta->object)
+        if (meta && meta->object)
         {
-            activeWindow = meta->object;
-            wglMakeCurrent(meta->deviceContext, meta->renderContext);
-        }
+            if (activeWindow != meta->object)
+            {
+                activeWindow = meta->object;
+                wglMakeCurrent(meta->deviceContext, meta->renderContext);
+            }
 
-        switch (message)
-        {
-            case WM_CLOSE:
-                meta->object->Close();
-                break;
+            switch (message)
+            {
+                case WM_CLOSE:
+                    meta->object->Close();
+                    break;
 
-            case WM_PAINT:
-                cout << "WM_PAINT" << endl;
-                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-                meta->object->SwapBuffers();
-                break;
+                case WM_PAINT:
+                    cout << "WM_PAINT" << endl;
+                    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                    meta->object->SwapBuffers();
+                    break;
+            }
         }
 
         return DefWindowProc(window, message, wparam, lparam);
@@ -206,11 +207,15 @@ namespace XPG
                 cerr << "error on DestroyWindow\n";
             }
 
+            memset(_native, 0, sizeof(_native));
+
             if (--openWindowCount < 1)
                 PostQuitMessage(0);
         }
-
-        memset(_native, 0, sizeof(_native));
+        else
+        {
+            memset(_native, 0, sizeof(_native));
+        }
     }
 
     void Window::Draw()
