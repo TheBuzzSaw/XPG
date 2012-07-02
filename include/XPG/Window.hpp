@@ -11,6 +11,13 @@ namespace XPG
             Window();
             ~Window();
 
+            void Open();
+            void Close();
+
+            void Draw();
+            void SetTitle(const char* title);
+            void SwapBuffers();
+
         private:
             char _native[128];
     };

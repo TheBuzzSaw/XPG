@@ -9,7 +9,10 @@ namespace XPG
     {
         public:
             Stopwatch();
+            Stopwatch(const Stopwatch& stopwatch);
             ~Stopwatch();
+
+            Stopwatch& operator=(const Stopwatch& stopwatch);
 
             inline const bool IsRunning() const { return _isRunning; }
 
@@ -19,7 +22,6 @@ namespace XPG
             void Stop();
             void Reset();
 
-        protected:
         private:
             bool _isRunning;
             TimeSpan _elapsed;

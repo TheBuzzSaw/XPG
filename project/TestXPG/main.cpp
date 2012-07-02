@@ -4,7 +4,10 @@
 #include <XPG/Thread.hpp>
 #include <XPG/Mutex.hpp>
 #include <XPG/Window.hpp>
+#include <XPG/Application.hpp>
+#include <XPG/Array.hpp>
 #include <iostream>
+#include <string>
 using namespace std;
 
 const char* const Letters = "ABCDEF";
@@ -33,12 +36,42 @@ void Talk(void* data)
     }
 }
 
+void MakeWindow()
+{
+    XPG::Window windows[3];
+}
+
+void SendAsyncDrawCalls(void* data)
+{
+    XPG::Window* window = (XPG::Window*)data;
+
+    for (int i = 0; i < 8; ++i)
+    {
+        XPG::Sleep(XPG::TimeSpan::FromMilliseconds(500));
+        window->Draw();
+    }
+}
+
 int main(int argc, char** argv)
 {
-    XPG::Window window;
     XPG::ResetTimer();
 
+    XPG::Array<string> array;
+    array.Add("Herro");
+    array.Add("Avast ye!");
+    array.Add("Shweet");
+
+    XPG::Array<string> anotherArray = array;
+
+    cout << "array has capacity " << anotherArray.Capacity() << endl;
+
+    for (size_t i = 0; i < anotherArray.Size(); ++i)
+    {
+        cout << anotherArray[i] << endl;
+    }
+
     cout << XPG::DateTime(1601, 1, 1).Ticks() << endl;
+    cout << XPG::DateTime(9999, 12, 31).Ticks() << endl;
     cout << XPG::DateTime::UtcTime() << endl;
     cout << XPG::HighResolutionUtcTime() << endl;
     cout << XPG::DateTime::LocalTime() << endl;
@@ -51,10 +84,20 @@ int main(int argc, char** argv)
     e.Fire();
 
     XPG::Thread a;
-    a.Start(Talk, (void*)(Letters + 0));
-
     XPG::Thread b;
+
+    a.Start(Talk, (void*)(Letters + 0));
     b.Start(Talk, (void*)(Letters + 1));
+
+    XPG::Thread c;
+
+    //MakeWindow();
+    XPG::Application application;
+    XPG::Window window[2];
+    window[0].SetTitle("XPG Main Window");
+    window[1].SetTitle("XPG Mini Map");
+    c.Start(SendAsyncDrawCalls, window);
+    application.Run();
 
     a.Join();
     cout << "joined thread A" << endl;

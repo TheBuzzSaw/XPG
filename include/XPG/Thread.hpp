@@ -2,14 +2,14 @@
 #define XpgThreadHpp
 
 #include "Platform.hpp"
-#include "DataTypes.hpp"
+#include "TimeSpan.hpp"
 
 namespace XPG
 {
     XpgClass Thread
     {
         public:
-            typedef void (* Entry)(void*);
+            typedef void (*Entry)(void*);
 
             Thread();
             ~Thread();
@@ -17,8 +17,20 @@ namespace XPG
             bool IsRunning() const;
             void Start(Entry entry, void* data = 0);
             void Join();
+            void Join(TimeSpan timeout);
 
         private:
+            Thread(const Thread& thread)
+            {
+                // no copying
+            }
+
+            Thread& operator=(const Thread& thread)
+            {
+                // no copying
+                return *this;
+            }
+
             char _native[64];
     };
 }

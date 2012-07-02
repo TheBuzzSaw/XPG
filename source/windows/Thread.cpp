@@ -67,4 +67,14 @@ namespace XPG
             WaitForSingleObject(meta->handle, INFINITE);
         }
     }
+
+    void Thread::Join(TimeSpan timeout)
+    {
+        ThreadMeta* meta = (ThreadMeta*)_native;
+
+        if (meta->running)
+        {
+            WaitForSingleObject(meta->handle, timeout.ToMilliseconds());
+        }
+    }
 }
