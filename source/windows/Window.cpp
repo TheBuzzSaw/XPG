@@ -141,6 +141,13 @@ namespace XPG
         PostMessage(meta->window, WM_PAINT, 0, 0);
     }
 
+    void Window::SetTitle(const char* title)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        if (meta->window != NULL)
+            SetWindowText(meta->window, title);
+    }
+
     void Window::SwapBuffers()
     {
         WindowMeta* meta = (WindowMeta*)_native;

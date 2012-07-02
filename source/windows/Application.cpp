@@ -8,8 +8,6 @@ namespace XPG
 {
     Application::Application()
     {
-        HINSTANCE instance = GetInstanceModule(NULL);
-
         WNDCLASSEX windowClass;
         memset(&windowClass, 0, sizeof(windowClass));
         windowClass.cbSize = sizeof(windowClass);
@@ -17,7 +15,7 @@ namespace XPG
         windowClass.lpfnWndProc = SetupCallback;
         windowClass.cbClsExtra = 0;
         windowClass.cbWndExtra = sizeof(void*);
-        windowClass.hInstance = instance;
+        windowClass.hInstance = GetInstanceModule(NULL);
         windowClass.hIcon = LoadIcon(NULL, IDI_WINLOGO);
         windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
         windowClass.hbrBackground = NULL;

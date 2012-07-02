@@ -15,6 +15,7 @@ namespace XPG
             void Close();
 
             void Draw();
+            void SetTitle(const char* title);
             void SwapBuffers();
 
         private:
