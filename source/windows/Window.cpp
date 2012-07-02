@@ -33,12 +33,6 @@ namespace XPG
 
         if (meta && meta->object)
         {
-            if (activeWindow != meta->object)
-            {
-                activeWindow = meta->object;
-                wglMakeCurrent(meta->deviceContext, meta->renderContext);
-            }
-
             switch (message)
             {
                 case WM_CLOSE:
@@ -47,6 +41,7 @@ namespace XPG
 
                 case WM_PAINT:
                     cout << "WM_PAINT" << endl;
+                    meta->object->MakeCurrent();
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                     meta->object->SwapBuffers();
                     break;
@@ -174,7 +169,7 @@ namespace XPG
         SetupContext(meta);
 
         glViewport(0, 0, 640, 480);
-        glClearColor(openWindowCount, 0.5f, 0.5f, 1.0f);
+        glClearColor(openWindowCount % 2, 0.5f, 0.5f, 1.0f);
 
 
         ShowWindow(meta->window, SW_SHOWNORMAL);
@@ -230,6 +225,16 @@ namespace XPG
         WindowMeta* meta = (WindowMeta*)_native;
         if (meta->window != NULL)
             SetWindowText(meta->window, title);
+    }
+
+    void Window::MakeCurrent()
+    {
+        if (activeWindow != this)
+        {
+            WindowMeta* meta = (WindowMeta*)_native;
+            activeWindow = this;
+            wglMakeCurrent(meta->deviceContext, meta->renderContext);
+        }
     }
 
     void Window::SwapBuffers()

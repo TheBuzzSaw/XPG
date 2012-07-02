@@ -93,7 +93,7 @@ int main(int argc, char** argv)
 
     //MakeWindow();
     XPG::Application application;
-    XPG::Window window[2];
+    XPG::Window window[4];
     window[0].SetTitle("XPG Main Window");
     window[1].SetTitle("XPG Mini Map");
     //c.Start(SendAsyncDrawCalls, window);
