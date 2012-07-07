@@ -135,8 +135,12 @@ namespace XPG
         if (!glBindVertexArray)
             glBindVertexArray = glBindVertexArrayAPPLE;
 
+        glViewport(0, 0, 640, 480);
+        glClearColor(theApplicationMeta->windowCount, 0.5f, 0.5f, 1.0f);
+
         meta->object = this;
         ++theApplicationMeta->windowCount;
+        windows[meta->window] = meta;
     }
 
     void Window::Close()
@@ -150,6 +154,7 @@ namespace XPG
             glXDestroyContext(display, meta->context);
             XDestroyWindow(display, meta->window);
             --theApplicationMeta->windowCount;
+            windows.erase(meta->window);
 
             memset(_native, 0, sizeof(_native));
         }

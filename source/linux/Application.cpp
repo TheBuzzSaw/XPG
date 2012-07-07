@@ -34,9 +34,7 @@ namespace XPG
             XEvent event;
             XNextEvent(meta->display, &event);
 
-            //cerr << meta->windowCount << endl;
-            static int i = 0;
-            cerr << ++i << endl;
+            ProcessEvent(event);
         }
     }
 }
