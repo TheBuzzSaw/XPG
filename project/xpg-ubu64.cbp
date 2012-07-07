@@ -43,6 +43,8 @@
 			<Add library="X11" />
 			<Add library="GL" />
 		</Linker>
+		<Unit filename="../include/XPG/Application.hpp" />
+		<Unit filename="../include/XPG/Array.hpp" />
 		<Unit filename="../include/XPG/Clock.hpp" />
 		<Unit filename="../include/XPG/DataTypes.hpp" />
 		<Unit filename="../include/XPG/DateTime.hpp" />
@@ -53,6 +55,8 @@
 		<Unit filename="../include/XPG/Thread.hpp" />
 		<Unit filename="../include/XPG/TimeSpan.hpp" />
 		<Unit filename="../include/XPG/Window.hpp" />
+		<Unit filename="../include/XPG/glew.h" />
+		<Unit filename="../include/XPG/glxew.h" />
 		<Unit filename="../source/DateTime.cpp" />
 		<Unit filename="../source/Event.cpp" />
 		<Unit filename="../source/Stopwatch.cpp" />
@@ -61,8 +65,11 @@
 		<Unit filename="../source/glew.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="../source/linux/Application.cpp" />
 		<Unit filename="../source/linux/Clock.cpp" />
 		<Unit filename="../source/linux/Window.cpp" />
+		<Unit filename="../source/linux/X.cpp" />
+		<Unit filename="../source/linux/X.hpp" />
 		<Unit filename="../source/unix/Mutex.cpp" />
 		<Unit filename="../source/unix/Thread.cpp" />
 		<Extensions>
