@@ -136,7 +136,7 @@ namespace XPG
             glBindVertexArray = glBindVertexArrayAPPLE;
 
         glViewport(0, 0, 640, 480);
-        glClearColor(theApplicationMeta->windowCount, 0.5f, 0.5f, 1.0f);
+        glClearColor(theApplicationMeta->windowCount % 2, 0.5f, 0.5f, 1.0f);
 
         meta->object = this;
         ++theApplicationMeta->windowCount;
