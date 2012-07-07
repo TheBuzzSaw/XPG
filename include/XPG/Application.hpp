@@ -25,7 +25,7 @@ namespace XPG
                 return *this;
             }
 
-            char _native[4];
+            char _native[64];
     };
 }
 

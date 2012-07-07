@@ -6,14 +6,6 @@ using namespace std;
 
 namespace XPG
 {
-    struct WindowMeta
-    {
-        GLXContext context;
-        ::Window window;
-        Atom wmDeleteMessage;
-        Window* object;
-    };
-
     static void SetGlxFunctionPointers()
     {
         glGenVertexArraysAPPLE = (void(*)(GLsizei, const GLuint*))
@@ -48,6 +40,7 @@ namespace XPG
     void Window::Open()
     {
         WindowMeta* meta = (WindowMeta*)_native;
+        Display* display = theApplicationMeta->display;
 
         int fbAttributes[] =
             {
@@ -65,14 +58,14 @@ namespace XPG
 
         int glxMajor = 0;
         int glxMinor = 0;
-        glXQueryVersion(GetDisplay(), &glxMajor, &glxMinor);
+        glXQueryVersion(display, &glxMajor, &glxMinor);
         cout << "GLX version " << glxMajor << "." << glxMinor << endl;
 
         int numConfigs = 0;
-        GLXFBConfig* fbConfigs = glXChooseFBConfig(GetDisplay(),
-            DefaultScreen(GetDisplay()), fbAttributes, &numConfigs);
+        GLXFBConfig* fbConfigs = glXChooseFBConfig(display,
+            DefaultScreen(display), fbAttributes, &numConfigs);
 
-        XVisualInfo* visualInfo = glXGetVisualFromFBConfig(GetDisplay(),
+        XVisualInfo* visualInfo = glXGetVisualFromFBConfig(display,
             fbConfigs[0]);
 
         long eventMask = ExposureMask | VisibilityChangeMask |
@@ -84,24 +77,24 @@ namespace XPG
         windowAttributes.event_mask = eventMask;
         windowAttributes.border_pixel = 0;
         windowAttributes.bit_gravity = StaticGravity;
-        windowAttributes.colormap = XCreateColormap(GetDisplay(),
-            RootWindow(GetDisplay(), visualInfo->screen), visualInfo->visual,
+        windowAttributes.colormap = XCreateColormap(display,
+            RootWindow(display, visualInfo->screen), visualInfo->visual,
             AllocNone);
 
         GLint windowMask = CWBorderPixel | CWBitGravity | CWEventMask
             | CWColormap;
 
-        meta->window = XCreateWindow(GetDisplay(),
-            DefaultRootWindow(GetDisplay()), 20, 20, 640, 480, 0,
+        meta->window = XCreateWindow(display,
+            DefaultRootWindow(display), 20, 20, 640, 480, 0,
             visualInfo->depth, InputOutput, visualInfo->visual, windowMask,
             &windowAttributes);
 
-        meta->wmDeleteMessage = XInternAtom(GetDisplay(), "WM_DELETE_WINDOW",
+        meta->wmDeleteMessage = XInternAtom(display, "WM_DELETE_WINDOW",
             False);
-        XSetWMProtocols(GetDisplay(), meta->window,
+        XSetWMProtocols(display, meta->window,
             &meta->wmDeleteMessage, 1);
 
-        XMapWindow(GetDisplay(), meta->window);
+        XMapWindow(display, meta->window);
 
         GLint attribs[] =
         {
@@ -114,13 +107,13 @@ namespace XPG
         if (glXCreateContextAttribsARB)
         {
             // Good to go. Create the 3.x context.
-            meta->context = glXCreateContextAttribsARB(GetDisplay(),
+            meta->context = glXCreateContextAttribsARB(display,
                 fbConfigs[0], 0, True, attribs);
         }
         else
         {
             // No good. Create a legacy context.
-            meta->context = glXCreateContext(GetDisplay(), visualInfo, NULL,
+            meta->context = glXCreateContext(display, visualInfo, NULL,
                 True);
         }
 
@@ -143,7 +136,7 @@ namespace XPG
             glBindVertexArray = glBindVertexArrayAPPLE;
 
         meta->object = this;
-        AcquireWindow();
+        ++theApplicationMeta->windowCount;
     }
 
     void Window::Close()
@@ -152,10 +145,11 @@ namespace XPG
 
         if (meta->object)
         {
-            glXMakeCurrent(GetDisplay(), None, NULL);
-            glXDestroyContext(GetDisplay(), meta->context);
-            XDestroyWindow(GetDisplay(), meta->window);
-            ReleaseWindow();
+            Display* display = theApplicationMeta->display;
+            glXMakeCurrent(display, None, NULL);
+            glXDestroyContext(display, meta->context);
+            XDestroyWindow(display, meta->window);
+            --theApplicationMeta->windowCount;
 
             memset(_native, 0, sizeof(_native));
         }
@@ -181,8 +175,8 @@ namespace XPG
 
             if (status)
             {
-                XSetTextProperty(GetDisplay(), meta->window, &titleProperty,
-                    XA_WM_NAME);
+                XSetTextProperty(theApplicationMeta->display, meta->window,
+                    &titleProperty, XA_WM_NAME);
                 XFree(titleProperty.value);
             }
 
@@ -193,12 +187,13 @@ namespace XPG
     void Window::MakeCurrent()
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        glXMakeCurrent(GetDisplay(), meta->window, meta->context);
+        glXMakeCurrent(theApplicationMeta->display, meta->window,
+            meta->context);
     }
 
     void Window::SwapBuffers()
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        glXSwapBuffers(GetDisplay(), meta->window);
+        glXSwapBuffers(theApplicationMeta->display, meta->window);
     }
 }

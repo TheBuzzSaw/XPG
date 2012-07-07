@@ -9,24 +9,34 @@ namespace XPG
 {
     Application::Application()
     {
-        SetupX11();
+        memset(_native, 0, sizeof(_native));
+        ApplicationMeta* meta = (ApplicationMeta*)_native;
+        theApplicationMeta = meta;
+
+        meta->display = XOpenDisplay(NULL);
+        meta->wmDeleteMessage = XInternAtom(meta->display, "WM_DELETE_WINDOW",
+            False);
     }
 
     Application::~Application()
     {
-        CloseX11();
+        ApplicationMeta* meta = (ApplicationMeta*)_native;
+
+        XCloseDisplay(meta->display);
     }
 
     void Application::Run()
     {
-        while (GetWindowCount() > 0)
+        ApplicationMeta* meta = (ApplicationMeta*)_native;
+
+        while (meta->windowCount > 0)
         {
             XEvent event;
-            XNextEvent(GetDisplay(), &event);
+            XNextEvent(meta->display, &event);
 
-            cerr << GetWindowCount() << endl;
-
-            //ReleaseWindow();
+            //cerr << meta->windowCount << endl;
+            static int i = 0;
+            cerr << ++i << endl;
         }
     }
 }

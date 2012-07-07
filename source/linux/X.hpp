@@ -1,6 +1,7 @@
 #ifndef XpgXHpp
 #define XpgXHpp
 
+#include "../../include/XPG/Window.hpp"
 #include "../../include/XPG/glew.h"
 #include "../../include/XPG/glxew.h"
 #include <X11/Xlib.h>
@@ -11,13 +12,22 @@
 
 namespace XPG
 {
-    void SetupX11();
-    void CloseX11();
-    Display* GetDisplay();
+    struct WindowMeta
+    {
+        GLXContext context;
+        ::Window window;
+        Atom wmDeleteMessage;
+        Window* object;
+    };
 
-    void AcquireWindow();
-    void ReleaseWindow();
-    size_t GetWindowCount();
+    struct ApplicationMeta
+    {
+        Display* display;
+        Atom wmDeleteMessage;
+        size_t windowCount;
+    };
+
+    extern ApplicationMeta* theApplicationMeta;
 }
 
 #endif
