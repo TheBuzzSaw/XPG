@@ -39,6 +39,8 @@
 		<Linker>
 			<Add library="xpg-ubu64" />
 		</Linker>
+		<Unit filename="FirstWindow.cpp" />
+		<Unit filename="FirstWindow.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

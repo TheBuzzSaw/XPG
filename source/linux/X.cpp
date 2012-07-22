@@ -13,20 +13,37 @@ namespace XPG
 
         if (i != windows.end())
         {
-            WindowMeta* meta = i->second;
+            WindowMeta& meta = *i->second;
+            Window& window = *meta.object;
 
             switch (event.type)
             {
-                case Expose:
-                    meta->object->MakeCurrent();
-                    glClear(GL_COLOR_BUFFER_BIT);
-                    meta->object->SwapBuffers();
+                case KeyPress:
+                {
+                    Event::Details details;
+                    details.source = meta.object;
+                    Key::Code* key = (Key::Code*)details.data;
+                    *key = LookupKey(event.xkey.keycode);
+                    window.OnKeyDown().Fire(details);
                     break;
+                }
+
+                case Expose:
+                {
+                    Event::Details details;
+                    details.source = meta.object;
+                    window.OnExpose().Fire(details);
+                    break;
+                }
 
                 case ClientMessage:
-                    if (event.xclient.data.l[0] == meta->wmDeleteMessage)
+                    if (event.xclient.data.l[0] == meta.wmDeleteMessage)
                     {
-                        meta->object->Close();
+                        Event::Details details;
+                        details.source = meta.object;
+                        window.OnClose().Fire(details);
+
+                        window.Close();
                     }
                     break;
             }

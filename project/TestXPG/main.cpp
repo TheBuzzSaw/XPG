@@ -1,3 +1,4 @@
+#include "FirstWindow.hpp"
 #include <XPG/Event.hpp>
 #include <XPG/Stopwatch.hpp>
 #include <XPG/Clock.hpp>
@@ -77,12 +78,6 @@ int main(int argc, char** argv)
     cout << XPG::DateTime::LocalTime() << endl;
     cout << XPG::HighResolutionLocalTime() << endl;
 
-    XPG::Event e;
-    e.AddListener(TestListener);
-    e.AddListener(TestListener, &e);
-    e.AddListener(TestListener, &cout);
-    e.Fire();
-
     XPG::Thread a;
     XPG::Thread b;
 
@@ -91,11 +86,8 @@ int main(int argc, char** argv)
 
     XPG::Thread c;
 
-    //MakeWindow();
     XPG::Application application;
-    XPG::Window window[4];
-    window[0].SetTitle("XPG Main Window");
-    window[1].SetTitle("XPG Mini Map");
+    FirstWindow firstWindow[2];
     //c.Start(SendAsyncDrawCalls, window);
     application.Run();
 

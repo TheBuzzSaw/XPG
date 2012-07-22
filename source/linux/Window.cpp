@@ -141,6 +141,10 @@ namespace XPG
         meta->object = this;
         ++theApplicationMeta->windowCount;
         windows[meta->window] = meta;
+
+        Event::Details details;
+        details.source = this;
+        _onOpen.Fire(details);
     }
 
     void Window::Close()
@@ -152,6 +156,7 @@ namespace XPG
             Display* display = theApplicationMeta->display;
             glXMakeCurrent(display, None, NULL);
             glXDestroyContext(display, meta->context);
+            XUnmapWindow(display, meta->window);
             XDestroyWindow(display, meta->window);
             --theApplicationMeta->windowCount;
             windows.erase(meta->window);

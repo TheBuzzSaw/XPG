@@ -2,30 +2,35 @@
 #define XpgEventHpp
 
 #include "Platform.hpp"
+#include "DataTypes.hpp"
 
 namespace XPG
 {
     XpgClass Event
     {
         public:
-            typedef void (*Listener)(void*);
-
-            Event();
-            virtual ~Event();
-
-            void AddListener(Listener listener, void* userData = 0);
-            void RemoveListener(Listener listener, void* userData = 0);
-            void Fire();
-
-        private:
-            struct Handler
+            struct Details
             {
-                Listener listener;
+                void* source;
                 void* userData;
-                Handler* nextHandler;
+                UInt8 data[64];
             };
 
-            Handler* _firstHandler;
+            typedef void (*Callback)(Details&);
+
+            Event();
+            Event(const Event& other);
+            ~Event();
+
+            Event& operator=(const Event& other);
+
+            void Aim(Callback callback, void* userData = 0);
+            void Clear();
+            void Fire(Details& details) const;
+
+        private:
+            Callback _callback;
+            void* _userData;
     };
 }
 

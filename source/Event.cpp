@@ -4,66 +4,45 @@ namespace XPG
 {
     Event::Event()
     {
-        _firstHandler = 0;
+        _callback = 0;
+        _userData = 0;
+    }
+
+    Event::Event(const Event& other)
+    {
+        _callback = other._callback;
+        _userData = other._userData;
     }
 
     Event::~Event()
     {
-        while (_firstHandler)
-        {
-            Handler* deadHandler = _firstHandler;
-            _firstHandler = _firstHandler->nextHandler;
-            delete deadHandler;
-        }
     }
 
-    void Event::AddListener(Listener listener, void* userData)
+    Event& Event::operator=(const Event& other)
     {
-        Handler* handler = new Handler;
-        handler->listener = listener;
-        handler->userData = userData;
-        handler->nextHandler = _firstHandler;
-        _firstHandler = handler;
+        _callback = other._callback;
+        _userData = other._userData;
+        return *this;
     }
 
-    void Event::RemoveListener(Listener listener, void* userData)
+    void Event::Aim(Event::Callback callback, void* userData)
     {
-        Handler* handler = _firstHandler;
-
-        if (handler)
-        {
-            if (handler->listener == listener
-                && handler->userData == userData)
-            {
-                _firstHandler = _firstHandler->nextHandler;
-                delete handler;
-            }
-            else
-            {
-                Handler* next = handler->nextHandler;
-
-                while (next)
-                {
-                    if (next->listener == listener
-                        && next->userData == userData)
-                    {
-                        handler->nextHandler = next->nextHandler;
-                        delete next;
-                        break;
-                    }
-
-                    handler = next;
-                    next = handler->nextHandler;
-                }
-            }
-        }
+        _callback = callback;
+        _userData = userData;
     }
 
-    void Event::Fire()
+    void Event::Clear()
     {
-        for (Handler* i = _firstHandler; i; i = i->nextHandler)
+        _callback = 0;
+        _userData = 0;
+    }
+
+    void Event::Fire(Event::Details& details) const
+    {
+        if (_callback)
         {
-            i->listener(i->userData);
+            details.userData = _userData;
+            _callback(details);
         }
     }
 }

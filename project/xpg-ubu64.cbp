@@ -49,6 +49,7 @@
 		<Unit filename="../include/XPG/DataTypes.hpp" />
 		<Unit filename="../include/XPG/DateTime.hpp" />
 		<Unit filename="../include/XPG/Event.hpp" />
+		<Unit filename="../include/XPG/Key.hpp" />
 		<Unit filename="../include/XPG/Mutex.hpp" />
 		<Unit filename="../include/XPG/Platform.hpp" />
 		<Unit filename="../include/XPG/Stopwatch.hpp" />
