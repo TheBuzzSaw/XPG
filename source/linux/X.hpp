@@ -35,7 +35,7 @@ namespace XPG
     void ProcessEvent(const XEvent& event);
 
     const size_t NumMappings = 135;
-    Key::Code KeyTable[NumMappings] = {
+    const Key::Code KeyTable[NumMappings] = {
         Key::Unknown, // 0
         Key::Unknown, // 1
         Key::Unknown, // 2

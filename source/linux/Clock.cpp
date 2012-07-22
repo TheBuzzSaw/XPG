@@ -1,11 +1,13 @@
-#include "../../include/XPG/DateTime.hpp"
+#include "../../include/XPG/Clock.hpp"
 #include <ctime>
 
 namespace XPG
 {
     void Sleep(TimeSpan timeSpan)
     {
+#ifndef XpgPlatformAndroid
         usleep(timeSpan.ToMicroseconds());
+#endif
     }
 
     const DateTime HighResolutionUtcTime()
@@ -29,7 +31,7 @@ namespace XPG
     const TimeSpan RawTimer()
     {
         timespec ts;
-        clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
+        clock_gettime(CLOCK_MONOTONIC, &ts);
 
         return TimeSpan::FromSeconds(ts.tv_sec)
             + TimeSpan::FromNanoseconds(ts.tv_nsec);
@@ -44,5 +46,4 @@ namespace XPG
     {
         return RawTimer() - timerBase;
     }
-
 }

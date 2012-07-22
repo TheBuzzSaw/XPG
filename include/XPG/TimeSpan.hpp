@@ -3,7 +3,10 @@
 
 #include "Platform.hpp"
 #include "DataTypes.hpp"
+
+#ifndef XpgPlatformAndroid
 #include <iostream>
+#endif
 
 namespace XPG
 {
@@ -54,9 +57,10 @@ namespace XPG
             Int64 _ticks;
     };
 
-    template<typename CharT, typename TraitsT>
-    std::basic_ostream<CharT, TraitsT>& operator<<(
-        std::basic_ostream<CharT, TraitsT>& stream, const TimeSpan& timeSpan)
+#ifndef XpgPlatformAndroid
+    template<typename TraitsT>
+    std::basic_ostream<char, TraitsT>& operator<<(
+        std::basic_ostream<char, TraitsT>& stream, const TimeSpan& timeSpan)
     {
         Int64 count = timeSpan.ToWeeks();
         stream << count << 'w';
@@ -81,6 +85,8 @@ namespace XPG
 
         return stream;
     }
+#endif
+
 }
 
 #endif

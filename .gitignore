@@ -12,3 +12,7 @@ bin/
 *.depend
 *.layout
 *.cbTemp
+
+# Android nonsense
+libs/
+

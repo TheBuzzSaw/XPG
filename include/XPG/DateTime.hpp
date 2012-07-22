@@ -1,7 +1,6 @@
 #ifndef XpgDateTimeHpp
 #define XpgDateTimeHpp
 
-#include "Platform.hpp"
 #include "TimeSpan.hpp"
 
 namespace XPG
@@ -65,6 +64,7 @@ namespace XPG
             Int64 _ticks;
     };
 
+#ifndef XpgPlatformAndroid
     template<typename CharT, typename TraitsT>
     std::basic_ostream<CharT, TraitsT>& operator<<(
         std::basic_ostream<CharT, TraitsT>& stream, const DateTime& dateTime)
@@ -84,6 +84,7 @@ namespace XPG
 
         return stream;
     }
+#endif
 }
 
 #endif
