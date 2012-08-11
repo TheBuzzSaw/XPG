@@ -34,9 +34,8 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-fexceptions" />
+			<Add option="-fno-exceptions" />
 			<Add option="-fPIC" />
-			<Add option="-DGLEW_STATIC" />
 		</Compiler>
 		<Linker>
 			<Add library="rt" />
@@ -51,13 +50,14 @@
 		<Unit filename="../include/XPG/Event.hpp" />
 		<Unit filename="../include/XPG/Key.hpp" />
 		<Unit filename="../include/XPG/Mutex.hpp" />
+		<Unit filename="../include/XPG/OpenGL/Base.hpp" />
+		<Unit filename="../include/XPG/OpenGL/glew.h" />
+		<Unit filename="../include/XPG/OpenGL/glxew.h" />
 		<Unit filename="../include/XPG/Platform.hpp" />
 		<Unit filename="../include/XPG/Stopwatch.hpp" />
 		<Unit filename="../include/XPG/Thread.hpp" />
 		<Unit filename="../include/XPG/TimeSpan.hpp" />
 		<Unit filename="../include/XPG/Window.hpp" />
-		<Unit filename="../include/XPG/glew.h" />
-		<Unit filename="../include/XPG/glxew.h" />
 		<Unit filename="../source/DateTime.cpp" />
 		<Unit filename="../source/Event.cpp" />
 		<Unit filename="../source/Stopwatch.cpp" />

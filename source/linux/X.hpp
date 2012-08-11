@@ -3,8 +3,7 @@
 
 #include "../../include/XPG/Window.hpp"
 #include "../../include/XPG/Key.hpp"
-#include "../../include/XPG/glew.h"
-#include "../../include/XPG/glxew.h"
+#include "../../include/XPG/OpenGL/Base.hpp"
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xos.h>

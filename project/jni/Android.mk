@@ -9,9 +9,12 @@ LOCAL_SRC_FILES := ../../source/TimeSpan.cpp \
     ../../source/linux/Clock.cpp \
     ../../source/unix/Thread.cpp \
     ../../source/unix/Mutex.cpp
-LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv2
-LOCAL_STATIC_LIBRARIES := android_native_app_glue
-LOCAL_MODULE    := libxpgmobile
+LOCAL_MODULE := xpgmobile
 
+include $(BUILD_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := dummy
+LOCAL_STATIC_LIBRARIES := xpgmobile
 include $(BUILD_SHARED_LIBRARY)
 

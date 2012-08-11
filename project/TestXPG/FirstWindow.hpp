@@ -14,7 +14,7 @@ class FirstWindow
 
         static void KeyDown(XPG::Event::Details& details);
         static void Close(XPG::Event::Details& details);
-        static void Expose(XPG::Event::Details& details);
+        static void OnExpose(XPG::Event::Details& details);
 };
 
 #endif

@@ -1,13 +1,13 @@
 #include "FirstWindow.hpp"
 #include <XPG/Key.hpp>
-#include <XPG/glew.h>
+#include <XPG/OpenGL/Base.hpp>
 #include <iostream>
 
 FirstWindow::FirstWindow()
 {
     _window.SetTitle("XPG Main Window");
     _window.OnKeyDown().Aim(KeyDown, this);
-    _window.OnExpose().Aim(Expose, this);
+    _window.OnExpose().Aim(OnExpose, this);
     _window.OnClose().Aim(Close, this);
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 }
@@ -35,7 +35,7 @@ void FirstWindow::Close(XPG::Event::Details& details)
     std::cout << "closed FirstWindow" << std::endl;
 }
 
-void FirstWindow::Expose(XPG::Event::Details& details)
+void FirstWindow::OnExpose(XPG::Event::Details& details)
 {
     FirstWindow* fw = (FirstWindow*)details.userData;
     fw->_window.MakeCurrent();
