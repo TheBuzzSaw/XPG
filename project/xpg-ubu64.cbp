@@ -54,6 +54,7 @@
 		<Unit filename="../include/XPG/OpenGL/glew.h" />
 		<Unit filename="../include/XPG/OpenGL/glxew.h" />
 		<Unit filename="../include/XPG/Platform.hpp" />
+		<Unit filename="../include/XPG/Screen.hpp" />
 		<Unit filename="../include/XPG/Stopwatch.hpp" />
 		<Unit filename="../include/XPG/Thread.hpp" />
 		<Unit filename="../include/XPG/TimeSpan.hpp" />
@@ -63,6 +64,7 @@
 		<Unit filename="../source/Stopwatch.cpp" />
 		<Unit filename="../source/TickSpans.hpp" />
 		<Unit filename="../source/TimeSpan.cpp" />
+		<Unit filename="../source/android/Screen.cpp" />
 		<Unit filename="../source/glew.c">
 			<Option compilerVar="CC" />
 		</Unit>
