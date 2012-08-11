@@ -9,16 +9,12 @@ namespace XPG
     {
         return theAndroidApp;
     }
-    
-    void SetAndroidApp(android_app* androidApp)
-    {
-        theAndroidApp = androidApp;
-    }
 }
 
 void android_main(android_app* androidApp)
 {
-    XPG::SetAndroidApp(androidApp);
+    XPG::theAndroidApp = androidApp;
+    app_dummy();
     XpgMain();
 }
 
