@@ -10,7 +10,7 @@ LOCAL_SRC_FILES := ../../source/TimeSpan.cpp \
     ../../source/unix/Thread.cpp \
     ../../source/unix/Mutex.cpp \
     ../../source/android/Main.cpp \
-		../../source/android/Screen.cpp
+    ../../source/android/Screen.cpp
 LOCAL_MODULE := xpgmobile
 LOCAL_STATIC_LIBRARIES := android_native_app_glue
 
