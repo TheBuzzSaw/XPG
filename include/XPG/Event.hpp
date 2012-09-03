@@ -6,6 +6,12 @@
 
 namespace XPG
 {
+    struct ResizeDetails
+    {
+        int width;
+        int height;
+    };
+
     XpgClass Event
     {
         public:

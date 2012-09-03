@@ -16,10 +16,15 @@ namespace XPG
             void Open();
             void Close();
 
+            void Run();
             void Draw();
             void SetTitle(const char* title);
             void MakeCurrent();
             void SwapBuffers();
+            
+            inline Event& OnLoad() { return _onLoad; }
+            inline Event& OnUnload() { return _onUnload; }
+            inline Event& OnLoop() { return _onLoop; }
 
             inline Event& OnResize() { return _onResize; }
             inline Event& OnMove() { return _onMove; }
@@ -45,7 +50,11 @@ namespace XPG
             inline Event& OnMouseWheelUp() { return _onMouseWheelUp; }
 
         private:
-            UInt8 _native[128];
+            UInt8 _native[256];
+            
+            Event _onLoad;
+            Event _onUnload;
+            Event _onLoop;
 
             Event _onResize;
             Event _onMove;
