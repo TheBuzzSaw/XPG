@@ -1,9 +1,22 @@
-#include "Screen.hpp"
+#include "../../include/XPG/Screen.hpp"
+
+#include <jni.h>
+#include <errno.h>
+
+#include <EGL/egl.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+
+#include <android/sensor.h>
+#include <android/log.h>
+#include <android_native_app_glue.h>
 
 namespace XPG
-{// struct to be able to reference our _native
+{
+  // struct to be able to reference our _native
   struct ScreenMeta
   {
+        Screen* screen;
         android_app* app;
         ASensorManager* sensorManager;
         const ASensor* accelerometerSensor;
@@ -11,15 +24,24 @@ namespace XPG
 
         int animating;
         EGLDisplay display;
-        EGL surface;
+        EGLSurface surface;
         EGLContext context;
         int32_t width;
         int32_t height;
-  }
+  };
+  
+  void GetCommand(struct android_app* app, int32_t command)
+	{
+	    ScreenMeta* meta = (ScreenMeta*)_native;
+	    Screen* screen = (Screen*)meta->app->userData;
+	    screen->OnCommand(meta->app, command);
+	}
 
   Screen::Screen()
 	{
 	    ScreenMeta* meta = (ScreenMeta*)_native;
+	    
+	    meta->screen = this;
 		meta->animating = 0;
 		meta->display = EGL_NO_DISPLAY;
 		meta->context = EGL_NO_CONTEXT;
@@ -207,13 +229,6 @@ namespace XPG
             details.source = this;
 			_onLoop.Fire(details);
 		}
-	}
-
-	void Screen::GetCommand(struct android_app* app, int32_t command)
-	{
-	    ScreenMeta* meta = (ScreenMeta*)_native;
-	    Screen* screen = (Screen*)meta->app->userData;
-	    screen->OnCommand(meta->app, command);
 	}
 
 	void Screen::OnCommand(struct android_app* app, int32_t command)

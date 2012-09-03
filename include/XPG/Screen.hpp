@@ -1,5 +1,5 @@
-#ifndef XpgWindowHpp
-#define XpgWindowHpp
+#ifndef XpgScreenHpp
+#define XpgScreenHpp
 
 #include "Platform.hpp"
 #include "DataTypes.hpp"
@@ -7,11 +7,11 @@
 
 namespace XPG
 {
-    XpgClass Window
+    XpgClass Screen
     {
         public:
-            Window();
-            ~Window();
+            Screen();
+            ~Screen();
 
             void Open();
             void Close();
