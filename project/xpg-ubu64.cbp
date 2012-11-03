@@ -64,7 +64,6 @@
 		<Unit filename="../source/Stopwatch.cpp" />
 		<Unit filename="../source/TickSpans.hpp" />
 		<Unit filename="../source/TimeSpan.cpp" />
-		<Unit filename="../source/android/Screen.cpp" />
 		<Unit filename="../source/glew.c">
 			<Option compilerVar="CC" />
 		</Unit>
