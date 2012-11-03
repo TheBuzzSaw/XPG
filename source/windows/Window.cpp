@@ -1,7 +1,8 @@
+#include "Windows.hpp"
 #include "../../include/XPG/Window.hpp"
 #include "../../include/XPG/glew.h"
 #include "../../include/XPG/wglew.h"
-#include "Windows.hpp"
+#include "../../include/XPG/DataTypes.hpp"
 #include <cstring>
 #include <cassert>
 
@@ -31,44 +32,144 @@ namespace XPG
         WindowMeta* meta = (WindowMeta*)GetWindowLongPtr(window,
             GWL_USERDATA);
 
+        LRESULT result = 0;
+
         if (meta && meta->object)
         {
             switch (message)
             {
-                case WM_CLOSE:
-                    meta->object->Close();
-                    break;
-
                 case WM_PAINT:
-                    cout << "WM_PAINT" << endl;
+                {
                     meta->object->MakeCurrent();
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                     meta->object->SwapBuffers();
                     break;
+                }
+
+                case WM_MOUSEMOVE:
+                {
+//                    Int32 x = GET_X_LPARAM(lparam);
+//                    Int32 y = GET_Y_LPARAM(lparam);
+//
+//                    cerr << "x,y: " << x << ", " << y << endl;
+                    break;
+                }
+
+                case WM_LBUTTONDOWN:
+                {
+                    cerr << "WM_LBUTTONDOWN" << endl;
+                    break;
+                }
+
+                case WM_LBUTTONUP:
+                {
+
+                    break;
+                }
+
+                case WM_LBUTTONDBLCLK:
+                {
+                    cerr << "WM_LBUTTONDBLCLK" << endl;
+                    break;
+                }
+
+                case WM_RBUTTONDOWN:
+                {
+                    break;
+                }
+
+                case WM_RBUTTONUP:
+                {
+
+                    break;
+                }
+
+                case WM_RBUTTONDBLCLK:
+                {
+                    break;
+                }
+
+                case WM_MBUTTONDOWN:
+                {
+
+                    break;
+                }
+
+                case WM_MBUTTONUP:
+                {
+                    break;
+                }
+
+                case WM_MBUTTONDBLCLK:
+                {
+
+                    break;
+                }
+
+                case WM_XBUTTONDOWN:
+                {
+                    Int32 whichX = GET_XBUTTON_WPARAM(wparam);
+
+                    cerr << "whichX: " << whichX << endl;
+                    break;
+                }
+
+                case WM_XBUTTONUP:
+                {
+                    break;
+                }
+
+                case WM_XBUTTONDBLCLK:
+                {
+                    break;
+                }
+
+
+                case WM_MOUSEWHEEL:
+                {
+                    Int16 delta = GET_WHEEL_DELTA_WPARAM(wparam);
+
+                    break;
+                }
+
+                case WM_CLOSE:
+                {
+                    meta->object->Close();
+                    break;
+                }
+
+
+                default:
+                {
+                    result = DefWindowProc(window, message, wparam, lparam);
+                }
             }
         }
 
-        return DefWindowProc(window, message, wparam, lparam);
+        return result;
     }
 
+    /*
+    *   This function is setup to be called as WndProc the first time, when a window
+    *   is being setup.  It sets up the user data for the window once it is first created
+    *   and then reassigns the WndProc callback to WindowCallback
+    */
     LRESULT CALLBACK SetupCallback(HWND window, UINT message, WPARAM wparam,
         LPARAM lparam)
     {
-        LRESULT result;
-
         if (message == WM_NCCREATE)
         {
             LPCREATESTRUCT cs = (LPCREATESTRUCT)lparam;
+
+            //setup the userdata for this window
             SetWindowLongPtr(window, GWL_USERDATA, (long)cs->lpCreateParams);
+
+            //reassign the WndProc function to WindowCallback now that we have setup the userdata
             SetWindowLongPtr(window, GWL_WNDPROC, (long)WindowCallback);
-            result = WindowCallback(window, message, wparam, lparam);
-        }
-        else
-        {
-            result = DefWindowProc(window, message, wparam, lparam);
         }
 
-        return result;
+        //
+        return DefWindowProc(window, message, wparam, lparam);
     }
 
     void SetupContext(WindowMeta* meta)
