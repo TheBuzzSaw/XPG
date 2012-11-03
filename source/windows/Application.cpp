@@ -31,6 +31,7 @@ namespace XPG
 
     Application::~Application()
     {
+        UnregisterClass(ClassName, GetInstanceModule(NULL));
     }
 
     void Application::Run()

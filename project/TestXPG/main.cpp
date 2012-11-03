@@ -56,19 +56,19 @@ int main(int argc, char** argv)
 {
     XPG::ResetTimer();
 
-    XPG::Array<string> array;
-    array.Add("Herro");
-    array.Add("Avast ye!");
-    array.Add("Shweet");
-
-    XPG::Array<string> anotherArray = array;
-
-    cout << "array has capacity " << anotherArray.Capacity() << endl;
-
-    for (size_t i = 0; i < anotherArray.Size(); ++i)
-    {
-        cout << anotherArray[i] << endl;
-    }
+//    XPG::Array<string> array;
+//    array.Add("Herro");
+//    array.Add("Avast ye!");
+//    array.Add("Shweet");
+//
+//    XPG::Array<string> anotherArray = array;
+//
+//    cout << "array has capacity " << anotherArray.Capacity() << endl;
+//
+//    for (size_t i = 0; i < anotherArray.Size(); ++i)
+//    {
+//        cout << anotherArray[i] << endl;
+//    }
 
     cout << XPG::DateTime(1601, 1, 1).Ticks() << endl;
     cout << XPG::DateTime(9999, 12, 31).Ticks() << endl;
