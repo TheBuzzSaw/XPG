@@ -2,6 +2,9 @@
 #define XpgWindowHpp
 
 #include "Platform.hpp"
+#include "MouseState.hpp"
+#include "../../source/windows/Windows.hpp"
+
 
 namespace XPG
 {
@@ -21,6 +24,8 @@ namespace XPG
 
         private:
             char _native[128];
+
+            MouseState* DetermineMouseState(WPARAM inWParam, LPARAM inLParam);
     };
 }
 

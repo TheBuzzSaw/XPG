@@ -132,6 +132,16 @@ namespace XPG
                     break;
                 }
 
+                case WM_KEYDOWN:
+                {
+                    break;
+                }
+
+                case WM_KEYUP:
+                {
+                    break;
+                }
+
                 case WM_CLOSE:
                 {
                     meta->object->Close();
@@ -147,6 +157,15 @@ namespace XPG
         }
 
         return result;
+    }
+
+    MouseState* Window::DetermineMouseState(WPARAM inWParam, LPARAM inLParam)
+    {
+        MouseState* state = new MouseState(NULL, GET_X_LPARAM(inLParam), GET_Y_LPARAM(inLParam));
+
+
+
+        return state;
     }
 
     /*

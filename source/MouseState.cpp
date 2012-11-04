@@ -3,10 +3,9 @@
 
 namespace XPG
 {
-    MouseState::MouseState(void* userData, UInt32 buttonFlags, int x, int y)
+    MouseState::MouseState(void* userData, int x, int y)
     {
         _userData = userData;
-        _buttonFlags = buttonFlags;
         _x = x;
         _y = y;
     }
@@ -27,9 +26,13 @@ namespace XPG
         return *this;
     }
 
-    bool MouseState::IsButtonDown(UInt32 button)
+    void MouseState::SetButton(Button inButton)
     {
-        UInt32 mask = 1 << button;
-        return _buttonFlags & mask;
+        _buttonFlags |= inButton;
+    }
+
+    bool MouseState::IsButtonDown(Button inButton)
+    {
+        return _buttonFlags & inButton;
     }
 }
