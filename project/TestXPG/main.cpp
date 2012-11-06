@@ -52,9 +52,9 @@ void SendAsyncDrawCalls(void* data)
     }
 }
 
-void OnLeftMouseButtonDown(XPG::MouseState&)
+void OnLeftMouseButtonDown(XPG::MouseState& currentState)
 {
-    cerr << "Hello!!!!" << endl;
+    cerr << "Hello!!!! x,y: " << currentState.X() << ", " << currentState.Y() << endl;
 }
 
 int main(int argc, char** argv)
