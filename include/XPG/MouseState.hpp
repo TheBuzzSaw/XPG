@@ -9,8 +9,6 @@ namespace XPG
     XpgClass MouseState
     {
         public:
-            typedef void (*Callback)(MouseState&);
-
             enum Button {
                 Left = 1 << 0,
                 Right = 1 << 1,
@@ -18,7 +16,7 @@ namespace XPG
                 X1 = 1 << 3,
                 X2 = 1 << 4 };
 
-            MouseState(void* userData, int x, int y);
+            MouseState();
             MouseState(const MouseState& other);
             ~MouseState();
 
@@ -26,6 +24,10 @@ namespace XPG
 
             inline int X() const { return _x; }
             inline int Y() const { return _y; }
+
+            inline void UserData(void* userData) { _userData = userData; }
+            inline void X(int x) { _x = x; }
+            inline void Y(int y) { _y = y; }
 
             void SetButton(Button inButton);
             bool IsButtonDown(Button inButton);

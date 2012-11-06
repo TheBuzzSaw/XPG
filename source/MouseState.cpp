@@ -3,11 +3,11 @@
 
 namespace XPG
 {
-    MouseState::MouseState(void* userData, int x, int y)
+    MouseState::MouseState()
     {
-        _userData = userData;
-        _x = x;
-        _y = y;
+        _userData = NULL;
+        _x = 0;
+        _y = 0;
     }
 
     MouseState::MouseState(const MouseState& other)

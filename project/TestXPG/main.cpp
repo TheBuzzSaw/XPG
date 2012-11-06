@@ -52,6 +52,11 @@ void SendAsyncDrawCalls(void* data)
     }
 }
 
+void OnLeftMouseButtonDown(XPG::MouseState&)
+{
+    cerr << "Hello!!!!" << endl;
+}
+
 int main(int argc, char** argv)
 {
     XPG::ResetTimer();
@@ -96,6 +101,8 @@ int main(int argc, char** argv)
     XPG::Window window[4];
     window[0].SetTitle("XPG Main Window");
     window[1].SetTitle("XPG Mini Map");
+
+    window[0].SetOnLeftMouseButtonDown(OnLeftMouseButtonDown);
     //c.Start(SendAsyncDrawCalls, window);
     application.Run();
 

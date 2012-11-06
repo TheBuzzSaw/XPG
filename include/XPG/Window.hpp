@@ -14,6 +14,9 @@ namespace XPG
             Window();
             ~Window();
 
+            typedef void (*MouseEventCallback)(MouseState&);
+
+
             void Open();
             void Close();
 
@@ -22,10 +25,13 @@ namespace XPG
             void MakeCurrent();
             void SwapBuffers();
 
-        private:
-            char _native[128];
+            void SetOnLeftMouseButtonDown(MouseEventCallback leftMouseButtonDownCallback);
 
-            MouseState* DetermineMouseState(WPARAM inWParam, LPARAM inLParam);
+        private:
+            //This must be bigger than the biggest possible size that Window could take up in memory
+            //It is used to pull the object out in the WndProc callback
+            char _native[1024];
+
     };
 }
 

@@ -11,6 +11,7 @@ using namespace std;
 
 namespace XPG
 {
+    //This is a cheat to keep the private section of the class out of the header file
     struct WindowMeta
     {
         HWND window;
@@ -18,6 +19,11 @@ namespace XPG
         HGLRC renderContext;
         RECT formerPosition;
         Window* object;
+
+        Window::MouseEventCallback OnLeftMouseButtonDown;
+
+        void* _userData;
+
     };
 
     static const DWORD BaseStyle = WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
@@ -25,6 +31,17 @@ namespace XPG
 
     static size_t openWindowCount = 0;
     static const Window* activeWindow = NULL;
+
+    static void DetermineMouseState(WPARAM wparam, LPARAM lparam, MouseState& state)
+    {
+//        MouseState* state = new MouseState(userData, GET_X_LPARAM(inLParam), GET_Y_LPARAM(inLParam));
+        state.X(GET_X_LPARAM(lparam));
+        state.Y(GET_Y_LPARAM(lparam));
+
+
+
+//        return state;
+    }
 
     LRESULT CALLBACK WindowCallback(HWND window, UINT message, WPARAM wparam,
         LPARAM lparam)
@@ -57,7 +74,14 @@ namespace XPG
 
                 case WM_LBUTTONDOWN:
                 {
-                    cerr << "WM_LBUTTONDOWN" << endl;
+                    if (meta->OnLeftMouseButtonDown != NULL)
+                    {
+                        MouseState currentState;
+                        currentState.UserData(meta->_userData);
+                        DetermineMouseState(wparam, lparam, currentState);
+                        meta->OnLeftMouseButtonDown(currentState);
+                    }
+
                     break;
                 }
 
@@ -127,7 +151,7 @@ namespace XPG
 
                 case WM_MOUSEWHEEL:
                 {
-                    Int16 delta = GET_WHEEL_DELTA_WPARAM(wparam);
+                    //Int16 delta = GET_WHEEL_DELTA_WPARAM(wparam);
 
                     break;
                 }
@@ -159,14 +183,6 @@ namespace XPG
         return result;
     }
 
-    MouseState* Window::DetermineMouseState(WPARAM inWParam, LPARAM inLParam)
-    {
-        MouseState* state = new MouseState(NULL, GET_X_LPARAM(inLParam), GET_Y_LPARAM(inLParam));
-
-
-
-        return state;
-    }
 
     /*
     *   This function is setup to be called as WndProc the first time, when a window
@@ -362,4 +378,11 @@ namespace XPG
         WindowMeta* meta = (WindowMeta*)_native;
         ::SwapBuffers(meta->deviceContext);
     }
+
+    void Window::SetOnLeftMouseButtonDown(MouseEventCallback leftMouseButtonDownCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnLeftMouseButtonDown = leftMouseButtonDownCallback;
+    }
+
 }
