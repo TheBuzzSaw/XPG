@@ -52,14 +52,24 @@ void SendAsyncDrawCalls(void* data)
     }
 }
 
-void OnLeftMouseButtonDown(XPG::MouseState& currentState)
+void OnLeftMouseButtonDown(const XPG::MouseState& currentState)
 {
     cerr << "Hello!!!! x,y: " << currentState.X() << ", " << currentState.Y() << endl;
 }
 
+void OnMouseMove(const XPG::MouseState& currentState)
+{
+    cerr << "Mouse Moved! x,y: " << currentState.X() << ", " << currentState.Y() << endl;
+}
+
+void OnMouseExtraButtonDown(const XPG::MouseState& currentState, int inWhichX)
+{
+    cerr << "Mouse X button down.  Button: " << inWhichX << endl;
+}
+
 int main(int argc, char** argv)
 {
-    XPG::ResetTimer();
+//    XPG::ResetTimer();
 
 //    XPG::Array<string> array;
 //    array.Add("Herro");
@@ -75,26 +85,26 @@ int main(int argc, char** argv)
 //        cout << anotherArray[i] << endl;
 //    }
 
-    cout << XPG::DateTime(1601, 1, 1).Ticks() << endl;
-    cout << XPG::DateTime(9999, 12, 31).Ticks() << endl;
-    cout << XPG::DateTime::UtcTime() << endl;
-    cout << XPG::HighResolutionUtcTime() << endl;
-    cout << XPG::DateTime::LocalTime() << endl;
-    cout << XPG::HighResolutionLocalTime() << endl;
+//    cout << XPG::DateTime(1601, 1, 1).Ticks() << endl;
+//    cout << XPG::DateTime(9999, 12, 31).Ticks() << endl;
+//    cout << XPG::DateTime::UtcTime() << endl;
+//    cout << XPG::HighResolutionUtcTime() << endl;
+//    cout << XPG::DateTime::LocalTime() << endl;
+//    cout << XPG::HighResolutionLocalTime() << endl;
 
-    XPG::Event e;
-    e.AddListener(TestListener);
-    e.AddListener(TestListener, &e);
-    e.AddListener(TestListener, &cout);
-    e.Fire();
+//    XPG::Event e;
+//    e.AddListener(TestListener);
+//    e.AddListener(TestListener, &e);
+//    e.AddListener(TestListener, &cout);
+//    e.Fire();
 
-    XPG::Thread a;
-    XPG::Thread b;
+//    XPG::Thread a;
+//    XPG::Thread b;
+//
+//    a.Start(Talk, (void*)(Letters + 0));
+//    b.Start(Talk, (void*)(Letters + 1));
 
-    a.Start(Talk, (void*)(Letters + 0));
-    b.Start(Talk, (void*)(Letters + 1));
-
-    XPG::Thread c;
+//    XPG::Thread c;
 
     //MakeWindow();
     XPG::Application application;
@@ -102,14 +112,16 @@ int main(int argc, char** argv)
     window[0].SetTitle("XPG Main Window");
     window[1].SetTitle("XPG Mini Map");
 
-    window[0].SetOnLeftMouseButtonDown(OnLeftMouseButtonDown);
+    window[0].OnLeftMouseButtonDown(OnLeftMouseButtonDown);
+    window[0].OnMouseMove(OnMouseMove);
+    window[2].OnMouseExtraButtonDown(OnMouseExtraButtonDown);
     //c.Start(SendAsyncDrawCalls, window);
     application.Run();
 
-    a.Join();
-    cout << "joined thread A" << endl;
-    b.Join();
-    cout << "joined thread B" << endl;
+//    a.Join();
+//    cout << "joined thread A" << endl;
+//    b.Join();
+//    cout << "joined thread B" << endl;
 
     return 0;
 }

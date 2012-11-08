@@ -21,6 +21,14 @@ namespace XPG
         Window* object;
 
         Window::MouseEventCallback OnLeftMouseButtonDown;
+        Window::MouseEventCallback OnLeftMouseButtonUp;
+        Window::MouseEventCallback OnMiddleMouseButtonDown;
+        Window::MouseEventCallback OnMiddleMouseButtonUp;
+        Window::MouseEventCallback OnRightMouseButtonDown;
+        Window::MouseEventCallback OnRightMouseButtonUp;
+        Window::MouseEventCallback OnMouseMove;
+        Window::MouseExtraButtonEventCallback OnMouseExtraButtonDown;
+        Window::MouseExtraButtonEventCallback OnMouseExtraButtonUp;
 
         void* _userData;
 
@@ -69,6 +77,13 @@ namespace XPG
 //                    Int32 y = GET_Y_LPARAM(lparam);
 //
 //                    cerr << "x,y: " << x << ", " << y << endl;
+                    if (meta->OnMouseMove != NULL)
+                    {
+                        MouseState currentState;
+                        currentState.UserData(meta->_userData);
+                        DetermineMouseState(wparam, lparam, currentState);
+                        meta->OnMouseMove(currentState);
+                    }
                     break;
                 }
 
@@ -132,9 +147,18 @@ namespace XPG
 
                 case WM_XBUTTONDOWN:
                 {
-                    Int32 whichX = GET_XBUTTON_WPARAM(wparam);
+                    if (meta->OnMouseExtraButtonDown != NULL)
+                    {
+                        Int32 whichX = GET_XBUTTON_WPARAM(wparam);
+                        MouseState currentState;
+                        currentState.UserData(meta->_userData);
+                        DetermineMouseState(wparam, lparam, currentState);
+                        meta->OnMouseExtraButtonDown(currentState, whichX);
+                    }
 
-                    cerr << "whichX: " << whichX << endl;
+
+
+                    //cerr << "whichX: " << whichX << endl;
                     break;
                 }
 
@@ -379,10 +403,58 @@ namespace XPG
         ::SwapBuffers(meta->deviceContext);
     }
 
-    void Window::SetOnLeftMouseButtonDown(MouseEventCallback leftMouseButtonDownCallback)
+    void Window::OnLeftMouseButtonDown(MouseEventCallback leftMouseButtonDownCallback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
         meta->OnLeftMouseButtonDown = leftMouseButtonDownCallback;
+    }
+
+    void Window::OnLeftMouseButtonUp(MouseEventCallback leftMouseButtonUpCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnLeftMouseButtonUp = leftMouseButtonUpCallback;
+    }
+
+    void Window::OnMiddleMouseButtonDown(MouseEventCallback middleMouseButtonDownCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnMiddleMouseButtonDown = middleMouseButtonDownCallback;
+    }
+
+    void Window::OnMiddleMouseButtonUp(MouseEventCallback middleMouseButtonUpCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnMiddleMouseButtonUp = middleMouseButtonUpCallback;
+    }
+
+    void Window::OnRightMouseButtonDown(MouseEventCallback rightMouseButtonDownCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnRightMouseButtonDown = rightMouseButtonDownCallback;
+    }
+
+    void Window::OnRightMouseButtonUp(MouseEventCallback rightMouseButtonUpCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnRightMouseButtonUp = rightMouseButtonUpCallback;
+    }
+
+    void Window::OnMouseMove(MouseEventCallback mouseMoveCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnMouseMove = mouseMoveCallback;
+    }
+
+    void Window::OnMouseExtraButtonDown(MouseExtraButtonEventCallback mouseExtraButtonDownCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnMouseExtraButtonDown = mouseExtraButtonDownCallback;
+    }
+
+    void Window::OnMouseExtraButtonUp(MouseExtraButtonEventCallback mouseExtraButtonUpCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnMouseExtraButtonUp = mouseExtraButtonUpCallback;
     }
 
 }
