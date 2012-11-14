@@ -116,6 +116,12 @@ void OnMouseWheel(XPG::MouseState& currentState, char whichWay)
     PrintMouseState(currentState);
 }
 
+bool OnWindowClose(void* inUserData)
+{
+    return false;
+    //return (MessageBoxA(NULL, "Are you sure you want to close?", "Please don't :)", MB_OKCANCEL) == IDOK);
+}
+
 
 int main(int argc, char** argv)
 {
@@ -167,6 +173,7 @@ int main(int argc, char** argv)
     window[0].OnMouseExtraButtonDown(OnMouseExtraButtonDown);
     window[0].OnRightMouseButtonDown(OnRightMouseButtonDown);
     window[0].OnMouseWheel(OnMouseWheel);
+    window[0].OnWindowClose(OnWindowClose);
     //c.Start(SendAsyncDrawCalls, window);
     application.Run();
 

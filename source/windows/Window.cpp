@@ -31,6 +31,8 @@ namespace XPG
         Window::MouseExtraButtonEventCallback OnMouseExtraButtonUp;
         Window::MouseWheelEventCallback OnMouseWheel;
 
+        Window::WindowCloseEventCallback OnWindowClose;
+
         void* _userData;
 
     };
@@ -249,7 +251,15 @@ namespace XPG
 
                 case WM_CLOSE:
                 {
-                    meta->object->Close();
+                    bool closeWindow = true;
+
+                    if (meta->OnWindowClose != NULL)
+                    {
+                        closeWindow = meta->OnWindowClose(meta->_userData);
+                    }
+
+                    if (closeWindow)
+                        meta->object->Close();
                     break;
                 }
 
@@ -519,5 +529,12 @@ namespace XPG
         WindowMeta* meta = (WindowMeta*)_native;
         meta->OnMouseWheel = mouseWheelEventCallback;
     }
+
+    void Window::OnWindowClose(WindowCloseEventCallback windowCloseEventCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnWindowClose = windowCloseEventCallback;
+    }
+
 
 }
