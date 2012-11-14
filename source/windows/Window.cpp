@@ -29,6 +29,7 @@ namespace XPG
         Window::MouseEventCallback OnMouseMove;
         Window::MouseExtraButtonEventCallback OnMouseExtraButtonDown;
         Window::MouseExtraButtonEventCallback OnMouseExtraButtonUp;
+        Window::MouseWheelEventCallback OnMouseWheel;
 
         void* _userData;
 
@@ -42,13 +43,28 @@ namespace XPG
 
     static void DetermineMouseState(WPARAM wparam, LPARAM lparam, MouseState& state)
     {
-//        MouseState* state = new MouseState(userData, GET_X_LPARAM(inLParam), GET_Y_LPARAM(inLParam));
         state.X(GET_X_LPARAM(lparam));
         state.Y(GET_Y_LPARAM(lparam));
 
+        if (wparam & 0x0001)
+            state.SetButton(MouseState::Left);
 
+        if (wparam & 0x0010)
+            state.SetButton(MouseState::Middle);
 
-//        return state;
+        if (wparam & 0x0002)
+            state.SetButton(MouseState::Right);
+
+        if (wparam & 0x0020)
+            state.SetButton(MouseState::X1);
+
+        if (wparam & 0x0040)
+            state.SetButton(MouseState::X2);
+
+//        if (wparam & 0x0008)
+//        {
+//            cerr << "Control key is down" << endl;
+//        }
     }
 
     LRESULT CALLBACK WindowCallback(HWND window, UINT message, WPARAM wparam,
@@ -73,10 +89,6 @@ namespace XPG
 
                 case WM_MOUSEMOVE:
                 {
-//                    Int32 x = GET_X_LPARAM(lparam);
-//                    Int32 y = GET_Y_LPARAM(lparam);
-//
-//                    cerr << "x,y: " << x << ", " << y << endl;
                     if (meta->OnMouseMove != NULL)
                     {
                         MouseState currentState;
@@ -102,7 +114,13 @@ namespace XPG
 
                 case WM_LBUTTONUP:
                 {
-
+                    if (meta->OnLeftMouseButtonUp != NULL)
+                    {
+                        MouseState currentState;
+                        currentState.UserData(meta->_userData);
+                        DetermineMouseState(wparam, lparam, currentState);
+                        meta->OnLeftMouseButtonUp(currentState);
+                    }
                     break;
                 }
 
@@ -114,12 +132,25 @@ namespace XPG
 
                 case WM_RBUTTONDOWN:
                 {
+                    if (meta->OnRightMouseButtonDown != NULL)
+                    {
+                        MouseState currentState;
+                        currentState.UserData(meta->_userData);
+                        DetermineMouseState(wparam, lparam, currentState);
+                        meta->OnRightMouseButtonDown(currentState);
+                    }
                     break;
                 }
 
                 case WM_RBUTTONUP:
                 {
-
+                    if (meta->OnRightMouseButtonUp != NULL)
+                    {
+                        MouseState currentState;
+                        currentState.UserData(meta->_userData);
+                        DetermineMouseState(wparam, lparam, currentState);
+                        meta->OnRightMouseButtonUp(currentState);
+                    }
                     break;
                 }
 
@@ -130,12 +161,25 @@ namespace XPG
 
                 case WM_MBUTTONDOWN:
                 {
-
+                    if (meta->OnMiddleMouseButtonDown != NULL)
+                    {
+                        MouseState currentState;
+                        currentState.UserData(meta->_userData);
+                        DetermineMouseState(wparam, lparam, currentState);
+                        meta->OnMiddleMouseButtonDown(currentState);
+                    }
                     break;
                 }
 
                 case WM_MBUTTONUP:
                 {
+                    if (meta->OnMiddleMouseButtonUp != NULL)
+                    {
+                        MouseState currentState;
+                        currentState.UserData(meta->_userData);
+                        DetermineMouseState(wparam, lparam, currentState);
+                        meta->OnMiddleMouseButtonUp(currentState);
+                    }
                     break;
                 }
 
@@ -156,14 +200,19 @@ namespace XPG
                         meta->OnMouseExtraButtonDown(currentState, whichX);
                     }
 
-
-
-                    //cerr << "whichX: " << whichX << endl;
                     break;
                 }
 
                 case WM_XBUTTONUP:
                 {
+                    if (meta->OnMouseExtraButtonUp != NULL)
+                    {
+                        Int32 whichX = GET_XBUTTON_WPARAM(wparam);
+                        MouseState currentState;
+                        currentState.UserData(meta->_userData);
+                        DetermineMouseState(wparam, lparam, currentState);
+                        meta->OnMouseExtraButtonUp(currentState, whichX);
+                    }
                     break;
                 }
 
@@ -175,8 +224,16 @@ namespace XPG
 
                 case WM_MOUSEWHEEL:
                 {
-                    //Int16 delta = GET_WHEEL_DELTA_WPARAM(wparam);
+                    if (meta->OnMouseWheel != NULL)
+                    {
+                        Int16 delta = GET_WHEEL_DELTA_WPARAM(wparam);
+                        MouseState currentState;
+                        currentState.UserData(meta->_userData);
+                        DetermineMouseState(wparam, lparam, currentState);
 
+                        char whichWay = delta > 0 ? 1 : -1;
+                        meta->OnMouseWheel(currentState, whichWay);
+                    }
                     break;
                 }
 
@@ -455,6 +512,12 @@ namespace XPG
     {
         WindowMeta* meta = (WindowMeta*)_native;
         meta->OnMouseExtraButtonUp = mouseExtraButtonUpCallback;
+    }
+
+    void Window::OnMouseWheel(MouseWheelEventCallback mouseWheelEventCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnMouseWheel = mouseWheelEventCallback;
     }
 
 }

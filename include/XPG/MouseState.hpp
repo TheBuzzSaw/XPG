@@ -14,7 +14,8 @@ namespace XPG
                 Right = 1 << 1,
                 Middle = 1 << 2,
                 X1 = 1 << 3,
-                X2 = 1 << 4 };
+                X2 = 1 << 4
+                };
 
             MouseState();
             MouseState(const MouseState& other);
@@ -30,7 +31,7 @@ namespace XPG
             inline void Y(int y) { _y = y; }
 
             void SetButton(Button inButton);
-            bool IsButtonDown(Button inButton);
+            bool const IsButtonDown(const Button inButton);
 
         private:
             void* _userData;

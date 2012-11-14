@@ -5,6 +5,7 @@ namespace XPG
 {
     MouseState::MouseState()
     {
+        _buttonFlags = 0;
         _userData = NULL;
         _x = 0;
         _y = 0;
@@ -31,7 +32,7 @@ namespace XPG
         _buttonFlags |= inButton;
     }
 
-    bool MouseState::IsButtonDown(Button inButton)
+    bool const MouseState::IsButtonDown(const Button inButton)
     {
         return _buttonFlags & inButton;
     }

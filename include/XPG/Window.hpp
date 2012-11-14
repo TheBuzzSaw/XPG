@@ -14,8 +14,9 @@ namespace XPG
             Window();
             ~Window();
 
-            typedef void (*MouseEventCallback)(const MouseState&);
-            typedef void (*MouseExtraButtonEventCallback)(const MouseState&, int);
+            typedef void (*MouseEventCallback)(MouseState&);
+            typedef void (*MouseExtraButtonEventCallback)(const MouseState&, Int32);
+            typedef void (*MouseWheelEventCallback)(MouseState&, char);
 
 
             void Open();
@@ -35,6 +36,7 @@ namespace XPG
             void OnMouseMove(MouseEventCallback mouseMoveCallback);
             void OnMouseExtraButtonDown(MouseExtraButtonEventCallback mouseExtraButtonDownCallback);
             void OnMouseExtraButtonUp(MouseExtraButtonEventCallback mouseExtraButtonUpCallback);
+            void OnMouseWheel(MouseWheelEventCallback mouseWheelEventCallback);
 
         private:
             //This must be bigger than the biggest possible size that Window could take up in memory

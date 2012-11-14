@@ -52,20 +52,70 @@ void SendAsyncDrawCalls(void* data)
     }
 }
 
-void OnLeftMouseButtonDown(const XPG::MouseState& currentState)
+
+void PrintMouseState(XPG::MouseState inState)
 {
-    cerr << "Hello!!!! x,y: " << currentState.X() << ", " << currentState.Y() << endl;
+    cout << "Current buttons pressed on mouse: ";
+    if (inState.IsButtonDown(XPG::MouseState::Left))
+        cout << " left";
+
+    if (inState.IsButtonDown(XPG::MouseState::Right))
+        cout << " right";
+
+    if (inState.IsButtonDown(XPG::MouseState::Middle))
+        cout << " middle";
+
+    if (inState.IsButtonDown(XPG::MouseState::X1))
+        cout << " X1";
+
+    if (inState.IsButtonDown(XPG::MouseState::X2))
+        cout << " X2";
+
+    cout << endl;
 }
 
-void OnMouseMove(const XPG::MouseState& currentState)
+
+void OnLeftMouseButtonDown(XPG::MouseState& currentState)
+{
+    cerr << "Hello!!!! x,y: " << currentState.X() << ", " << currentState.Y() << endl;
+    PrintMouseState(currentState);
+}
+
+void OnMouseMove(XPG::MouseState& currentState)
 {
     cerr << "Mouse Moved! x,y: " << currentState.X() << ", " << currentState.Y() << endl;
+    PrintMouseState(currentState);
 }
 
 void OnMouseExtraButtonDown(const XPG::MouseState& currentState, int inWhichX)
 {
     cerr << "Mouse X button down.  Button: " << inWhichX << endl;
+    PrintMouseState(currentState);
 }
+
+void OnRightMouseButtonDown(XPG::MouseState& currentState)
+{
+    PrintMouseState(currentState);
+}
+
+void OnMouseWheel(XPG::MouseState& currentState, char whichWay)
+{
+    if (whichWay > 0)
+    {
+        cerr << "Mouse wheel up" << endl;
+    }
+    else if (whichWay < 0)
+    {
+        cerr << "Mouse wheel down" << endl;
+    }
+    else
+    {
+        cerr << "What???" << endl;
+    }
+
+    PrintMouseState(currentState);
+}
+
 
 int main(int argc, char** argv)
 {
@@ -108,13 +158,15 @@ int main(int argc, char** argv)
 
     //MakeWindow();
     XPG::Application application;
-    XPG::Window window[4];
+    XPG::Window window[1];
     window[0].SetTitle("XPG Main Window");
-    window[1].SetTitle("XPG Mini Map");
+    //window[1].SetTitle("XPG Mini Map");
 
     window[0].OnLeftMouseButtonDown(OnLeftMouseButtonDown);
-    window[0].OnMouseMove(OnMouseMove);
-    window[2].OnMouseExtraButtonDown(OnMouseExtraButtonDown);
+    //window[0].OnMouseMove(OnMouseMove);
+    window[0].OnMouseExtraButtonDown(OnMouseExtraButtonDown);
+    window[0].OnRightMouseButtonDown(OnRightMouseButtonDown);
+    window[0].OnMouseWheel(OnMouseWheel);
     //c.Start(SendAsyncDrawCalls, window);
     application.Run();
 
