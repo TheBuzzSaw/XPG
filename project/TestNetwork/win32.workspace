@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Workspace">
+		<Project filename="testxpg-win32.cbp">
+			<Depends filename="../xpg-win32.cbp" />
+		</Project>
+		<Project filename="../xpg-win32.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

@@ -47,6 +47,7 @@
 		<Linker>
 			<Add library="gdi32" />
 			<Add library="opengl32" />
+			<Add library="ws2_32" />
 		</Linker>
 		<Unit filename="..\include\XPG\Application.hpp" />
 		<Unit filename="..\include\XPG\Array.hpp" />
@@ -56,6 +57,9 @@
 		<Unit filename="..\include\XPG\Event.hpp" />
 		<Unit filename="..\include\XPG\MouseState.hpp" />
 		<Unit filename="..\include\XPG\Mutex.hpp" />
+		<Unit filename="..\include\XPG\Network\Address32.hpp" />
+		<Unit filename="..\include\XPG\Network\Management.hpp" />
+		<Unit filename="..\include\XPG\Network\UdpSocket.hpp" />
 		<Unit filename="..\include\XPG\Platform.hpp" />
 		<Unit filename="..\include\XPG\Stopwatch.hpp" />
 		<Unit filename="..\include\XPG\Thread.hpp" />
@@ -63,17 +67,21 @@
 		<Unit filename="..\include\XPG\Window.hpp" />
 		<Unit filename="..\include\XPG\glew.h" />
 		<Unit filename="..\include\XPG\wglew.h" />
+		<Unit filename="..\source\Address32.cpp" />
 		<Unit filename="..\source\DateTime.cpp" />
 		<Unit filename="..\source\Event.cpp" />
 		<Unit filename="..\source\MouseState.cpp" />
+		<Unit filename="..\source\Network.hpp" />
 		<Unit filename="..\source\Stopwatch.cpp" />
 		<Unit filename="..\source\TickSpans.hpp" />
 		<Unit filename="..\source\TimeSpan.cpp" />
+		<Unit filename="..\source\UdpSocket.cpp" />
 		<Unit filename="..\source\glew.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\source\windows\Application.cpp" />
 		<Unit filename="..\source\windows\Clock.cpp" />
+		<Unit filename="..\source\windows\Management.cpp" />
 		<Unit filename="..\source\windows\Mutex.cpp" />
 		<Unit filename="..\source\windows\Thread.cpp" />
 		<Unit filename="..\source\windows\Window.cpp" />

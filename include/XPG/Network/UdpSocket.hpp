@@ -14,7 +14,9 @@ namespace XPG
             bool Open(UInt16 port);
             void Close();
             bool IsOpen() const;
-            bool Send(const Address32& destination);
+            bool Send(const Address32& destination, const void* data,
+                int size) const;
+            int Receive(Address32& source, void* data, int size) const;
 
         private:
             UdpSocket(const UdpSocket& other);

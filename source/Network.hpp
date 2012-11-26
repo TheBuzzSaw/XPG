@@ -4,6 +4,7 @@
 #include "../include/XPG/Platform.hpp"
 
 #ifdef XpgPlatformWindows
+#   include "windows/Windows.hpp"
 #   include <winsock2.h>
 typedef int socklen_t;
 #else

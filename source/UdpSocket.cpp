@@ -16,7 +16,7 @@ namespace XPG
     {
         bool success = false;
 
-        SOCKET attempt = ::socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+        SOCKET attempt = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
         if (attempt > 0)
         {
@@ -51,5 +51,48 @@ namespace XPG
     {
         const SOCKET* _socket = reinterpret_cast<const SOCKET*>(_native);
         return *_socket > 0;
+    }
+
+    bool UdpSocket::Send(const Address32& destination, const void* data,
+        int size) const
+    {
+        bool success = false;
+
+        if (data && size > 0 && IsOpen())
+        {
+            sockaddr_in address;
+            address.sin_family = AF_INET;
+            address.sin_addr.s_addr = htonl(destination.Address());
+            address.sin_port = htons(destination.Port());
+
+            const SOCKET* _socket = reinterpret_cast<const SOCKET*>(_native);
+            int sentBytes = sendto(*_socket, (const char*)data, size, 0,
+                (sockaddr*)&address, sizeof(sockaddr_in));
+
+            success = sentBytes == size;
+        }
+
+        return success;
+    }
+
+    int UdpSocket::Receive(Address32& source, void* data, int size) const
+    {
+        int received = 0;
+
+        if (data && size > 0 && IsOpen())
+        {
+            sockaddr_in from;
+            socklen_t length = sizeof(from);
+
+            const SOCKET* _socket = reinterpret_cast<const SOCKET*>(_native);
+
+            received = recvfrom(*_socket, (char*)data, size, 0,
+                (sockaddr*)&from, &length);
+
+            source = Address32(ntohl(from.sin_addr.s_addr),
+                ntohs(from.sin_port));
+        }
+
+        return received;
     }
 }
