@@ -59,6 +59,7 @@
 		<Unit filename="..\include\XPG\Mutex.hpp" />
 		<Unit filename="..\include\XPG\Network\Address32.hpp" />
 		<Unit filename="..\include\XPG\Network\Management.hpp" />
+		<Unit filename="..\include\XPG\Network\Packet32.hpp" />
 		<Unit filename="..\include\XPG\Network\UdpSocket.hpp" />
 		<Unit filename="..\include\XPG\Platform.hpp" />
 		<Unit filename="..\include\XPG\Stopwatch.hpp" />
@@ -72,6 +73,7 @@
 		<Unit filename="..\source\Event.cpp" />
 		<Unit filename="..\source\MouseState.cpp" />
 		<Unit filename="..\source\Network.hpp" />
+		<Unit filename="..\source\Packet32.cpp" />
 		<Unit filename="..\source\Stopwatch.cpp" />
 		<Unit filename="..\source\TickSpans.hpp" />
 		<Unit filename="..\source\TimeSpan.cpp" />
