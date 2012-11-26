@@ -12,6 +12,8 @@ namespace XPG
         _capacity = _buffer ? capacity : 0;
         _position = 0;
         _failedToWrite = false;
+
+        memset(_buffer, 0, _capacity);
     }
 
     Packet32::~Packet32()

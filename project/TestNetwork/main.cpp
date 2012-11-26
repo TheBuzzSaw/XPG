@@ -8,12 +8,16 @@ int main(int argc, char** argv)
 {
     if (XPG::OpenSockets())
     {
+        XPG::Packet32 packet(256);
+
         if (argc > 1)
         {
+            packet.Write("HERRO", 5);
+            packet.Address(XPG::Address32(31313));
+
             XPG::UdpSocket socket;
             socket.Open(28555);
-            const char* message = "HERRO";
-            if (socket.Send(XPG::Address32(31313), message, 5))
+            if (socket.Send(packet))
                 cout << "sent message";
             else
                 cout << "failed to send message";
@@ -22,11 +26,12 @@ int main(int argc, char** argv)
         {
             XPG::UdpSocket socket;
             socket.Open(31313);
-            char buffer[256] = "";
 
-            XPG::Address32 source;
-            cout << "received " << socket.Receive(source, buffer, 256)
-                << " bytes: " << buffer << endl;
+            if (socket.Receive(packet))
+            {
+                cout << "received " << packet.Position()
+                    << " bytes: " << packet.Buffer() << endl;
+            }
         }
 
         XPG::CloseSockets();

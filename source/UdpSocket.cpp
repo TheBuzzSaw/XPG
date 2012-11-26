@@ -53,46 +53,53 @@ namespace XPG
         return *_socket > 0;
     }
 
-    bool UdpSocket::Send(const Address32& destination, const void* data,
-        int size) const
+    bool UdpSocket::Send(const Packet32& packet) const
     {
         bool success = false;
 
-        if (data && size > 0 && IsOpen())
+        if (packet.Position() > 0 && IsOpen())
         {
+            Address32 header = packet.Address();
             sockaddr_in address;
             address.sin_family = AF_INET;
-            address.sin_addr.s_addr = htonl(destination.Address());
-            address.sin_port = htons(destination.Port());
+            address.sin_addr.s_addr = htonl(header.Address());
+            address.sin_port = htons(header.Port());
 
             const SOCKET* _socket = reinterpret_cast<const SOCKET*>(_native);
-            int sentBytes = sendto(*_socket, (const char*)data, size, 0,
-                (sockaddr*)&address, sizeof(sockaddr_in));
+            int sentBytes = sendto(*_socket, (const char*)packet.Buffer(),
+                packet.Position(), 0, (sockaddr*)&address, sizeof(sockaddr_in));
 
-            success = sentBytes == size;
+            success = sentBytes == packet.Position();
         }
 
         return success;
     }
 
-    int UdpSocket::Receive(Address32& source, void* data, int size) const
+    bool UdpSocket::Receive(Packet32& packet) const
     {
-        int received = 0;
+        bool success = false;
 
-        if (data && size > 0 && IsOpen())
+        if (packet.Capacity() > 0 && IsOpen())
         {
             sockaddr_in from;
             socklen_t length = sizeof(from);
 
             const SOCKET* _socket = reinterpret_cast<const SOCKET*>(_native);
+            packet.Clear();
 
-            received = recvfrom(*_socket, (char*)data, size, 0,
-                (sockaddr*)&from, &length);
+            int received = recvfrom(*_socket, (char*)packet.Buffer(),
+                packet.Capacity(), 0, (sockaddr*)&from, &length);
 
-            source = Address32(ntohl(from.sin_addr.s_addr),
-                ntohs(from.sin_port));
+            if (received > 0)
+            {
+                packet.Position(received);
+                success = true;
+            }
+
+            packet.Address(Address32(ntohl(from.sin_addr.s_addr),
+                ntohs(from.sin_port)));
         }
 
-        return received;
+        return success;
     }
 }
