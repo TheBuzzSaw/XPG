@@ -57,7 +57,7 @@ namespace XPG
     {
         bool success = false;
 
-        if (packet.Position() > 0 && IsOpen())
+        if (packet.ContentLength() > 0 && IsOpen())
         {
             Address32 header = packet.Address();
             sockaddr_in address;
@@ -67,9 +67,10 @@ namespace XPG
 
             const SOCKET* _socket = reinterpret_cast<const SOCKET*>(_native);
             int sentBytes = sendto(*_socket, (const char*)packet.Buffer(),
-                packet.Position(), 0, (sockaddr*)&address, sizeof(sockaddr_in));
+                packet.ContentLength(), 0, (sockaddr*)&address,
+                sizeof(sockaddr_in));
 
-            success = sentBytes == packet.Position();
+            success = sentBytes == packet.ContentLength();
         }
 
         return success;
@@ -92,7 +93,8 @@ namespace XPG
 
             if (received > 0)
             {
-                packet.Position(received);
+                packet.ContentLength(received);
+                packet.Position(0);
                 success = true;
             }
 

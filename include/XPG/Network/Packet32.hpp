@@ -26,6 +26,11 @@ namespace XPG
                 return _capacity;
             }
 
+            inline UInt16 ContentLength() const
+            {
+                return _contentLength;
+            }
+
             inline UInt16 Position() const
             {
                 return _position;
@@ -36,24 +41,24 @@ namespace XPG
                 return _capacity - _position;
             }
 
-            inline bool FailedToWrite() const
+            inline UInt16 ReadableBytesRemaining() const
             {
-                return _failedToWrite;
+                return _contentLength - _position;
+            }
+
+            inline bool FailedToStream() const
+            {
+                return _failedToStream;
             }
 
             inline operator bool() const
             {
-                return _failedToWrite;
+                return !_failedToStream;
             }
 
             inline void Forgive()
             {
-                _failedToWrite = false;
-            }
-
-            inline const UInt8* Buffer() const
-            {
-                return _buffer;
+                _failedToStream = false;
             }
 
             inline UInt8* Buffer()
@@ -61,9 +66,16 @@ namespace XPG
                 return _buffer;
             }
 
+            inline const UInt8* Buffer() const
+            {
+                return _buffer;
+            }
+
+            void ContentLength(UInt16 contentLength);
             void Position(UInt16 position);
             void Clear();
             void Write(const void* data, UInt16 size);
+            void Read(void* buffer, UInt16 size);
 
         private:
             Packet32(const Packet32& other);
@@ -72,9 +84,28 @@ namespace XPG
             Address32 _address;
             UInt8* _buffer;
             UInt16 _capacity;
+            UInt16 _contentLength;
             UInt16 _position;
-            bool _failedToWrite;
+            bool _failedToStream;
     };
+
+    Packet32& operator<<(Packet32& packet, Int8 data);
+    Packet32& operator<<(Packet32& packet, UInt8 data);
+    Packet32& operator<<(Packet32& packet, Int16 data);
+    Packet32& operator<<(Packet32& packet, UInt16 data);
+    Packet32& operator<<(Packet32& packet, Int32 data);
+    Packet32& operator<<(Packet32& packet, UInt32 data);
+    Packet32& operator<<(Packet32& packet, Int64 data);
+    Packet32& operator<<(Packet32& packet, UInt64 data);
+
+    Packet32& operator>>(Packet32& packet, Int8& data);
+    Packet32& operator>>(Packet32& packet, UInt8& data);
+    Packet32& operator>>(Packet32& packet, Int16& data);
+    Packet32& operator>>(Packet32& packet, UInt16& data);
+    Packet32& operator>>(Packet32& packet, Int32& data);
+    Packet32& operator>>(Packet32& packet, UInt32& data);
+    Packet32& operator>>(Packet32& packet, Int64& data);
+    Packet32& operator>>(Packet32& packet, UInt64& data);
 }
 
 #endif

@@ -6,6 +6,7 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
+    cout << "version 3" << endl;
     if (XPG::OpenSockets())
     {
         XPG::Packet32 packet(256);
@@ -17,6 +18,7 @@ int main(int argc, char** argv)
 
             XPG::UdpSocket socket;
             socket.Open(28555);
+
             if (socket.Send(packet))
                 cout << "sent message";
             else
@@ -29,7 +31,7 @@ int main(int argc, char** argv)
 
             if (socket.Receive(packet))
             {
-                cout << "received " << packet.Position()
+                cout << "received " << packet.ContentLength()
                     << " bytes: " << packet.Buffer() << endl;
             }
         }
