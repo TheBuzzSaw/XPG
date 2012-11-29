@@ -7,7 +7,6 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    cout << "version 3" << endl;
     if (XPG::OpenSockets())
     {
         {
@@ -19,7 +18,7 @@ int main(int argc, char** argv)
             {
                 XPG::Address32 a = query.GetResult(i);
                 cout << a.A() << "." << a.B() << "." << a.C() << "." << a.D()
-                    << endl;
+                    << ":" << a.Port() << endl;
             }
         }
 
