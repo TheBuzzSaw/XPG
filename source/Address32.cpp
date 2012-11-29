@@ -44,4 +44,26 @@ namespace XPG
         _port = other._port;
         return *this;
     }
+
+    static const UInt32 ByteMask = 0x000000ff;
+
+    UInt32 Address32::A() const
+    {
+        return (_address >> 24) & ByteMask;
+    }
+
+    UInt32 Address32::B() const
+    {
+        return (_address >> 16) & ByteMask;
+    }
+
+    UInt32 Address32::C() const
+    {
+        return (_address >> 8) & ByteMask;
+    }
+
+    UInt32 Address32::D() const
+    {
+        return _address & ByteMask;
+    }
 }

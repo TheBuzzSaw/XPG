@@ -1,4 +1,5 @@
 #include <XPG/Network/Management.hpp>
+#include <XPG/Network/Address32Query.hpp>
 #include <XPG/Network/UdpSocket.hpp>
 #include <iostream>
 #include <string>
@@ -9,30 +10,16 @@ int main(int argc, char** argv)
     cout << "version 3" << endl;
     if (XPG::OpenSockets())
     {
-        XPG::Packet32 packet(256);
-
-        if (argc > 1)
         {
-            packet.Write("HERRO", 5);
-            packet.Address(XPG::Address32(31313));
+            XPG::Address32Query query("google.com", "80");
 
-            XPG::UdpSocket socket;
-            socket.Open(28555);
+            cout << query.Count() << " results" << endl;
 
-            if (socket.Send(packet))
-                cout << "sent message";
-            else
-                cout << "failed to send message";
-        }
-        else
-        {
-            XPG::UdpSocket socket;
-            socket.Open(31313);
-
-            if (socket.Receive(packet))
+            for (XPG::UInt32 i = 0; i < query.Count(); ++i)
             {
-                cout << "received " << packet.ContentLength()
-                    << " bytes: " << packet.Buffer() << endl;
+                XPG::Address32 a = query.GetResult(i);
+                cout << a.A() << "." << a.B() << "." << a.C() << "." << a.D()
+                    << endl;
             }
         }
 

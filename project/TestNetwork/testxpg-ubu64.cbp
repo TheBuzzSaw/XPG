@@ -34,6 +34,8 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-fno-exceptions" />
+			<Add option="-fno-rtti" />
 			<Add directory="../../include" />
 		</Compiler>
 		<Linker>

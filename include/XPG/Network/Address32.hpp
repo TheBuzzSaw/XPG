@@ -16,6 +16,11 @@ namespace XPG
             Address32(const Address32& other);
             ~Address32();
 
+            UInt32 A() const;
+            UInt32 B() const;
+            UInt32 C() const;
+            UInt32 D() const;
+
             Address32& operator=(const Address32& other);
 
             inline UInt32 Address() const { return _address; }
