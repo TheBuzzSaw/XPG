@@ -1,25 +1,16 @@
-#ifndef XpgPacket32Hpp
-#define XpgPacket32Hpp
+#ifndef XpgPacketHpp
+#define XpgPacketHpp
 
-#include "Address32.hpp"
+#include "../Platform.hpp"
+#include "../DataTypes.hpp"
 
 namespace XPG
 {
-    XpgClass Packet32
+    XpgClass Packet
     {
         public:
-            Packet32(UInt16 capacity);
-            ~Packet32();
-
-            inline Address32 Address() const
-            {
-                return _address;
-            }
-
-            inline void Address(const Address32& address)
-            {
-                _address = address;
-            }
+            Packet(UInt16 capacity);
+            virtual ~Packet();
 
             inline UInt16 Capacity() const
             {
@@ -78,10 +69,9 @@ namespace XPG
             void Read(void* buffer, UInt16 size);
 
         private:
-            Packet32(const Packet32& other);
-            Packet32& operator=(const Packet32& other);
+            Packet(const Packet& other);
+            Packet& operator=(const Packet& other);
 
-            Address32 _address;
             UInt8* _buffer;
             UInt16 _capacity;
             UInt16 _contentLength;
@@ -89,23 +79,25 @@ namespace XPG
             bool _failedToStream;
     };
 
-    Packet32& operator<<(Packet32& packet, Int8 data);
-    Packet32& operator<<(Packet32& packet, UInt8 data);
-    Packet32& operator<<(Packet32& packet, Int16 data);
-    Packet32& operator<<(Packet32& packet, UInt16 data);
-    Packet32& operator<<(Packet32& packet, Int32 data);
-    Packet32& operator<<(Packet32& packet, UInt32 data);
-    Packet32& operator<<(Packet32& packet, Int64 data);
-    Packet32& operator<<(Packet32& packet, UInt64 data);
+    Packet& operator<<(Packet& packet, const char* data);
 
-    Packet32& operator>>(Packet32& packet, Int8& data);
-    Packet32& operator>>(Packet32& packet, UInt8& data);
-    Packet32& operator>>(Packet32& packet, Int16& data);
-    Packet32& operator>>(Packet32& packet, UInt16& data);
-    Packet32& operator>>(Packet32& packet, Int32& data);
-    Packet32& operator>>(Packet32& packet, UInt32& data);
-    Packet32& operator>>(Packet32& packet, Int64& data);
-    Packet32& operator>>(Packet32& packet, UInt64& data);
+    Packet& operator<<(Packet& packet, Int8 data);
+    Packet& operator<<(Packet& packet, UInt8 data);
+    Packet& operator<<(Packet& packet, Int16 data);
+    Packet& operator<<(Packet& packet, UInt16 data);
+    Packet& operator<<(Packet& packet, Int32 data);
+    Packet& operator<<(Packet& packet, UInt32 data);
+    Packet& operator<<(Packet& packet, Int64 data);
+    Packet& operator<<(Packet& packet, UInt64 data);
+
+    Packet& operator>>(Packet& packet, Int8& data);
+    Packet& operator>>(Packet& packet, UInt8& data);
+    Packet& operator>>(Packet& packet, Int16& data);
+    Packet& operator>>(Packet& packet, UInt16& data);
+    Packet& operator>>(Packet& packet, Int32& data);
+    Packet& operator>>(Packet& packet, UInt32& data);
+    Packet& operator>>(Packet& packet, Int64& data);
+    Packet& operator>>(Packet& packet, UInt64& data);
 }
 
 #endif

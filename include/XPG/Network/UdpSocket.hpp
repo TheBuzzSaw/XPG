@@ -1,7 +1,7 @@
 #ifndef XpgUdpSocketHpp
 #define XpgUdpSocketHpp
 
-#include "Packet32.hpp"
+#include "Datagram32.hpp"
 
 namespace XPG
 {
@@ -14,8 +14,8 @@ namespace XPG
             bool Open(UInt16 port);
             void Close();
             bool IsOpen() const;
-            bool Send(const Packet32& packet) const;
-            bool Receive(Packet32& packet) const;
+            bool Send(const Datagram32& packet) const;
+            bool Receive(Datagram32& packet) const;
 
         private:
             UdpSocket(const UdpSocket& other);

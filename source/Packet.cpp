@@ -1,11 +1,11 @@
-#include "../include/XPG/Network/Packet32.hpp"
+#include "../include/XPG/Network/Packet.hpp"
 #include <cstdlib>
 #include <cstring>
 #include <cassert>
 
 namespace XPG
 {
-    Packet32::Packet32(UInt16 capacity)
+    Packet::Packet(UInt16 capacity)
     {
         assert(capacity > 0);
         _buffer = (UInt8*)malloc(capacity);
@@ -17,12 +17,12 @@ namespace XPG
         memset(_buffer, 0, _capacity);
     }
 
-    Packet32::~Packet32()
+    Packet::~Packet()
     {
         free(_buffer);
     }
 
-    void Packet32::ContentLength(UInt16 contentLength)
+    void Packet::ContentLength(UInt16 contentLength)
     {
         if (contentLength <= _capacity)
         {
@@ -33,20 +33,20 @@ namespace XPG
         }
     }
 
-    void Packet32::Position(UInt16 position)
+    void Packet::Position(UInt16 position)
     {
         if (position < _contentLength)
             _position = position;
     }
 
-    void Packet32::Clear()
+    void Packet::Clear()
     {
         _contentLength = 0;
         _position = 0;
         _failedToStream = false;
     }
 
-    void Packet32::Write(const void* data, UInt16 size)
+    void Packet::Write(const void* data, UInt16 size)
     {
         assert(data != 0);
         assert(size > 0);
@@ -67,7 +67,7 @@ namespace XPG
         }
     }
 
-    void Packet32::Read(void* buffer, UInt16 size)
+    void Packet::Read(void* buffer, UInt16 size)
     {
         assert(buffer != 0);
         assert(size > 0);
@@ -86,6 +86,16 @@ namespace XPG
         }
     }
 
+    Packet& operator<<(Packet& packet, const char* data)
+    {
+        size_t length = data ? strlen(data) : 0;
+
+        if (length > 0)
+            packet.Write(data, length);
+
+        return packet;
+    }
+
     template<typename T>
     T EndianFlip(T integer)
     {
@@ -101,7 +111,7 @@ namespace XPG
     }
 
     template<typename T>
-    void WriteInteger(Packet32& packet, T data)
+    void WriteInteger(Packet& packet, T data)
     {
 #ifdef XpgLittleEndian
         data = EndianFlip(data);
@@ -110,7 +120,7 @@ namespace XPG
     }
 
     template<typename T>
-    void ReadInteger(Packet32& packet, T& data)
+    void ReadInteger(Packet& packet, T& data)
     {
         packet.Read(&data, sizeof(T));
 
@@ -120,97 +130,97 @@ namespace XPG
 #endif
     }
 
-    Packet32& operator<<(Packet32& packet, Int8 data)
+    Packet& operator<<(Packet& packet, Int8 data)
     {
         packet.Write(&data, 1);
         return packet;
     }
 
-    Packet32& operator<<(Packet32& packet, UInt8 data)
+    Packet& operator<<(Packet& packet, UInt8 data)
     {
         packet.Write(&data, 1);
         return packet;
     }
 
-    Packet32& operator<<(Packet32& packet, Int16 data)
+    Packet& operator<<(Packet& packet, Int16 data)
     {
         WriteInteger(packet, data);
         return packet;
     }
 
-    Packet32& operator<<(Packet32& packet, UInt16 data)
+    Packet& operator<<(Packet& packet, UInt16 data)
     {
         WriteInteger(packet, data);
         return packet;
     }
 
-    Packet32& operator<<(Packet32& packet, Int32 data)
+    Packet& operator<<(Packet& packet, Int32 data)
     {
         WriteInteger(packet, data);
         return packet;
     }
 
-    Packet32& operator<<(Packet32& packet, UInt32 data)
+    Packet& operator<<(Packet& packet, UInt32 data)
     {
         WriteInteger(packet, data);
         return packet;
     }
 
-    Packet32& operator<<(Packet32& packet, Int64 data)
+    Packet& operator<<(Packet& packet, Int64 data)
     {
         WriteInteger(packet, data);
         return packet;
     }
 
-    Packet32& operator<<(Packet32& packet, UInt64 data)
+    Packet& operator<<(Packet& packet, UInt64 data)
     {
         WriteInteger(packet, data);
         return packet;
     }
 
-    Packet32& operator>>(Packet32& packet, Int8& data)
+    Packet& operator>>(Packet& packet, Int8& data)
     {
         packet.Read(&data, 1);
         return packet;
     }
 
-    Packet32& operator>>(Packet32& packet, UInt8& data)
+    Packet& operator>>(Packet& packet, UInt8& data)
     {
         packet.Read(&data, 1);
         return packet;
     }
 
-    Packet32& operator>>(Packet32& packet, Int16& data)
+    Packet& operator>>(Packet& packet, Int16& data)
     {
         ReadInteger(packet, data);
         return packet;
     }
 
-    Packet32& operator>>(Packet32& packet, UInt16& data)
+    Packet& operator>>(Packet& packet, UInt16& data)
     {
         ReadInteger(packet, data);
         return packet;
     }
 
-    Packet32& operator>>(Packet32& packet, Int32& data)
+    Packet& operator>>(Packet& packet, Int32& data)
     {
         ReadInteger(packet, data);
         return packet;
     }
 
-    Packet32& operator>>(Packet32& packet, UInt32& data)
+    Packet& operator>>(Packet& packet, UInt32& data)
     {
         ReadInteger(packet, data);
         return packet;
     }
 
-    Packet32& operator>>(Packet32& packet, Int64& data)
+    Packet& operator>>(Packet& packet, Int64& data)
     {
         ReadInteger(packet, data);
         return packet;
     }
 
-    Packet32& operator>>(Packet32& packet, UInt64& data)
+    Packet& operator>>(Packet& packet, UInt64& data)
     {
         ReadInteger(packet, data);
         return packet;

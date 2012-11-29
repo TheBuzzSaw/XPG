@@ -53,13 +53,13 @@ namespace XPG
         return *_socket > 0;
     }
 
-    bool UdpSocket::Send(const Packet32& packet) const
+    bool UdpSocket::Send(const Datagram32& packet) const
     {
         bool success = false;
 
         if (packet.ContentLength() > 0 && IsOpen())
         {
-            Address32 header = packet.Address();
+            Address32 header = packet.Destination();
             sockaddr_in address;
             address.sin_family = AF_INET;
             address.sin_addr.s_addr = htonl(header.Address());
@@ -76,7 +76,7 @@ namespace XPG
         return success;
     }
 
-    bool UdpSocket::Receive(Packet32& packet) const
+    bool UdpSocket::Receive(Datagram32& packet) const
     {
         bool success = false;
 
@@ -98,7 +98,7 @@ namespace XPG
                 success = true;
             }
 
-            packet.Address(Address32(ntohl(from.sin_addr.s_addr),
+            packet.Source(Address32(ntohl(from.sin_addr.s_addr),
                 ntohs(from.sin_port)));
         }
 

@@ -23,8 +23,14 @@ namespace XPG
 
             Address32& operator=(const Address32& other);
 
+            inline bool IsValid() const
+            {
+                return _address > 0 || _port > 0;
+            }
+
             inline UInt32 Address() const { return _address; }
             inline UInt16 Port() const { return _port; }
+            inline operator bool() const { return IsValid(); }
 
         private:
             UInt32 _address;
