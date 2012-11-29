@@ -6,6 +6,7 @@
 #ifdef XpgPlatformWindows
 #   include "windows/Windows.hpp"
 #   include <winsock2.h>
+#   include <ws2tcpip.h>
 typedef int socklen_t;
 #else
 #   include <cstdio>
