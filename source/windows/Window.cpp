@@ -3,6 +3,7 @@
 #include "../../include/XPG/glew.h"
 #include "../../include/XPG/wglew.h"
 #include "../../include/XPG/DataTypes.hpp"
+#include "WindowsKeyMapping.hpp"
 #include <cstring>
 #include <cassert>
 
@@ -30,6 +31,9 @@ namespace XPG
         Window::MouseExtraButtonEventCallback OnMouseExtraButtonDown;
         Window::MouseExtraButtonEventCallback OnMouseExtraButtonUp;
         Window::MouseWheelEventCallback OnMouseWheel;
+
+        Window::KeyboardEventCallback OnKeyDown;
+        Window::KeyboardEventCallback OnKeyUp;
 
         Window::WindowCloseEventCallback OnWindowClose;
 
@@ -240,12 +244,28 @@ namespace XPG
                 }
 
                 case WM_KEYDOWN:
+                case WM_SYSKEYDOWN:
                 {
+                    if (meta->OnKeyDown != NULL)
+                    {
+                        UInt32 key = (lparam & 0x00ff0000) >> 16;
+                        bool extended = lparam & (1 << 24);
+                        Key::Code keyCode = lookupKey(key, extended);
+                        meta->OnKeyDown(keyCode, extended);
+                    }
                     break;
                 }
 
                 case WM_KEYUP:
+                case WM_SYSKEYUP:
                 {
+                    if (meta->OnKeyUp != NULL)
+                    {
+                        UInt32 key = (lparam & 0x00ff0000) >> 16;
+                        bool extended = lparam & (1 << 24);
+                        Key::Code keyCode = lookupKey(key, extended);
+                        meta->OnKeyUp(keyCode, extended);
+                    }
                     break;
                 }
 
@@ -528,6 +548,19 @@ namespace XPG
     {
         WindowMeta* meta = (WindowMeta*)_native;
         meta->OnMouseWheel = mouseWheelEventCallback;
+    }
+
+    void Window::OnKeyDown(KeyboardEventCallback keyDownEventCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnKeyDown = keyDownEventCallback;
+    }
+
+
+    void Window::OnKeyUp(KeyboardEventCallback keyUpEventCallback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->OnKeyUp = keyUpEventCallback;
     }
 
     void Window::OnWindowClose(WindowCloseEventCallback windowCloseEventCallback)

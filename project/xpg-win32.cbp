@@ -54,6 +54,7 @@
 		<Unit filename="..\include\XPG\DataTypes.hpp" />
 		<Unit filename="..\include\XPG\DateTime.hpp" />
 		<Unit filename="..\include\XPG\Event.hpp" />
+		<Unit filename="..\include\XPG\Key.hpp" />
 		<Unit filename="..\include\XPG\MouseState.hpp" />
 		<Unit filename="..\include\XPG\Mutex.hpp" />
 		<Unit filename="..\include\XPG\Platform.hpp" />
@@ -78,6 +79,7 @@
 		<Unit filename="..\source\windows\Thread.cpp" />
 		<Unit filename="..\source\windows\Window.cpp" />
 		<Unit filename="..\source\windows\Windows.hpp" />
+		<Unit filename="..\source\windows\WindowsKeyMapping.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

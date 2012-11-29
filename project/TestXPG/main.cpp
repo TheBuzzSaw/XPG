@@ -6,6 +6,7 @@
 #include <XPG/Window.hpp>
 #include <XPG/Application.hpp>
 #include <XPG/Array.hpp>
+#include <XPG/Key.hpp>
 #include <iostream>
 #include <string>
 using namespace std;
@@ -36,10 +37,10 @@ void Talk(void* data)
     }
 }
 
-void MakeWindow()
-{
-    XPG::Window windows[3];
-}
+//void MakeWindow()
+//{
+//    XPG::Window windows[3];
+//}
 
 void SendAsyncDrawCalls(void* data)
 {
@@ -116,10 +117,35 @@ void OnMouseWheel(XPG::MouseState& currentState, char whichWay)
     PrintMouseState(currentState);
 }
 
+void OnKeyDown(XPG::Key::Code inKey, bool inExtended)
+{
+    if (inKey == XPG::Key::LetterA)
+    {
+        cout << "Letter A pressed!" << endl;
+    }
+    else if (inKey == XPG::Key::CapsLock)
+    {
+        cout << "Caps Lock Down" << endl;
+    }
+}
+
+void OnKeyUp(XPG::Key::Code inKey, bool inExtended)
+{
+    if (inKey == XPG::Key::LetterA)
+    {
+        cout << "Letter A up!" << endl;
+    }
+    else if (inKey == XPG::Key::CapsLock)
+    {
+        cout << "Caps Lock Up" << endl;
+    }
+}
+
 bool OnWindowClose(void* inUserData)
 {
-    return false;
+    //return false;
     //return (MessageBoxA(NULL, "Are you sure you want to close?", "Please don't :)", MB_OKCANCEL) == IDOK);
+    return true;
 }
 
 
@@ -173,6 +199,8 @@ int main(int argc, char** argv)
     window[0].OnMouseExtraButtonDown(OnMouseExtraButtonDown);
     window[0].OnRightMouseButtonDown(OnRightMouseButtonDown);
     window[0].OnMouseWheel(OnMouseWheel);
+    window[0].OnKeyDown(OnKeyDown);
+    window[0].OnKeyUp(OnKeyUp);
     window[0].OnWindowClose(OnWindowClose);
     //c.Start(SendAsyncDrawCalls, window);
     application.Run();

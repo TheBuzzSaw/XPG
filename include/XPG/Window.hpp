@@ -4,6 +4,7 @@
 #include "Platform.hpp"
 #include "MouseState.hpp"
 #include "../../source/windows/Windows.hpp"
+#include "Key.hpp"
 
 
 namespace XPG
@@ -18,6 +19,8 @@ namespace XPG
             typedef void (*MouseExtraButtonEventCallback)(const MouseState&, Int32);
             typedef void (*MouseWheelEventCallback)(MouseState&, char);
             typedef bool (*WindowCloseEventCallback)(void*);
+
+            typedef void (*KeyboardEventCallback)(Key::Code, bool);
 
 
             void Open();
@@ -38,6 +41,9 @@ namespace XPG
             void OnMouseExtraButtonDown(MouseExtraButtonEventCallback mouseExtraButtonDownCallback);
             void OnMouseExtraButtonUp(MouseExtraButtonEventCallback mouseExtraButtonUpCallback);
             void OnMouseWheel(MouseWheelEventCallback mouseWheelEventCallback);
+
+            void OnKeyDown(KeyboardEventCallback keyDownEventCallback);
+            void OnKeyUp(KeyboardEventCallback keyUpEventCallback);
 
             void OnWindowClose(WindowCloseEventCallback windowCloseEventCallback);
 
