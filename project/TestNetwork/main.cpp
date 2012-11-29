@@ -29,12 +29,12 @@ int main(int argc, char** argv)
 
                 XPG::Packet packet(2048);
                 const char* request =
-                    "GET / HTTP/1.1\n"
-                    "Host: www.google.com\n"
-                    "Connection: close\n"
-                    "\n\n";
-                //packet << request << XPG::Int8(0);
-                packet.Write(request, strlen(request) + 1);
+                    "GET / HTTP/1.1\r\n"
+                    "Host: www.google.com\r\n"
+                    "Connection: close\r\n"
+                    "\r\n\r\n";
+
+                packet << request << XPG::Null;
 
                 XPG::TcpSocket socket;
 
@@ -47,8 +47,7 @@ int main(int argc, char** argv)
                     while (fout && socket.Receive(packet))
                     {
                         const char* buffer = (const char*)packet.Buffer();
-                        for (XPG::UInt16 i = 0; i < packet.ContentLength(); ++i)
-                            fout.write(buffer + i, 1);
+                        fout.write(buffer, packet.ContentLength());
                     }
 
                     fout.close();

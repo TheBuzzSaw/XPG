@@ -79,25 +79,25 @@ namespace XPG
             bool _failedToStream;
     };
 
-    Packet& operator<<(Packet& packet, const char* data);
+    XpgFunction Packet& operator<<(Packet& packet, const char* data);
 
-    Packet& operator<<(Packet& packet, Int8 data);
-    Packet& operator<<(Packet& packet, UInt8 data);
-    Packet& operator<<(Packet& packet, Int16 data);
-    Packet& operator<<(Packet& packet, UInt16 data);
-    Packet& operator<<(Packet& packet, Int32 data);
-    Packet& operator<<(Packet& packet, UInt32 data);
-    Packet& operator<<(Packet& packet, Int64 data);
-    Packet& operator<<(Packet& packet, UInt64 data);
+    XpgFunction Packet& operator<<(Packet& packet, Int8 data);
+    XpgFunction Packet& operator<<(Packet& packet, UInt8 data);
+    XpgFunction Packet& operator<<(Packet& packet, Int16 data);
+    XpgFunction Packet& operator<<(Packet& packet, UInt16 data);
+    XpgFunction Packet& operator<<(Packet& packet, Int32 data);
+    XpgFunction Packet& operator<<(Packet& packet, UInt32 data);
+    XpgFunction Packet& operator<<(Packet& packet, Int64 data);
+    XpgFunction Packet& operator<<(Packet& packet, UInt64 data);
 
-    Packet& operator>>(Packet& packet, Int8& data);
-    Packet& operator>>(Packet& packet, UInt8& data);
-    Packet& operator>>(Packet& packet, Int16& data);
-    Packet& operator>>(Packet& packet, UInt16& data);
-    Packet& operator>>(Packet& packet, Int32& data);
-    Packet& operator>>(Packet& packet, UInt32& data);
-    Packet& operator>>(Packet& packet, Int64& data);
-    Packet& operator>>(Packet& packet, UInt64& data);
+    XpgFunction Packet& operator>>(Packet& packet, Int8& data);
+    XpgFunction Packet& operator>>(Packet& packet, UInt8& data);
+    XpgFunction Packet& operator>>(Packet& packet, Int16& data);
+    XpgFunction Packet& operator>>(Packet& packet, UInt16& data);
+    XpgFunction Packet& operator>>(Packet& packet, Int32& data);
+    XpgFunction Packet& operator>>(Packet& packet, UInt32& data);
+    XpgFunction Packet& operator>>(Packet& packet, Int64& data);
+    XpgFunction Packet& operator>>(Packet& packet, UInt64& data);
 }
 
 #endif

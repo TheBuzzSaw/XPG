@@ -14,6 +14,8 @@ namespace XPG
     typedef uint16_t UInt16;
     typedef uint32_t UInt32;
     typedef uint64_t UInt64;
+
+    const Int8 Null = 0;
 }
 
 #endif
