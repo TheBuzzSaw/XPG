@@ -6,6 +6,8 @@
 
 namespace XPG
 {
+    class TcpListener;
+
     XpgClass TcpSocket
     {
         public:
@@ -16,8 +18,10 @@ namespace XPG
             void Close();
             bool IsOpen() const;
             bool Open(Address32 address);
-            bool SendAll(const Packet& packet);
+            bool Open(const TcpListener& listener);
+            bool Send(const Packet& packet);
             bool Receive(Packet& packet);
+            void SetBlocking(bool blocking);
 
         private:
             TcpSocket(const TcpSocket& other);

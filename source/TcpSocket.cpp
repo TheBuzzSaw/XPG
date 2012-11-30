@@ -1,5 +1,6 @@
 #include "../include/XPG/Network/TcpSocket.hpp"
-#include "Network.hpp"
+#include "../include/XPG/Network/TcpListener.hpp"
+#include "TcpListenerMeta.hpp"
 #include <cstdlib>
 
 namespace XPG
@@ -29,6 +30,7 @@ namespace XPG
         {
             closesocket(meta->socket);
             meta->socket = 0;
+            meta->address = Address32();
         }
     }
 
@@ -75,7 +77,35 @@ namespace XPG
         return success;
     }
 
-    bool TcpSocket::SendAll(const Packet& packet)
+    bool TcpSocket::Open(const TcpListener& listener)
+    {
+        bool success = false;
+
+        if (!IsOpen() && listener.IsOpen())
+        {
+            const TcpListenerMeta* tlm =
+                reinterpret_cast<const TcpListenerMeta*>(listener._native);
+
+            if (listen(tlm->socket, tlm->backlog) == 0)
+            {
+                sockaddr_in from;
+                socklen_t fromlen = sizeof(from);
+
+                TcpSocketMeta* meta =
+                    reinterpret_cast<TcpSocketMeta*>(_native);
+
+                meta->socket = accept(tlm->socket, (sockaddr*)&from, &fromlen);
+                meta->address = Address32(ntohl(from.sin_addr.s_addr),
+                    ntohs(from.sin_port));
+
+                success = true;
+            }
+        }
+
+        return success;
+    }
+
+    bool TcpSocket::Send(const Packet& packet)
     {
         bool success = false;
 
@@ -132,5 +162,22 @@ namespace XPG
         }
 
         return success;
+    }
+
+    void TcpSocket::SetBlocking(bool blocking)
+    {
+        if (IsOpen() && !blocking)
+        {
+            TcpSocketMeta* meta =
+                reinterpret_cast<TcpSocketMeta*>(_native);
+
+#ifdef XpgPlatformWindows
+            DWORD nonBlocking = 1;
+            ioctlsocket(meta->socket, FIONBIO, &nonBlocking);
+#else
+            int nonBlocking = 1;
+            fcntl(handle, F_SETFL, O_NONBLOCK, nonBlocking);
+#endif
+        }
     }
 }

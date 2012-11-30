@@ -65,6 +65,7 @@
 		<Unit filename="..\include\XPG\Network\Datagram32.hpp" />
 		<Unit filename="..\include\XPG\Network\Management.hpp" />
 		<Unit filename="..\include\XPG\Network\Packet.hpp" />
+		<Unit filename="..\include\XPG\Network\TcpListener.hpp" />
 		<Unit filename="..\include\XPG\Network\TcpSocket.hpp" />
 		<Unit filename="..\include\XPG\Network\UdpSocket.hpp" />
 		<Unit filename="..\include\XPG\Platform.hpp" />
@@ -82,6 +83,8 @@
 		<Unit filename="..\source\Network.hpp" />
 		<Unit filename="..\source\Packet.cpp" />
 		<Unit filename="..\source\Stopwatch.cpp" />
+		<Unit filename="..\source\TcpListener.cpp" />
+		<Unit filename="..\source\TcpListenerMeta.hpp" />
 		<Unit filename="..\source\TcpSocket.cpp" />
 		<Unit filename="..\source\TickSpans.hpp" />
 		<Unit filename="..\source\TimeSpan.cpp" />
