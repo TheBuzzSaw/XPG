@@ -9,32 +9,21 @@ namespace XPG
     XpgClass Datagram32 : public Packet
     {
         public:
-            Datagram32();
+            Datagram32(UInt16 capacity);
             virtual ~Datagram32();
 
-            inline Address32 Source() const
+            inline Address32 Address() const
             {
-                return _source;
+                return _address;
             }
 
-            inline Address32 Destination() const
+            inline void Address(const Address32& address)
             {
-                return _destination;
-            }
-
-            inline void Source(const Address32& address)
-            {
-                _source = address;
-            }
-
-            inline void Destination(const Address32& address)
-            {
-                _destination = address;
+                _address = address;
             }
 
         private:
-            Address32 _source;
-            Address32 _destination;
+            Address32 _address;
     };
 }
 

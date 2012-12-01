@@ -59,7 +59,7 @@ namespace XPG
 
         if (packet.ContentLength() > 0 && IsOpen())
         {
-            Address32 header = packet.Destination();
+            Address32 header = packet.Address();
             sockaddr_in address;
             address.sin_family = AF_INET;
             address.sin_addr.s_addr = htonl(header.Address());
@@ -70,7 +70,8 @@ namespace XPG
                 packet.ContentLength(), 0, (sockaddr*)&address,
                 sizeof(sockaddr_in));
 
-            success = sentBytes == packet.ContentLength();
+            if (sentBytes > 0)
+                success = (UInt32)sentBytes == packet.ContentLength();
         }
 
         return success;
@@ -93,13 +94,13 @@ namespace XPG
 
             if (received > 0)
             {
+                packet.Address(Address32(ntohl(from.sin_addr.s_addr),
+                    ntohs(from.sin_port)));
+
                 packet.ContentLength(received);
                 packet.Position(0);
                 success = true;
             }
-
-            packet.Source(Address32(ntohl(from.sin_addr.s_addr),
-                ntohs(from.sin_port)));
         }
 
         return success;

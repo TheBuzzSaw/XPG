@@ -15,6 +15,7 @@ typedef int socklen_t;
 #   include <cstring>
 
 #   include <unistd.h>
+#   include <fcntl.h>
 #   include <sys/types.h>
 #   include <sys/socket.h>
 #   include <netinet/in.h>
@@ -23,6 +24,7 @@ typedef int socklen_t;
 
 #   define SOCKET int
 #   define INVALID_SOCKET -1
+#   define SOCKET_ERROR -1
 #   define closesocket close
 #endif
 

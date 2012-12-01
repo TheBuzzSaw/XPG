@@ -5,7 +5,7 @@
 
 namespace XPG
 {
-    Packet::Packet(UInt16 capacity)
+    Packet::Packet(UInt32 capacity)
     {
         assert(capacity > 0);
         _buffer = (UInt8*)malloc(capacity);
@@ -22,7 +22,7 @@ namespace XPG
         free(_buffer);
     }
 
-    void Packet::ContentLength(UInt16 contentLength)
+    void Packet::ContentLength(UInt32 contentLength)
     {
         if (contentLength <= _capacity)
         {
@@ -33,7 +33,7 @@ namespace XPG
         }
     }
 
-    void Packet::Position(UInt16 position)
+    void Packet::Position(UInt32 position)
     {
         if (position < _contentLength)
             _position = position;
@@ -46,7 +46,7 @@ namespace XPG
         _failedToStream = false;
     }
 
-    void Packet::Write(const void* data, UInt16 size)
+    void Packet::Write(const void* data, UInt32 size)
     {
         assert(data != 0);
         assert(size > 0);
@@ -67,7 +67,7 @@ namespace XPG
         }
     }
 
-    void Packet::Read(void* buffer, UInt16 size)
+    void Packet::Read(void* buffer, UInt32 size)
     {
         assert(buffer != 0);
         assert(size > 0);

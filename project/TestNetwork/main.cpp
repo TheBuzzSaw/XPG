@@ -57,9 +57,9 @@ void HttpListen()
 {
     XPG::TcpListener listener;
 
-    if (listener.Open(80))
+    if (listener.Open(8080))
     {
-        cout << "listening on port 80" << endl;
+        cout << "listening on port 8080" << endl;
 
         XPG::TcpSocket socket;
 

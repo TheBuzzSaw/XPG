@@ -9,30 +9,30 @@ namespace XPG
     XpgClass Packet
     {
         public:
-            Packet(UInt16 capacity);
+            Packet(UInt32 capacity);
             virtual ~Packet();
 
-            inline UInt16 Capacity() const
+            inline UInt32 Capacity() const
             {
                 return _capacity;
             }
 
-            inline UInt16 ContentLength() const
+            inline UInt32 ContentLength() const
             {
                 return _contentLength;
             }
 
-            inline UInt16 Position() const
+            inline UInt32 Position() const
             {
                 return _position;
             }
 
-            inline UInt16 FreeSpace() const
+            inline UInt32 FreeSpace() const
             {
                 return _capacity - _position;
             }
 
-            inline UInt16 ReadableBytesRemaining() const
+            inline UInt32 ReadableBytesRemaining() const
             {
                 return _contentLength - _position;
             }
@@ -62,20 +62,20 @@ namespace XPG
                 return _buffer;
             }
 
-            void ContentLength(UInt16 contentLength);
-            void Position(UInt16 position);
+            void ContentLength(UInt32 contentLength);
+            void Position(UInt32 position);
             void Clear();
-            void Write(const void* data, UInt16 size);
-            void Read(void* buffer, UInt16 size);
+            void Write(const void* data, UInt32 size);
+            void Read(void* buffer, UInt32 size);
 
         private:
             Packet(const Packet& other);
             Packet& operator=(const Packet& other);
 
             UInt8* _buffer;
-            UInt16 _capacity;
-            UInt16 _contentLength;
-            UInt16 _position;
+            UInt32 _capacity;
+            UInt32 _contentLength;
+            UInt32 _position;
             bool _failedToStream;
     };
 
