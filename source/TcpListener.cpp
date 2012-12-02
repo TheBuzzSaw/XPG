@@ -29,9 +29,15 @@ namespace XPG
 
             if (attempt != INVALID_SOCKET)
             {
+#ifdef XpgPlatformWindows
+                BOOL yes = TRUE;
+                setsockopt(attempt, SOL_SOCKET, SO_REUSEADDR, (const char*)&yes,
+                    sizeof(yes));
+#else
                 int yes = 1;
                 setsockopt(attempt, SOL_SOCKET, SO_REUSEADDR, &yes,
                     sizeof(int));
+#endif
 
                 Address32 address(127, 0, 0, 1, port);
 

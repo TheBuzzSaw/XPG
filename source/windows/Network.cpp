@@ -2,7 +2,7 @@
 
 namespace XPG
 {
-    bool SetBlocking(SOCKET socket, bool blocking)
+    bool SetBlockingMode(SOCKET socket, bool blocking)
     {
         bool success = true;
 

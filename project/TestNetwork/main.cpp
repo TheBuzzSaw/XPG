@@ -55,7 +55,7 @@ void HttpGoogle()
     }
 }
 
-void HttpListen()
+void SuperSimpleWebServer()
 {
     XPG::TcpListener listener;
     XPG::UInt16 port = 8080;
@@ -79,6 +79,21 @@ void HttpListen()
 
                 socket.SetBlocking(false);
             }
+
+            packet.Clear();
+
+            const char* response =
+                "HTTP/1.1 200 OK\r\n"
+                "Connection: close\r\n"
+                "Content-Type: text/html; charset=UTF-8\r\n"
+                "\r\n"
+                "<html><head><title>XPG Server</title></head>"
+                "<body><p>Hello, World! Text is da bomb.</p></body>"
+                "</html>"
+                ;
+
+            packet << response;
+            socket.Send(packet);
         }
         else
         {
@@ -95,7 +110,7 @@ int main(int argc, char** argv)
 {
     if (XPG::OpenSockets())
     {
-        HttpListen();
+        SuperSimpleWebServer();
         XPG::CloseSockets();
     }
     else
