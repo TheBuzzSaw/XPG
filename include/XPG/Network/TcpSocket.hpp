@@ -1,6 +1,7 @@
 #ifndef XpgTcpSocketHpp
 #define XpgTcpSocketHpp
 
+#include "Socket.hpp"
 #include "Address32.hpp"
 #include "Packet.hpp"
 
@@ -8,20 +9,21 @@ namespace XPG
 {
     class TcpListener;
 
-    XpgClass TcpSocket
+    XpgClass TcpSocket : public Socket
     {
         public:
             TcpSocket();
-            ~TcpSocket();
+            virtual ~TcpSocket();
 
             Address32 Address() const;
-            void Close();
-            bool IsOpen() const;
             bool Open(Address32 address);
             bool Open(const TcpListener& listener);
             bool Send(const Packet& packet);
             bool Receive(Packet& packet);
-            void SetBlocking(bool blocking);
+
+            virtual void Close();
+            virtual bool IsOpen() const;
+            virtual bool SetBlocking(bool blocking);
 
         private:
             TcpSocket(const TcpSocket& other);

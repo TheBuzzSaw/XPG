@@ -54,6 +54,7 @@
 		<Unit filename="../include/XPG/Network/Datagram32.hpp" />
 		<Unit filename="../include/XPG/Network/Management.hpp" />
 		<Unit filename="../include/XPG/Network/Packet.hpp" />
+		<Unit filename="../include/XPG/Network/Socket.hpp" />
 		<Unit filename="../include/XPG/Network/TcpListener.hpp" />
 		<Unit filename="../include/XPG/Network/TcpSocket.hpp" />
 		<Unit filename="../include/XPG/Network/UdpSocket.hpp" />
@@ -69,6 +70,7 @@
 		<Unit filename="../source/MouseState.cpp" />
 		<Unit filename="../source/Network.hpp" />
 		<Unit filename="../source/Packet.cpp" />
+		<Unit filename="../source/Socket.cpp" />
 		<Unit filename="../source/Stopwatch.cpp" />
 		<Unit filename="../source/TcpListener.cpp" />
 		<Unit filename="../source/TcpListenerMeta.hpp" />
@@ -82,6 +84,7 @@
 		<Unit filename="../source/linux/Clock.cpp" />
 		<Unit filename="../source/unix/Management.cpp" />
 		<Unit filename="../source/unix/Mutex.cpp" />
+		<Unit filename="../source/unix/Network.cpp" />
 		<Unit filename="../source/unix/Thread.cpp" />
 		<Extensions>
 			<code_completion />

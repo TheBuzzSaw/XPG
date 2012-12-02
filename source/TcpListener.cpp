@@ -11,7 +11,7 @@ namespace XPG
         TcpListenerMeta* meta =
             reinterpret_cast<TcpListenerMeta*>(_native);
 
-        meta->backlog = 1;
+        meta->backlog = 2;
     }
 
     TcpListener::~TcpListener()
@@ -29,6 +29,10 @@ namespace XPG
 
             if (attempt != INVALID_SOCKET)
             {
+                int yes = 1;
+                setsockopt(attempt, SOL_SOCKET, SO_REUSEADDR, &yes,
+                    sizeof(int));
+
                 Address32 address(127, 0, 0, 1, port);
 
                 sockaddr_in service;

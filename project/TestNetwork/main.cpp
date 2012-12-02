@@ -44,7 +44,9 @@ void HttpGoogle()
 
             while (fout && socket.Receive(packet))
             {
-                const char* buffer = (const char*)packet.Buffer();
+                const char* buffer =
+                    reinterpret_cast<const char*>(packet.Buffer());
+
                 fout.write(buffer, packet.ContentLength());
             }
 
@@ -56,10 +58,11 @@ void HttpGoogle()
 void HttpListen()
 {
     XPG::TcpListener listener;
+    XPG::UInt16 port = 8080;
 
-    if (listener.Open(8080))
+    if (listener.Open(port))
     {
-        cout << "listening on port 8080" << endl;
+        cout << "listening on port " << port << endl;
 
         XPG::TcpSocket socket;
 
@@ -84,7 +87,7 @@ void HttpListen()
     }
     else
     {
-        cout << "failed to listen on port 80" << endl;
+        cout << "failed to listen on port " << port << endl;
     }
 }
 

@@ -164,20 +164,18 @@ namespace XPG
         return success;
     }
 
-    void TcpSocket::SetBlocking(bool blocking)
+    bool TcpSocket::SetBlocking(bool blocking)
     {
+        bool success = false;
+
         if (IsOpen())
         {
             TcpSocketMeta* meta =
                 reinterpret_cast<TcpSocketMeta*>(_native);
 
-#ifdef XpgPlatformWindows
-            DWORD nonBlocking = blocking ? 0 : 1;
-            ioctlsocket(meta->socket, FIONBIO, &nonBlocking);
-#else
-            int nonBlocking =  blocking ? 0 : 1;
-            fcntl(meta->socket, F_SETFL, O_NONBLOCK, nonBlocking);
-#endif
+            success = SetBlockingMode(meta->socket, blocking);
         }
+
+        return success;
     }
 }

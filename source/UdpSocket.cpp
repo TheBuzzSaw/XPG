@@ -53,6 +53,19 @@ namespace XPG
         return *_socket > 0;
     }
 
+    bool UdpSocket::SetBlocking(bool blocking)
+    {
+        bool success = false;
+
+        if (IsOpen())
+        {
+            SOCKET* _socket = reinterpret_cast<SOCKET*>(_native);
+            success = SetBlockingMode(*_socket, blocking);
+        }
+
+        return success;
+    }
+
     bool UdpSocket::Send(const Datagram32& packet) const
     {
         bool success = false;

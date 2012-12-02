@@ -28,4 +28,9 @@ typedef int socklen_t;
 #   define closesocket close
 #endif
 
+namespace XPG
+{
+    bool SetBlockingMode(SOCKET socket, bool blocking);
+}
+
 #endif

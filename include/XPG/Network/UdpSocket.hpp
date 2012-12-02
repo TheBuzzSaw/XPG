@@ -1,21 +1,24 @@
 #ifndef XpgUdpSocketHpp
 #define XpgUdpSocketHpp
 
+#include "Socket.hpp"
 #include "Datagram32.hpp"
 
 namespace XPG
 {
-    XpgClass UdpSocket
+    XpgClass UdpSocket : public Socket
     {
         public:
             UdpSocket();
             ~UdpSocket();
 
             bool Open(UInt16 port);
-            void Close();
-            bool IsOpen() const;
             bool Send(const Datagram32& packet) const;
             bool Receive(Datagram32& packet) const;
+
+            virtual void Close();
+            virtual bool IsOpen() const;
+            virtual bool SetBlocking(bool blocking);
 
         private:
             UdpSocket(const UdpSocket& other);
