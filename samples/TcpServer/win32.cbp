@@ -2,25 +2,25 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="testxpg-win32" />
+		<Option title="TCP Server (win32)" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/testxpg-win32" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
+				<Option output="bin\Debug\tcpserver-win32" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add directory="../bin/Debug" />
+					<Add directory="..\..\project\bin\Debug" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/testxpg-win32" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
+				<Option output="bin\Release\tcpserver-win32" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -28,7 +28,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add directory="../bin/Release" />
+					<Add directory="..\..\project\bin\Release" />
 				</Linker>
 			</Target>
 		</Build>
@@ -36,7 +36,7 @@
 			<Add option="-Wall" />
 			<Add option="-fno-exceptions" />
 			<Add option="-fno-rtti" />
-			<Add directory="../../include" />
+			<Add directory="..\..\include" />
 		</Compiler>
 		<Linker>
 			<Add library="xpg-win32" />
