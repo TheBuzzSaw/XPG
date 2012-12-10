@@ -3,9 +3,7 @@
 
 #include "Platform.hpp"
 #include "MouseState.hpp"
-#include "../../source/windows/Windows.hpp"
 #include "Key.hpp"
-
 
 namespace XPG
 {
@@ -16,12 +14,12 @@ namespace XPG
             ~Window();
 
             typedef void (*MouseEventCallback)(MouseState&);
-            typedef void (*MouseExtraButtonEventCallback)(const MouseState&, Int32);
-            typedef void (*MouseWheelEventCallback)(MouseState&, char);
+            typedef void (*MouseExtraButtonEventCallback)(const MouseState&,
+                Int32);
+            typedef void (*MouseWheelEventCallback)(MouseState&, Int8);
             typedef bool (*WindowCloseEventCallback)(void*);
 
-            typedef void (*KeyboardEventCallback)(Key::Code, bool);
-
+            typedef void (*KeyboardEventCallback)(Key::Code);
 
             void Open();
             void Close();
@@ -31,26 +29,24 @@ namespace XPG
             void MakeCurrent();
             void SwapBuffers();
 
-            void OnLeftMouseButtonDown(MouseEventCallback leftMouseButtonDownCallback);
-            void OnLeftMouseButtonUp(MouseEventCallback leftMouseButtonUpCallback);
-            void OnMiddleMouseButtonDown(MouseEventCallback middleMouseButtonDownCallback);
-            void OnMiddleMouseButtonUp(MouseEventCallback middleMouseButtonUpCallback);
-            void OnRightMouseButtonDown(MouseEventCallback rightMouseButtonDownCallback);
-            void OnRightMouseButtonUp(MouseEventCallback rightMouseButtonUpCallback);
-            void OnMouseMove(MouseEventCallback mouseMoveCallback);
-            void OnMouseExtraButtonDown(MouseExtraButtonEventCallback mouseExtraButtonDownCallback);
-            void OnMouseExtraButtonUp(MouseExtraButtonEventCallback mouseExtraButtonUpCallback);
-            void OnMouseWheel(MouseWheelEventCallback mouseWheelEventCallback);
+            void OnLeftMouseButtonDown(MouseEventCallback callback);
+            void OnLeftMouseButtonUp(MouseEventCallback callback);
+            void OnMiddleMouseButtonDown(MouseEventCallback callback);
+            void OnMiddleMouseButtonUp(MouseEventCallback callback);
+            void OnRightMouseButtonDown(MouseEventCallback callback);
+            void OnRightMouseButtonUp(MouseEventCallback callback);
+            void OnMouseMove(MouseEventCallback callback);
+            void OnMouseExtraButtonDown(MouseExtraButtonEventCallback callback);
+            void OnMouseExtraButtonUp(MouseExtraButtonEventCallback callback);
+            void OnMouseWheel(MouseWheelEventCallback callback);
 
-            void OnKeyDown(KeyboardEventCallback keyDownEventCallback);
-            void OnKeyUp(KeyboardEventCallback keyUpEventCallback);
+            void OnKeyDown(KeyboardEventCallback callback);
+            void OnKeyUp(KeyboardEventCallback callback);
 
-            void OnWindowClose(WindowCloseEventCallback windowCloseEventCallback);
+            void OnWindowClose(WindowCloseEventCallback callback);
 
         private:
-            //This must be bigger than the biggest possible size that Window could take up in memory
-            //It is used to pull the object out in the WndProc callback
-            char _native[1024];
+            UInt8 _native[1024];
 
     };
 }

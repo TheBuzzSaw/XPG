@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="xpg-ubu64" />
+		<Option title="XPG (ubu64)" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -37,17 +37,20 @@
 			<Add option="-fno-exceptions" />
 			<Add option="-fno-rtti" />
 			<Add option="-fPIC" />
-			<Add option="-DGLEW_STATIC" />
 		</Compiler>
 		<Linker>
 			<Add library="rt" />
 			<Add library="X11" />
 			<Add library="GL" />
 		</Linker>
+		<Unit filename="../include/XPG/Application.hpp" />
+		<Unit filename="../include/XPG/Array.hpp" />
 		<Unit filename="../include/XPG/Clock.hpp" />
 		<Unit filename="../include/XPG/DataTypes.hpp" />
 		<Unit filename="../include/XPG/DateTime.hpp" />
 		<Unit filename="../include/XPG/Event.hpp" />
+		<Unit filename="../include/XPG/Key.hpp" />
+		<Unit filename="../include/XPG/MouseState.hpp" />
 		<Unit filename="../include/XPG/Mutex.hpp" />
 		<Unit filename="../include/XPG/Network/Address32.hpp" />
 		<Unit filename="../include/XPG/Network/Address32Query.hpp" />
@@ -58,10 +61,14 @@
 		<Unit filename="../include/XPG/Network/TcpListener.hpp" />
 		<Unit filename="../include/XPG/Network/TcpSocket.hpp" />
 		<Unit filename="../include/XPG/Network/UdpSocket.hpp" />
+		<Unit filename="../include/XPG/OpenGL/Base.hpp" />
+		<Unit filename="../include/XPG/OpenGL/glew.h" />
+		<Unit filename="../include/XPG/OpenGL/glxew.h" />
 		<Unit filename="../include/XPG/Platform.hpp" />
 		<Unit filename="../include/XPG/Stopwatch.hpp" />
 		<Unit filename="../include/XPG/Thread.hpp" />
 		<Unit filename="../include/XPG/TimeSpan.hpp" />
+		<Unit filename="../include/XPG/Window.hpp" />
 		<Unit filename="../source/Address32.cpp" />
 		<Unit filename="../source/Address32Query.cpp" />
 		<Unit filename="../source/Datagram32.cpp" />
@@ -82,6 +89,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../source/linux/Clock.cpp" />
+		<Unit filename="../source/linux/Window.cpp" />
+		<Unit filename="../source/linux/X.cpp" />
+		<Unit filename="../source/linux/X.hpp" />
 		<Unit filename="../source/unix/Management.cpp" />
 		<Unit filename="../source/unix/Mutex.cpp" />
 		<Unit filename="../source/unix/Network.cpp" />

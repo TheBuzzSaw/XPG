@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="testxpg-ubu64" />
+		<Option title="SimpleWindows (ubu64)" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/testxpg-ubu64" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/simplewindows-ubu64" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -15,11 +15,11 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add directory="../bin/Debug" />
+					<Add directory="../../project/bin/Debug" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/testxpg-ubu64" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/simplewindows-ubu64" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -28,7 +28,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add directory="../bin/Release" />
+					<Add directory="../../project/bin/Release" />
 				</Linker>
 			</Target>
 		</Build>
