@@ -66,6 +66,7 @@
 		<Unit filename="../include/XPG/OpenGL/glew.h" />
 		<Unit filename="../include/XPG/OpenGL/glxew.h" />
 		<Unit filename="../include/XPG/Platform.hpp" />
+		<Unit filename="../include/XPG/STL/StreamExtensions.hpp" />
 		<Unit filename="../include/XPG/Stopwatch.hpp" />
 		<Unit filename="../include/XPG/Thread.hpp" />
 		<Unit filename="../include/XPG/TimeSpan.hpp" />

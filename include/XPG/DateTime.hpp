@@ -64,26 +64,6 @@ namespace XPG
 
             Int64 _ticks;
     };
-
-    template<typename CharT, typename TraitsT>
-    std::basic_ostream<CharT, TraitsT>& operator<<(
-        std::basic_ostream<CharT, TraitsT>& stream, const DateTime& dateTime)
-    {
-        stream << dateTime.Year() << '-' << dateTime.Month() << '-'
-            << dateTime.Day() << ' ';
-
-        stream << dateTime.Hour() << ':';
-
-        int minute = dateTime.Minute();
-        if (minute < 10) stream << '0';
-        stream << minute << ':';
-
-        int second = dateTime.Second();
-        if (second < 10) stream << '0';
-        stream << second;
-
-        return stream;
-    }
 }
 
 #endif

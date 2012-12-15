@@ -3,7 +3,6 @@
 
 #include "Platform.hpp"
 #include "DataTypes.hpp"
-#include <iostream>
 
 namespace XPG
 {
@@ -53,34 +52,6 @@ namespace XPG
         private:
             Int64 _ticks;
     };
-
-    template<typename CharT, typename TraitsT>
-    std::basic_ostream<CharT, TraitsT>& operator<<(
-        std::basic_ostream<CharT, TraitsT>& stream, const TimeSpan& timeSpan)
-    {
-        Int64 count = timeSpan.ToWeeks();
-        stream << count << 'w';
-
-        count = timeSpan.ToDays() - timeSpan.ToWeeks() * 7;
-        stream << count << 'd';
-
-        count = timeSpan.ToHours() - timeSpan.ToDays() * 24;
-        stream << count << 'h';
-
-        count = timeSpan.ToMinutes() - timeSpan.ToHours() * 60;
-        stream << count << 'm';
-
-        count = timeSpan.ToSeconds() - timeSpan.ToMinutes() * 60;
-        stream << count << 's';
-
-        count = timeSpan.ToMilliseconds() - timeSpan.ToSeconds() * 1000;
-        stream << count << "ms";
-
-        count = timeSpan.ToMicroseconds() - timeSpan.ToMilliseconds() * 1000;
-        stream << count << "us";
-
-        return stream;
-    }
 }
 
 #endif
