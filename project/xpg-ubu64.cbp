@@ -50,6 +50,7 @@
 		<Unit filename="../include/XPG/DateTime.hpp" />
 		<Unit filename="../include/XPG/Event.hpp" />
 		<Unit filename="../include/XPG/Key.hpp" />
+		<Unit filename="../include/XPG/MersenneTwister19937.hpp" />
 		<Unit filename="../include/XPG/MouseState.hpp" />
 		<Unit filename="../include/XPG/Mutex.hpp" />
 		<Unit filename="../include/XPG/Network/Address32.hpp" />
@@ -74,6 +75,7 @@
 		<Unit filename="../source/Datagram32.cpp" />
 		<Unit filename="../source/DateTime.cpp" />
 		<Unit filename="../source/Event.cpp" />
+		<Unit filename="../source/MersenneTwister19937.cpp" />
 		<Unit filename="../source/MouseState.cpp" />
 		<Unit filename="../source/Network.hpp" />
 		<Unit filename="../source/Packet.cpp" />
