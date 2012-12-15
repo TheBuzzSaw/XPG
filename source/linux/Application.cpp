@@ -14,6 +14,9 @@ namespace XPG
             memset(theApplicationMeta, 0, sizeof(ApplicationMeta));
 
             theApplicationMeta->display = XOpenDisplay(NULL);
+            theApplicationMeta->wmDeleteMessage =
+                XInternAtom(theApplicationMeta->display, "WM_DELETE_WINDOW",
+                False);
         }
 
         ++theApplicationMeta->referenceCount;

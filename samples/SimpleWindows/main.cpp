@@ -106,7 +106,7 @@ bool OnWindowClose(void* inUserData)
 int main(int argc, char** argv)
 {
     XPG::Application application;
-    XPG::Window window[1];
+    XPG::Window window[3];
     window[0].SetTitle("XPG Main Window");
     //window[1].SetTitle("XPG Mini Map");
 

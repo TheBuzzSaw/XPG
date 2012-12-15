@@ -60,6 +60,7 @@ namespace XPG
 
                 case Expose:
                 {
+                    meta.object->MakeCurrent();
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                     meta.object->SwapBuffers();
                     break;
@@ -69,8 +70,8 @@ namespace XPG
                 {
                     if ((Atom)event.xclient.data.l[0] == meta.wmDeleteMessage)
                     {
-                        if (meta.events.onWindowClose
-                            && meta.events.onWindowClose(meta.events.userData))
+                        if (!meta.events.onWindowClose
+                            || meta.events.onWindowClose(meta.events.userData))
                             window.Close();
                     }
 

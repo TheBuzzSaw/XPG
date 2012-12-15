@@ -68,6 +68,8 @@ namespace XPG
             visualInfo->depth, InputOutput, visualInfo->visual, windowMask,
             &windowAttributes);
 
+        meta->wmDeleteMessage = XInternAtom(display, "WM_DELETE_WINDOW",
+            False);
         XSetWMProtocols(display, meta->window, &meta->wmDeleteMessage, 1);
 
         XMapWindow(display, meta->window);
