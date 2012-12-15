@@ -68,6 +68,7 @@
 		<Unit filename="../include/XPG/Platform.hpp" />
 		<Unit filename="../include/XPG/STL/StreamExtensions.hpp" />
 		<Unit filename="../include/XPG/Stopwatch.hpp" />
+		<Unit filename="../include/XPG/System.hpp" />
 		<Unit filename="../include/XPG/Thread.hpp" />
 		<Unit filename="../include/XPG/TimeSpan.hpp" />
 		<Unit filename="../include/XPG/Window.hpp" />
@@ -76,6 +77,7 @@
 		<Unit filename="../source/Datagram32.cpp" />
 		<Unit filename="../source/DateTime.cpp" />
 		<Unit filename="../source/Event.cpp" />
+		<Unit filename="../source/EventBatch.hpp" />
 		<Unit filename="../source/MersenneTwister19937.cpp" />
 		<Unit filename="../source/MouseState.cpp" />
 		<Unit filename="../source/Network.hpp" />
@@ -91,6 +93,7 @@
 		<Unit filename="../source/glew.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="../source/linux/Application.cpp" />
 		<Unit filename="../source/linux/Clock.cpp" />
 		<Unit filename="../source/linux/Window.cpp" />
 		<Unit filename="../source/linux/X.cpp" />

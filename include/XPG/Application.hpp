@@ -2,6 +2,7 @@
 #define XpgApplicationHpp
 
 #include "Platform.hpp"
+#include "DataTypes.hpp"
 
 namespace XPG
 {
@@ -25,7 +26,7 @@ namespace XPG
                 return *this;
             }
 
-            char _native[4];
+            void* _native;
     };
 }
 

@@ -100,8 +100,6 @@ void OnKeyUp(XPG::Key::Code inKey)
 
 bool OnWindowClose(void* inUserData)
 {
-    //return false;
-    //return (MessageBoxA(NULL, "Are you sure you want to close?", "Please don't :)", MB_OKCANCEL) == IDOK);
     return true;
 }
 

@@ -38,10 +38,10 @@ namespace XPG
             {
                 case KeyPress:
                 {
-                    if (meta.onKeyDown)
+                    if (meta.events.onKeyDown)
                     {
                         Key::Code key = LookupKey(event.xkey.keycode);
-                        meta.onKeyDown(key);
+                        meta.events.onKeyDown(key);
                     }
 
                     break;
@@ -49,10 +49,10 @@ namespace XPG
 
                 case KeyRelease:
                 {
-                    if (meta.onKeyUp)
+                    if (meta.events.onKeyUp)
                     {
                         Key::Code key = LookupKey(event.xkey.keycode);
-                        meta.onKeyUp(key);
+                        meta.events.onKeyUp(key);
                     }
 
                     break;
@@ -60,6 +60,8 @@ namespace XPG
 
                 case Expose:
                 {
+                    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                    meta.object->SwapBuffers();
                     break;
                 }
 
@@ -67,8 +69,8 @@ namespace XPG
                 {
                     if ((Atom)event.xclient.data.l[0] == meta.wmDeleteMessage)
                     {
-                        if (meta.onWindowClose
-                            && meta.onWindowClose(meta.userData))
+                        if (meta.events.onWindowClose
+                            && meta.events.onWindowClose(meta.events.userData))
                             window.Close();
                     }
 

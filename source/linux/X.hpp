@@ -5,6 +5,7 @@
 #include "../../include/XPG/Key.hpp"
 #include "../../include/XPG/OpenGL/glew.h"
 #include "../../include/XPG/OpenGL/glxew.h"
+#include "../EventBatch.hpp"
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xos.h>
@@ -20,31 +21,14 @@ namespace XPG
         ::Window window;
         Atom wmDeleteMessage;
         Window* object;
-
-        Window::MouseEventCallback onLeftMouseButtonDown;
-        Window::MouseEventCallback onLeftMouseButtonUp;
-        Window::MouseEventCallback onMiddleMouseButtonDown;
-        Window::MouseEventCallback onMiddleMouseButtonUp;
-        Window::MouseEventCallback onRightMouseButtonDown;
-        Window::MouseEventCallback onRightMouseButtonUp;
-        Window::MouseEventCallback onMouseMove;
-        Window::MouseExtraButtonEventCallback onMouseExtraButtonDown;
-        Window::MouseExtraButtonEventCallback onMouseExtraButtonUp;
-        Window::MouseWheelEventCallback onMouseWheel;
-
-        Window::KeyboardEventCallback onKeyDown;
-        Window::KeyboardEventCallback onKeyUp;
-
-        Window::WindowCloseEventCallback onWindowClose;
-
-        void* userData;
+        EventBatch events;
     };
 
     struct ApplicationMeta
     {
         Display* display;
-        Atom wmDeleteMessage;
         size_t windowCount;
+        size_t referenceCount;
     };
 
     extern ApplicationMeta* theApplicationMeta;
