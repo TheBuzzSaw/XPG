@@ -7,8 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin\Debug\xpg-win32" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Debug\" />
+				<Option output="bin/Debug/xpg-win32" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -23,8 +23,8 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin\Release\xpg-win32" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Release\" />
+				<Option output="bin/Release/xpg-win32" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -51,61 +51,73 @@
 			<Add library="opengl32" />
 			<Add library="ws2_32" />
 		</Linker>
-		<Unit filename="..\include\XPG\Application.hpp" />
-		<Unit filename="..\include\XPG\Array.hpp" />
-		<Unit filename="..\include\XPG\Clock.hpp" />
-		<Unit filename="..\include\XPG\DataTypes.hpp" />
-		<Unit filename="..\include\XPG\DateTime.hpp" />
-		<Unit filename="..\include\XPG\Event.hpp" />
-		<Unit filename="..\include\XPG\Key.hpp" />
-		<Unit filename="..\include\XPG\MouseState.hpp" />
-		<Unit filename="..\include\XPG\Mutex.hpp" />
-		<Unit filename="..\include\XPG\Network\Address32.hpp" />
-		<Unit filename="..\include\XPG\Network\Address32Query.hpp" />
-		<Unit filename="..\include\XPG\Network\Datagram32.hpp" />
-		<Unit filename="..\include\XPG\Network\Management.hpp" />
-		<Unit filename="..\include\XPG\Network\Packet.hpp" />
-		<Unit filename="..\include\XPG\Network\Socket.hpp" />
-		<Unit filename="..\include\XPG\Network\TcpListener.hpp" />
-		<Unit filename="..\include\XPG\Network\TcpSocket.hpp" />
-		<Unit filename="..\include\XPG\Network\UdpSocket.hpp" />
-		<Unit filename="..\include\XPG\Platform.hpp" />
-		<Unit filename="..\include\XPG\Stopwatch.hpp" />
-		<Unit filename="..\include\XPG\Thread.hpp" />
-		<Unit filename="..\include\XPG\TimeSpan.hpp" />
-		<Unit filename="..\include\XPG\Window.hpp" />
-		<Unit filename="..\include\XPG\glew.h" />
-		<Unit filename="..\include\XPG\wglew.h" />
-		<Unit filename="..\source\Address32.cpp" />
-		<Unit filename="..\source\Address32Query.cpp" />
-		<Unit filename="..\source\Datagram32.cpp" />
-		<Unit filename="..\source\DateTime.cpp" />
-		<Unit filename="..\source\Event.cpp" />
-		<Unit filename="..\source\MouseState.cpp" />
-		<Unit filename="..\source\Network.hpp" />
-		<Unit filename="..\source\Packet.cpp" />
-		<Unit filename="..\source\Socket.cpp" />
-		<Unit filename="..\source\Stopwatch.cpp" />
-		<Unit filename="..\source\TcpListener.cpp" />
-		<Unit filename="..\source\TcpListenerMeta.hpp" />
-		<Unit filename="..\source\TcpSocket.cpp" />
-		<Unit filename="..\source\TickSpans.hpp" />
-		<Unit filename="..\source\TimeSpan.cpp" />
-		<Unit filename="..\source\UdpSocket.cpp" />
-		<Unit filename="..\source\glew.cpp" />
-		<Unit filename="..\source\windows\Application.cpp" />
-		<Unit filename="..\source\windows\Clock.cpp" />
-		<Unit filename="..\source\windows\Management.cpp" />
-		<Unit filename="..\source\windows\Mutex.cpp" />
-		<Unit filename="..\source\windows\Network.cpp" />
-		<Unit filename="..\source\windows\Thread.cpp" />
-		<Unit filename="..\source\windows\Window.cpp" />
-		<Unit filename="..\source\windows\Windows.hpp" />
-		<Unit filename="..\source\windows\WindowsKeyMapping.hpp" />
+		<Unit filename="../include/XPG/Application.hpp" />
+		<Unit filename="../include/XPG/Array.hpp" />
+		<Unit filename="../include/XPG/Clock.hpp" />
+		<Unit filename="../include/XPG/DataTypes.hpp" />
+		<Unit filename="../include/XPG/DateTime.hpp" />
+		<Unit filename="../include/XPG/Event.hpp" />
+		<Unit filename="../include/XPG/Key.hpp" />
+		<Unit filename="../include/XPG/MouseState.hpp" />
+		<Unit filename="../include/XPG/Mutex.hpp" />
+		<Unit filename="../include/XPG/Network/Address32.hpp" />
+		<Unit filename="../include/XPG/Network/Address32Query.hpp" />
+		<Unit filename="../include/XPG/Network/Datagram32.hpp" />
+		<Unit filename="../include/XPG/Network/Management.hpp" />
+		<Unit filename="../include/XPG/Network/Packet.hpp" />
+		<Unit filename="../include/XPG/Network/Socket.hpp" />
+		<Unit filename="../include/XPG/Network/TcpListener.hpp" />
+		<Unit filename="../include/XPG/Network/TcpSocket.hpp" />
+		<Unit filename="../include/XPG/Network/UdpSocket.hpp" />
+		<Unit filename="../include/XPG/OpenGL/Base.hpp" />
+		<Unit filename="../include/XPG/OpenGL/glew.h" />
+		<Unit filename="../include/XPG/OpenGL/wglew.h" />
+		<Unit filename="../include/XPG/Platform.hpp" />
+		<Unit filename="../include/XPG/Stopwatch.hpp" />
+		<Unit filename="../include/XPG/Thread.hpp" />
+		<Unit filename="../include/XPG/TimeSpan.hpp" />
+		<Unit filename="../include/XPG/Window.hpp" />
+		<Unit filename="../source/Address32.cpp" />
+		<Unit filename="../source/Address32Query.cpp" />
+		<Unit filename="../source/Datagram32.cpp" />
+		<Unit filename="../source/DateTime.cpp" />
+		<Unit filename="../source/Event.cpp" />
+		<Unit filename="../source/EventBatch.hpp" />
+		<Unit filename="../source/MersenneTwister19937.cpp" />
+		<Unit filename="../source/MouseState.cpp" />
+		<Unit filename="../source/Network.hpp" />
+		<Unit filename="../source/Packet.cpp" />
+		<Unit filename="../source/Socket.cpp" />
+		<Unit filename="../source/Stopwatch.cpp" />
+		<Unit filename="../source/TcpListener.cpp" />
+		<Unit filename="../source/TcpListenerMeta.hpp" />
+		<Unit filename="../source/TcpSocket.cpp" />
+		<Unit filename="../source/TickSpans.hpp" />
+		<Unit filename="../source/TimeSpan.cpp" />
+		<Unit filename="../source/UdpSocket.cpp" />
+		<Unit filename="../source/glew.cpp" />
+		<Unit filename="../source/windows/Application.cpp" />
+		<Unit filename="../source/windows/Clock.cpp" />
+		<Unit filename="../source/windows/Management.cpp" />
+		<Unit filename="../source/windows/Mutex.cpp" />
+		<Unit filename="../source/windows/Network.cpp" />
+		<Unit filename="../source/windows/Thread.cpp" />
+		<Unit filename="../source/windows/Window.cpp" />
+		<Unit filename="../source/windows/Windows.hpp" />
+		<Unit filename="../source/windows/WindowsKeyMapping.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<debugger />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

@@ -40,8 +40,8 @@ namespace XPG
             void OnMouseMove(MouseEventCallback callback);
             void OnMouseExtraButtonDown(MouseExtraButtonEventCallback callback);
             void OnMouseExtraButtonUp(MouseExtraButtonEventCallback callback);
-            void OnMouseWheelUp(MouseEventCallback callback);
             void OnMouseWheelDown(MouseEventCallback callback);
+            void OnMouseWheelUp(MouseEventCallback callback);
 
             void OnKeyDown(KeyboardEventCallback callback);
             void OnKeyUp(KeyboardEventCallback callback);
@@ -56,7 +56,6 @@ namespace XPG
 
         private:
             UInt8 _native[2048];
-
     };
 }
 

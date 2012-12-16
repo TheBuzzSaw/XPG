@@ -1,8 +1,9 @@
 #include "Windows.hpp"
 #include "../../include/XPG/Window.hpp"
-#include "../../include/XPG/glew.h"
-#include "../../include/XPG/wglew.h"
+#include "../../include/XPG/OpenGL/glew.h"
+#include "../../include/XPG/OpenGL/wglew.h"
 #include "../../include/XPG/DataTypes.hpp"
+#include "../EventBatch.hpp"
 #include "WindowsKeyMapping.hpp"
 #include <cstring>
 #include <cassert>
@@ -20,25 +21,7 @@ namespace XPG
         HGLRC renderContext;
         RECT formerPosition;
         Window* object;
-
-        Window::MouseEventCallback OnLeftMouseButtonDown;
-        Window::MouseEventCallback OnLeftMouseButtonUp;
-        Window::MouseEventCallback OnMiddleMouseButtonDown;
-        Window::MouseEventCallback OnMiddleMouseButtonUp;
-        Window::MouseEventCallback OnRightMouseButtonDown;
-        Window::MouseEventCallback OnRightMouseButtonUp;
-        Window::MouseEventCallback OnMouseMove;
-        Window::MouseExtraButtonEventCallback OnMouseExtraButtonDown;
-        Window::MouseExtraButtonEventCallback OnMouseExtraButtonUp;
-        Window::MouseWheelEventCallback OnMouseWheel;
-
-        Window::KeyboardEventCallback OnKeyDown;
-        Window::KeyboardEventCallback OnKeyUp;
-
-        Window::WindowCloseEventCallback OnWindowClose;
-
-        void* _userData;
-
+        EventBatch events;
     };
 
     static const DWORD BaseStyle = WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
@@ -87,6 +70,8 @@ namespace XPG
             {
                 case WM_PAINT:
                 {
+                    if (meta->events.onWindowExpose)
+                        meta->events.onWindowExpose(meta->events.userData);
                     meta->object->MakeCurrent();
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                     meta->object->SwapBuffers();
@@ -95,24 +80,24 @@ namespace XPG
 
                 case WM_MOUSEMOVE:
                 {
-                    if (meta->OnMouseMove != NULL)
+                    if (meta->events.onMouseMove)
                     {
                         MouseState currentState;
-                        currentState.UserData(meta->_userData);
+                        currentState.UserData(meta->events.userData);
                         DetermineMouseState(wparam, lparam, currentState);
-                        meta->OnMouseMove(currentState);
+                        meta->events.onMouseMove(currentState);
                     }
                     break;
                 }
 
                 case WM_LBUTTONDOWN:
                 {
-                    if (meta->OnLeftMouseButtonDown != NULL)
+                    if (meta->events.onLeftMouseButtonDown)
                     {
                         MouseState currentState;
-                        currentState.UserData(meta->_userData);
+                        currentState.UserData(meta->events.userData);
                         DetermineMouseState(wparam, lparam, currentState);
-                        meta->OnLeftMouseButtonDown(currentState);
+                        meta->events.onLeftMouseButtonDown(currentState);
                     }
 
                     break;
@@ -120,12 +105,12 @@ namespace XPG
 
                 case WM_LBUTTONUP:
                 {
-                    if (meta->OnLeftMouseButtonUp != NULL)
+                    if (meta->events.onLeftMouseButtonUp)
                     {
                         MouseState currentState;
-                        currentState.UserData(meta->_userData);
+                        currentState.UserData(meta->events.userData);
                         DetermineMouseState(wparam, lparam, currentState);
-                        meta->OnLeftMouseButtonUp(currentState);
+                        meta->events.onLeftMouseButtonUp(currentState);
                     }
                     break;
                 }
@@ -138,24 +123,24 @@ namespace XPG
 
                 case WM_RBUTTONDOWN:
                 {
-                    if (meta->OnRightMouseButtonDown != NULL)
+                    if (meta->events.onRightMouseButtonDown)
                     {
                         MouseState currentState;
-                        currentState.UserData(meta->_userData);
+                        currentState.UserData(meta->events.userData);
                         DetermineMouseState(wparam, lparam, currentState);
-                        meta->OnRightMouseButtonDown(currentState);
+                        meta->events.onRightMouseButtonDown(currentState);
                     }
                     break;
                 }
 
                 case WM_RBUTTONUP:
                 {
-                    if (meta->OnRightMouseButtonUp != NULL)
+                    if (meta->events.onRightMouseButtonUp)
                     {
                         MouseState currentState;
-                        currentState.UserData(meta->_userData);
+                        currentState.UserData(meta->events.userData);
                         DetermineMouseState(wparam, lparam, currentState);
-                        meta->OnRightMouseButtonUp(currentState);
+                        meta->events.onRightMouseButtonUp(currentState);
                     }
                     break;
                 }
@@ -167,24 +152,24 @@ namespace XPG
 
                 case WM_MBUTTONDOWN:
                 {
-                    if (meta->OnMiddleMouseButtonDown != NULL)
+                    if (meta->events.onMiddleMouseButtonDown)
                     {
                         MouseState currentState;
-                        currentState.UserData(meta->_userData);
+                        currentState.UserData(meta->events.userData);
                         DetermineMouseState(wparam, lparam, currentState);
-                        meta->OnMiddleMouseButtonDown(currentState);
+                        meta->events.onMiddleMouseButtonDown(currentState);
                     }
                     break;
                 }
 
                 case WM_MBUTTONUP:
                 {
-                    if (meta->OnMiddleMouseButtonUp != NULL)
+                    if (meta->events.onMiddleMouseButtonUp)
                     {
                         MouseState currentState;
-                        currentState.UserData(meta->_userData);
+                        currentState.UserData(meta->events.userData);
                         DetermineMouseState(wparam, lparam, currentState);
-                        meta->OnMiddleMouseButtonUp(currentState);
+                        meta->events.onMiddleMouseButtonUp(currentState);
                     }
                     break;
                 }
@@ -197,13 +182,14 @@ namespace XPG
 
                 case WM_XBUTTONDOWN:
                 {
-                    if (meta->OnMouseExtraButtonDown != NULL)
+                    if (meta->events.onMouseExtraButtonDown)
                     {
                         Int32 whichX = GET_XBUTTON_WPARAM(wparam);
                         MouseState currentState;
-                        currentState.UserData(meta->_userData);
+                        currentState.UserData(meta->events.userData);
                         DetermineMouseState(wparam, lparam, currentState);
-                        meta->OnMouseExtraButtonDown(currentState, whichX);
+                        meta->events.onMouseExtraButtonDown(currentState,
+                            whichX);
                     }
 
                     break;
@@ -211,13 +197,13 @@ namespace XPG
 
                 case WM_XBUTTONUP:
                 {
-                    if (meta->OnMouseExtraButtonUp != NULL)
+                    if (meta->events.onMouseExtraButtonUp)
                     {
                         Int32 whichX = GET_XBUTTON_WPARAM(wparam);
                         MouseState currentState;
-                        currentState.UserData(meta->_userData);
+                        currentState.UserData(meta->events.userData);
                         DetermineMouseState(wparam, lparam, currentState);
-                        meta->OnMouseExtraButtonUp(currentState, whichX);
+                        meta->events.onMouseExtraButtonUp(currentState, whichX);
                     }
                     break;
                 }
@@ -230,28 +216,34 @@ namespace XPG
 
                 case WM_MOUSEWHEEL:
                 {
-                    if (meta->OnMouseWheel != NULL)
-                    {
-                        Int16 delta = GET_WHEEL_DELTA_WPARAM(wparam);
-                        MouseState currentState;
-                        currentState.UserData(meta->_userData);
-                        DetermineMouseState(wparam, lparam, currentState);
+                    Int16 delta = GET_WHEEL_DELTA_WPARAM(wparam);
+                    MouseState currentState;
+                    currentState.UserData(meta->events.userData);
+                    DetermineMouseState(wparam, lparam, currentState);
 
-                        char whichWay = delta > 0 ? 1 : -1;
-                        meta->OnMouseWheel(currentState, whichWay);
+                    if (delta > 0)
+                    {
+                        if (meta->events.onMouseWheelUp)
+                            meta->events.onMouseWheelUp(currentState);
                     }
+                    else
+                    {
+                        if (meta->events.onMouseWheelDown)
+                            meta->events.onMouseWheelDown(currentState);
+                    }
+
                     break;
                 }
 
                 case WM_KEYDOWN:
                 case WM_SYSKEYDOWN:
                 {
-                    if (meta->OnKeyDown != NULL)
+                    if (meta->events.onKeyDown)
                     {
                         UInt32 key = (lparam & 0x00ff0000) >> 16;
                         bool extended = lparam & (1 << 24);
                         Key::Code keyCode = lookupKey(key, extended);
-                        meta->OnKeyDown(keyCode, extended);
+                        meta->events.onKeyDown(keyCode, meta->events.userData);
                     }
                     break;
                 }
@@ -259,27 +251,24 @@ namespace XPG
                 case WM_KEYUP:
                 case WM_SYSKEYUP:
                 {
-                    if (meta->OnKeyUp != NULL)
+                    if (meta->events.onKeyUp)
                     {
                         UInt32 key = (lparam & 0x00ff0000) >> 16;
                         bool extended = lparam & (1 << 24);
                         Key::Code keyCode = lookupKey(key, extended);
-                        meta->OnKeyUp(keyCode, extended);
+                        meta->events.onKeyUp(keyCode, meta->events.userData);
                     }
                     break;
                 }
 
                 case WM_CLOSE:
                 {
-                    bool closeWindow = true;
-
-                    if (meta->OnWindowClose != NULL)
+                    if (!meta->events.onWindowClose
+                        || meta->events.onWindowClose(meta->events.userData))
                     {
-                        closeWindow = meta->OnWindowClose(meta->_userData);
+                        meta->object->Close();
                     }
 
-                    if (closeWindow)
-                        meta->object->Close();
                     break;
                 }
 
@@ -460,13 +449,6 @@ namespace XPG
         }
     }
 
-    void Window::Draw()
-    {
-        WindowMeta* meta = (WindowMeta*)_native;
-        assert(meta->object != NULL);
-        PostMessage(meta->window, WM_PAINT, 0, 0);
-    }
-
     void Window::SetTitle(const char* title)
     {
         WindowMeta* meta = (WindowMeta*)_native;
@@ -490,84 +472,117 @@ namespace XPG
         ::SwapBuffers(meta->deviceContext);
     }
 
-    void Window::OnLeftMouseButtonDown(MouseEventCallback leftMouseButtonDownCallback)
+    void Window::OnLeftMouseButtonDown(MouseEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnLeftMouseButtonDown = leftMouseButtonDownCallback;
+        meta->events.onLeftMouseButtonDown = callback;
     }
 
-    void Window::OnLeftMouseButtonUp(MouseEventCallback leftMouseButtonUpCallback)
+    void Window::OnLeftMouseButtonUp(MouseEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnLeftMouseButtonUp = leftMouseButtonUpCallback;
+        meta->events.onLeftMouseButtonUp = callback;
     }
 
-    void Window::OnMiddleMouseButtonDown(MouseEventCallback middleMouseButtonDownCallback)
+    void Window::OnMiddleMouseButtonDown(MouseEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnMiddleMouseButtonDown = middleMouseButtonDownCallback;
+        meta->events.onMiddleMouseButtonDown = callback;
     }
 
-    void Window::OnMiddleMouseButtonUp(MouseEventCallback middleMouseButtonUpCallback)
+    void Window::OnMiddleMouseButtonUp(MouseEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnMiddleMouseButtonUp = middleMouseButtonUpCallback;
+        meta->events.onMiddleMouseButtonUp = callback;
     }
 
-    void Window::OnRightMouseButtonDown(MouseEventCallback rightMouseButtonDownCallback)
+    void Window::OnRightMouseButtonDown(MouseEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnRightMouseButtonDown = rightMouseButtonDownCallback;
+        meta->events.onRightMouseButtonDown = callback;
     }
 
-    void Window::OnRightMouseButtonUp(MouseEventCallback rightMouseButtonUpCallback)
+    void Window::OnRightMouseButtonUp(MouseEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnRightMouseButtonUp = rightMouseButtonUpCallback;
+        meta->events.onRightMouseButtonUp = callback;
     }
 
-    void Window::OnMouseMove(MouseEventCallback mouseMoveCallback)
+    void Window::OnMouseMove(MouseEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnMouseMove = mouseMoveCallback;
+        meta->events.onMouseMove = callback;
     }
 
-    void Window::OnMouseExtraButtonDown(MouseExtraButtonEventCallback mouseExtraButtonDownCallback)
+    void Window::OnMouseExtraButtonDown(MouseExtraButtonEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnMouseExtraButtonDown = mouseExtraButtonDownCallback;
+        meta->events.onMouseExtraButtonDown = callback;
     }
 
-    void Window::OnMouseExtraButtonUp(MouseExtraButtonEventCallback mouseExtraButtonUpCallback)
+    void Window::OnMouseExtraButtonUp(MouseExtraButtonEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnMouseExtraButtonUp = mouseExtraButtonUpCallback;
+        meta->events.onMouseExtraButtonUp = callback;
     }
 
-    void Window::OnMouseWheel(MouseWheelEventCallback mouseWheelEventCallback)
+    void Window::OnMouseWheelDown(MouseEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnMouseWheel = mouseWheelEventCallback;
+        meta->events.onMouseWheelDown = callback;
     }
 
-    void Window::OnKeyDown(KeyboardEventCallback keyDownEventCallback)
+    void Window::OnMouseWheelUp(MouseEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnKeyDown = keyDownEventCallback;
+        meta->events.onMouseWheelUp = callback;
     }
 
-
-    void Window::OnKeyUp(KeyboardEventCallback keyUpEventCallback)
+    void Window::OnKeyDown(KeyboardEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnKeyUp = keyUpEventCallback;
+        meta->events.onKeyDown = callback;
     }
 
-    void Window::OnWindowClose(WindowCloseEventCallback windowCloseEventCallback)
+    void Window::OnKeyUp(KeyboardEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;
-        meta->OnWindowClose = windowCloseEventCallback;
+        meta->events.onKeyUp = callback;
     }
 
+    void Window::OnFocus(BasicCallback callback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->events.onWindowFocus = callback;
+    }
 
+    void Window::OnBlur(BasicCallback callback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->events.onWindowBlur = callback;
+    }
+
+    void Window::OnMouseIn(BasicCallback callback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->events.onWindowMouseIn = callback;
+    }
+
+    void Window::OnMouseOut(BasicCallback callback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->events.onWindowMouseOut = callback;
+    }
+
+    void Window::OnExpose(BasicCallback callback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->events.onWindowExpose = callback;
+    }
+
+    void Window::OnClose(SuccessCallback callback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->events.onWindowClose = callback;
+    }
 }
