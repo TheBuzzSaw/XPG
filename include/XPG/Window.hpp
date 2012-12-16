@@ -46,6 +46,11 @@ namespace XPG
             void OnKeyDown(KeyboardEventCallback callback);
             void OnKeyUp(KeyboardEventCallback callback);
 
+            void OnFocus(BasicCallback callback);
+            void OnBlur(BasicCallback callback);
+            void OnMouseIn(BasicCallback callback);
+            void OnMouseOut(BasicCallback callback);
+            //void OnResize(BasicCallback callback);
             void OnClose(SuccessCallback callback);
             void OnExpose(BasicCallback callback);
 

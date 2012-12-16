@@ -1,6 +1,8 @@
 #ifndef XpgEventBatchHpp
 #define XpgEventBatchHpp
 
+#include "../include/XPG/Window.hpp"
+
 namespace XPG
 {
     struct EventBatch
@@ -20,8 +22,12 @@ namespace XPG
         Window::KeyboardEventCallback onKeyDown;
         Window::KeyboardEventCallback onKeyUp;
 
-        Window::SuccessCallback onWindowClose;
+        Window::BasicCallback onWindowFocus;
+        Window::BasicCallback onWindowBlur;
+        Window::BasicCallback onWindowMouseIn;
+        Window::BasicCallback onWindowMouseOut;
         Window::BasicCallback onWindowExpose;
+        Window::SuccessCallback onWindowClose;
 
         void* userData;
     };

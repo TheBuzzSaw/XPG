@@ -42,6 +42,8 @@ namespace XPG
                 {
                     MouseState state;
                     state.UserData(meta.events.userData);
+                    state.X(event.xmotion.x);
+                    state.Y(event.xmotion.y);
 
                     switch (event.xbutton.button)
                     {
@@ -95,6 +97,8 @@ namespace XPG
                 {
                     MouseState state;
                     state.UserData(meta.events.userData);
+                    state.X(event.xmotion.x);
+                    state.Y(event.xmotion.y);
 
                     switch (event.xbutton.button)
                     {
@@ -124,6 +128,36 @@ namespace XPG
 
                         default: break;
                     }
+
+                    break;
+                }
+
+                case MotionNotify:
+                {
+                    if (meta.events.onMouseMove)
+                    {
+                        MouseState state;
+                        state.UserData(meta.events.userData);
+                        state.X(event.xmotion.x);
+                        state.Y(event.xmotion.y);
+                        meta.events.onMouseMove(state);
+                    }
+
+                    break;
+                }
+
+                case EnterNotify:
+                {
+                    if (meta.events.onWindowMouseIn)
+                        meta.events.onWindowMouseIn(meta.events.userData);
+
+                    break;
+                }
+
+                case LeaveNotify:
+                {
+                    if (meta.events.onWindowMouseOut)
+                        meta.events.onWindowMouseOut(meta.events.userData);
 
                     break;
                 }

@@ -86,6 +86,16 @@ void OnKeyUp(XPG::Key::Code inKey, void* data)
     }
 }
 
+void OnMouseOut(void* data)
+{
+    cout << "goodbye" << endl;
+}
+
+void OnMouseIn(void* data)
+{
+    cout << "WELCOME BACK" << endl;
+}
+
 void OnExpose(void* data)
 {
     static int x = 0;
@@ -113,6 +123,8 @@ int main(int argc, char** argv)
     window[0].OnKeyUp(OnKeyUp);
     window[0].OnClose(OnWindowClose);
     window[2].OnExpose(OnExpose);
+    window[0].OnMouseOut(OnMouseOut);
+    window[0].OnMouseIn(OnMouseIn);
     application.Run();
 
     return 0;

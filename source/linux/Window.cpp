@@ -282,6 +282,34 @@ namespace XPG
         meta->events.onKeyUp = callback;
     }
 
+    void Window::OnFocus(BasicCallback callback)
+    {
+        WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
+
+        meta->events.onWindowFocus = callback;
+    }
+
+    void Window::OnBlur(BasicCallback callback)
+    {
+        WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
+
+        meta->events.onWindowBlur = callback;
+    }
+
+    void Window::OnMouseIn(BasicCallback callback)
+    {
+        WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
+
+        meta->events.onWindowMouseIn = callback;
+    }
+
+    void Window::OnMouseOut(BasicCallback callback)
+    {
+        WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
+
+        meta->events.onWindowMouseOut = callback;
+    }
+
     void Window::OnClose(SuccessCallback callback)
     {
         WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
