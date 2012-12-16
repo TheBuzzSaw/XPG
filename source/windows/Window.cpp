@@ -272,6 +272,29 @@ namespace XPG
                     break;
                 }
 
+                case WM_SETFOCUS:
+                {
+                    if (meta->events.onWindowFocus)
+                        meta->events.onWindowFocus(meta->events.userData);
+
+                    break;
+                }
+
+                case WM_KILLFOCUS:
+                {
+                    if (meta->events.onWindowBlur)
+                        meta->events.onWindowBlur(meta->events.userData);
+
+                    break;
+                }
+
+                case WM_MOUSELEAVE:
+                {
+                    if (meta->events.onWindowMouseOut)
+                        meta->events.onWindowMouseOut(meta->events.userData);
+
+                    break;
+                }
 
                 default:
                 {
