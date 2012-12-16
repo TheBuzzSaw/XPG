@@ -98,6 +98,12 @@ void OnKeyUp(XPG::Key::Code inKey)
     }
 }
 
+void OnExpose(void* data)
+{
+    static int x = 0;
+    cout << "EXPOSE " << ++x << endl;
+}
+
 bool OnWindowClose(void* inUserData)
 {
     return true;
@@ -108,7 +114,7 @@ int main(int argc, char** argv)
     XPG::Application application;
     XPG::Window window[3];
     window[0].SetTitle("XPG Main Window");
-    //window[1].SetTitle("XPG Mini Map");
+    window[1].SetTitle("XPG Mini Map");
 
     window[0].OnLeftMouseButtonDown(OnLeftMouseButtonDown);
     //window[0].OnMouseMove(OnMouseMove);
@@ -117,7 +123,8 @@ int main(int argc, char** argv)
     window[0].OnMouseWheel(OnMouseWheel);
     window[0].OnKeyDown(OnKeyDown);
     window[0].OnKeyUp(OnKeyUp);
-    window[0].OnWindowClose(OnWindowClose);
+    window[0].OnClose(OnWindowClose);
+    window[2].OnExpose(OnExpose);
     application.Run();
 
     return 0;

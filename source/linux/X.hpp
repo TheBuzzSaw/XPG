@@ -27,7 +27,6 @@ namespace XPG
     struct ApplicationMeta
     {
         Display* display;
-        Atom wmDeleteMessage;
         size_t windowCount;
         size_t referenceCount;
     };

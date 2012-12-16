@@ -1,4 +1,5 @@
 #include "X.hpp"
+#include <cstdio>
 
 namespace XPG
 {
@@ -25,6 +26,7 @@ namespace XPG
 
     void ProcessEvent(const XEvent& event)
     {
+        //printf("processing event\n");
         ::Window window = event.xany.window;
         std::map< ::Window, WindowMeta*>::const_iterator i =
             windows.find(window);
@@ -60,9 +62,9 @@ namespace XPG
 
                 case Expose:
                 {
-                    meta.object->MakeCurrent();
-                    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-                    meta.object->SwapBuffers();
+                    if (meta.events.onWindowExpose)
+                        meta.events.onWindowExpose(meta.events.userData);
+
                     break;
                 }
 
@@ -72,7 +74,9 @@ namespace XPG
                     {
                         if (!meta.events.onWindowClose
                             || meta.events.onWindowClose(meta.events.userData))
+                        {
                             window.Close();
+                        }
                     }
 
                     break;

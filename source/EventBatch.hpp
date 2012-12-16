@@ -19,7 +19,8 @@ namespace XPG
         Window::KeyboardEventCallback onKeyDown;
         Window::KeyboardEventCallback onKeyUp;
 
-        Window::WindowCloseEventCallback onWindowClose;
+        Window::SuccessCallback onWindowClose;
+        Window::BasicCallback onWindowExpose;
 
         void* userData;
     };

@@ -98,6 +98,7 @@ namespace XPG
         MakeCurrent();
 
         GLenum e = glewInit();
+        (void)e;
 
         if (!glGenerateMipmap)
             glGenerateMipmap = (void(*)(GLenum))
@@ -176,6 +177,18 @@ namespace XPG
         WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
 
         glXSwapBuffers(theApplicationMeta->display, meta->window);
+    }
+
+    const void* Window::UserData() const
+    {
+        const WindowMeta* meta = reinterpret_cast<const WindowMeta*>(_native);
+        return meta->events.userData;
+    }
+
+    void Window::UserData(void* userData)
+    {
+        WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
+        meta->events.userData = userData;
     }
 
     void Window::OnLeftMouseButtonDown(MouseEventCallback callback)
@@ -262,10 +275,17 @@ namespace XPG
         meta->events.onKeyUp = callback;
     }
 
-    void Window::OnWindowClose(WindowCloseEventCallback callback)
+    void Window::OnClose(SuccessCallback callback)
     {
         WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
 
         meta->events.onWindowClose = callback;
+    }
+
+    void Window::OnExpose(BasicCallback callback)
+    {
+        WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
+
+        meta->events.onWindowExpose = callback;
     }
 }
