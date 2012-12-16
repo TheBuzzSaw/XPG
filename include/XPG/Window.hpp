@@ -13,14 +13,13 @@ namespace XPG
             Window();
             ~Window();
 
-            typedef void (*MouseEventCallback)(MouseState&);
+            typedef void (*MouseEventCallback)(const MouseState&);
             typedef void (*MouseExtraButtonEventCallback)(const MouseState&,
                 Int32);
-            typedef void (*MouseWheelEventCallback)(MouseState&, Int8);
             typedef void (*BasicCallback)(void*);
             typedef bool (*SuccessCallback)(void*);
 
-            typedef void (*KeyboardEventCallback)(Key::Code);
+            typedef void (*KeyboardEventCallback)(Key::Code, void*);
 
             void Open();
             void Close();
@@ -41,7 +40,8 @@ namespace XPG
             void OnMouseMove(MouseEventCallback callback);
             void OnMouseExtraButtonDown(MouseExtraButtonEventCallback callback);
             void OnMouseExtraButtonUp(MouseExtraButtonEventCallback callback);
-            void OnMouseWheel(MouseWheelEventCallback callback);
+            void OnMouseWheelUp(MouseEventCallback callback);
+            void OnMouseWheelDown(MouseEventCallback callback);
 
             void OnKeyDown(KeyboardEventCallback callback);
             void OnKeyUp(KeyboardEventCallback callback);

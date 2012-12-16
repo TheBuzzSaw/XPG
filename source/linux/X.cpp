@@ -38,12 +38,102 @@ namespace XPG
 
             switch (event.type)
             {
+                case ButtonPress:
+                {
+                    MouseState state;
+                    state.UserData(meta.events.userData);
+
+                    switch (event.xbutton.button)
+                    {
+                        case Button1:
+                        {
+                            if (meta.events.onLeftMouseButtonDown)
+                                meta.events.onLeftMouseButtonDown(state);
+
+                            break;
+                        }
+
+                        case Button2:
+                        {
+                            if (meta.events.onMiddleMouseButtonDown)
+                                meta.events.onMiddleMouseButtonDown(state);
+
+                            break;
+                        }
+
+                        case Button3:
+                        {
+                            if (meta.events.onRightMouseButtonDown)
+                                meta.events.onRightMouseButtonDown(state);
+
+                            break;
+                        }
+
+                        case Button4:
+                        {
+                            if (meta.events.onMouseWheelUp)
+                                meta.events.onMouseWheelUp(state);
+
+                            break;
+                        }
+
+                        case Button5:
+                        {
+                            if (meta.events.onMouseWheelDown)
+                                meta.events.onMouseWheelDown(state);
+
+                            break;
+                        }
+
+                        default: break;
+                    }
+
+                    break;
+                }
+
+                case ButtonRelease:
+                {
+                    MouseState state;
+                    state.UserData(meta.events.userData);
+
+                    switch (event.xbutton.button)
+                    {
+                        case Button1:
+                        {
+                            if (meta.events.onLeftMouseButtonUp)
+                                meta.events.onLeftMouseButtonUp(state);
+
+                            break;
+                        }
+
+                        case Button2:
+                        {
+                            if (meta.events.onMiddleMouseButtonUp)
+                                meta.events.onMiddleMouseButtonUp(state);
+
+                            break;
+                        }
+
+                        case Button3:
+                        {
+                            if (meta.events.onRightMouseButtonUp)
+                                meta.events.onRightMouseButtonUp(state);
+
+                            break;
+                        }
+
+                        default: break;
+                    }
+
+                    break;
+                }
+
                 case KeyPress:
                 {
                     if (meta.events.onKeyDown)
                     {
                         Key::Code key = LookupKey(event.xkey.keycode);
-                        meta.events.onKeyDown(key);
+                        meta.events.onKeyDown(key, meta.events.userData);
                     }
 
                     break;
@@ -54,7 +144,7 @@ namespace XPG
                     if (meta.events.onKeyUp)
                     {
                         Key::Code key = LookupKey(event.xkey.keycode);
-                        meta.events.onKeyUp(key);
+                        meta.events.onKeyUp(key, meta.events.userData);
                     }
 
                     break;

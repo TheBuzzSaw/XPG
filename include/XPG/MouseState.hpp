@@ -30,8 +30,8 @@ namespace XPG
             inline void X(int x) { _x = x; }
             inline void Y(int y) { _y = y; }
 
-            void SetButton(Button inButton);
-            bool const IsButtonDown(const Button inButton);
+            void SetButton(Button button);
+            bool IsButtonDown(Button button) const;
 
         private:
             void* _userData;

@@ -12,9 +12,10 @@ namespace XPG
         Window::MouseEventCallback onRightMouseButtonDown;
         Window::MouseEventCallback onRightMouseButtonUp;
         Window::MouseEventCallback onMouseMove;
+        Window::MouseEventCallback onMouseWheelUp;
+        Window::MouseEventCallback onMouseWheelDown;
         Window::MouseExtraButtonEventCallback onMouseExtraButtonDown;
         Window::MouseExtraButtonEventCallback onMouseExtraButtonUp;
-        Window::MouseWheelEventCallback onMouseWheel;
 
         Window::KeyboardEventCallback onKeyDown;
         Window::KeyboardEventCallback onKeyUp;

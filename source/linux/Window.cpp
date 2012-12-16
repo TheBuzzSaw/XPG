@@ -254,11 +254,18 @@ namespace XPG
         meta->events.onMouseExtraButtonUp = callback;
     }
 
-    void Window::OnMouseWheel(MouseWheelEventCallback callback)
+    void Window::OnMouseWheelUp(MouseEventCallback callback)
     {
         WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
 
-        meta->events.onMouseWheel = callback;
+        meta->events.onMouseWheelUp = callback;
+    }
+
+    void Window::OnMouseWheelDown(MouseEventCallback callback)
+    {
+        WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
+
+        meta->events.onMouseWheelDown = callback;
     }
 
     void Window::OnKeyDown(KeyboardEventCallback callback)

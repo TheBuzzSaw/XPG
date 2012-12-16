@@ -27,13 +27,13 @@ namespace XPG
         return *this;
     }
 
-    void MouseState::SetButton(Button inButton)
+    void MouseState::SetButton(Button button)
     {
-        _buttonFlags |= inButton;
+        _buttonFlags |= button;
     }
 
-    bool const MouseState::IsButtonDown(const Button inButton)
+    bool MouseState::IsButtonDown(Button button) const
     {
-        return _buttonFlags & inButton;
+        return _buttonFlags & button;
     }
 }

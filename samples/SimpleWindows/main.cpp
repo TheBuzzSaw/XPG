@@ -32,16 +32,17 @@ void PrintMouseState(XPG::MouseState inState)
     cout << endl;
 }
 
-
-void OnLeftMouseButtonDown(XPG::MouseState& currentState)
+void OnLeftMouseButtonDown(const XPG::MouseState& currentState)
 {
-    cerr << "Hello!!!! x,y: " << currentState.X() << ", " << currentState.Y() << endl;
+    cerr << "Hello!!!! x,y: " << currentState.X() << ", " << currentState.Y()
+        << endl;
     PrintMouseState(currentState);
 }
 
-void OnMouseMove(XPG::MouseState& currentState)
+void OnMouseMove(const XPG::MouseState& currentState)
 {
-    cerr << "Mouse Moved! x,y: " << currentState.X() << ", " << currentState.Y() << endl;
+    cerr << "Mouse Moved! x,y: " << currentState.X() << ", "
+        << currentState.Y() << endl;
     PrintMouseState(currentState);
 }
 
@@ -51,30 +52,17 @@ void OnMouseExtraButtonDown(const XPG::MouseState& currentState, int inWhichX)
     PrintMouseState(currentState);
 }
 
-void OnRightMouseButtonDown(XPG::MouseState& currentState)
+void OnRightMouseButtonDown(const XPG::MouseState& currentState)
 {
     PrintMouseState(currentState);
 }
 
-void OnMouseWheel(XPG::MouseState& currentState, XPG::Int8 whichWay)
+void OnMouseWheel(const XPG::MouseState& currentState)
 {
-    if (whichWay > 0)
-    {
-        cerr << "Mouse wheel up" << endl;
-    }
-    else if (whichWay < 0)
-    {
-        cerr << "Mouse wheel down" << endl;
-    }
-    else
-    {
-        cerr << "What???" << endl;
-    }
-
     PrintMouseState(currentState);
 }
 
-void OnKeyDown(XPG::Key::Code inKey)
+void OnKeyDown(XPG::Key::Code inKey, void* data)
 {
     if (inKey == XPG::Key::LetterA)
     {
@@ -86,7 +74,7 @@ void OnKeyDown(XPG::Key::Code inKey)
     }
 }
 
-void OnKeyUp(XPG::Key::Code inKey)
+void OnKeyUp(XPG::Key::Code inKey, void* data)
 {
     if (inKey == XPG::Key::LetterA)
     {
@@ -120,7 +108,7 @@ int main(int argc, char** argv)
     //window[0].OnMouseMove(OnMouseMove);
     window[0].OnMouseExtraButtonDown(OnMouseExtraButtonDown);
     window[0].OnRightMouseButtonDown(OnRightMouseButtonDown);
-    window[0].OnMouseWheel(OnMouseWheel);
+    window[0].OnMouseWheelUp(OnMouseWheel);
     window[0].OnKeyDown(OnKeyDown);
     window[0].OnKeyUp(OnKeyUp);
     window[0].OnClose(OnWindowClose);
