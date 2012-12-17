@@ -31,6 +31,8 @@ namespace XPG
             const void* UserData() const;
             void UserData(void* userData);
 
+            void ClearAllEventCallbacks();
+
             void OnLeftMouseButtonDown(MouseEventCallback callback);
             void OnLeftMouseButtonUp(MouseEventCallback callback);
             void OnMiddleMouseButtonDown(MouseEventCallback callback);

@@ -191,6 +191,12 @@ namespace XPG
         meta->events.userData = userData;
     }
 
+    void Window::ClearAllEventCallbacks()
+    {
+        WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
+        memset(&meta->events, 0, sizeof(EventBatch));
+    }
+
     void Window::OnLeftMouseButtonDown(MouseEventCallback callback)
     {
         WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);

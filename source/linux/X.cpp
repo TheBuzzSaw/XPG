@@ -26,7 +26,6 @@ namespace XPG
 
     void ProcessEvent(const XEvent& event)
     {
-        //printf("processing event\n");
         ::Window window = event.xany.window;
         std::map< ::Window, WindowMeta*>::const_iterator i =
             windows.find(window);
