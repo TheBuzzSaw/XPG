@@ -608,4 +608,16 @@ namespace XPG
         WindowMeta* meta = (WindowMeta*)_native;
         meta->events.onWindowClose = callback;
     }
+
+    void Window::UserData(void* userData)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->events.userData = userData;
+    }
+
+    void Window::ClearAllEventCallbacks()
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        memset(&meta->events, 0, sizeof(EventBatch));
+    }
 }

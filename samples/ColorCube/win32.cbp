@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="SampleWindows (win32)" />
+		<Option title="ColorCube (win32)" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -39,6 +39,8 @@
 		<Linker>
 			<Add library="xpg-win32" />
 		</Linker>
+		<Unit filename="ColorCubeModule.cpp" />
+		<Unit filename="ColorCubeModule.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<DoxyBlocks>
