@@ -72,9 +72,6 @@ namespace XPG
                 {
                     if (meta->events.onWindowExpose)
                         meta->events.onWindowExpose(meta->events.userData);
-                    meta->object->MakeCurrent();
-                    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-                    meta->object->SwapBuffers();
                     break;
                 }
 
@@ -365,7 +362,7 @@ namespace XPG
         {
             int attributes[] = {
                 WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
-                WGL_CONTEXT_MINOR_VERSION_ARB, 1,
+                WGL_CONTEXT_MINOR_VERSION_ARB, 2,
                 0, 0
                 };
 
@@ -387,7 +384,6 @@ namespace XPG
 
     Window::Window()
     {
-        cout << "WindowMeta size " << sizeof(WindowMeta) << endl;
         assert(sizeof(WindowMeta) <= sizeof(Window::_native));
         memset(_native, 0, sizeof(_native));
 
@@ -613,6 +609,12 @@ namespace XPG
     {
         WindowMeta* meta = (WindowMeta*)_native;
         meta->events.userData = userData;
+    }
+
+    const void* Window::UserData() const
+    {
+        const WindowMeta* meta = (const WindowMeta*)_native;
+        return meta->events.userData;
     }
 
     void Window::ClearAllEventCallbacks()
