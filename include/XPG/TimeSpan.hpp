@@ -29,6 +29,7 @@ namespace XPG
 
             const TimeSpan operator+(const TimeSpan& timeSpan) const;
             const TimeSpan operator-(const TimeSpan& timeSpan) const;
+            const TimeSpan operator/(Int64 operand) const;
             const TimeSpan operator-() const;
 
             Int64 ToNanoseconds() const;

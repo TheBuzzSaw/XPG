@@ -93,6 +93,12 @@ ColorCubeModule::ColorCubeModule()
     _modelView.RotateX(45.0f);
     _modelView.RotateY(45.0f);
 
+
+    _interval = XPG::TimeSpan::FromSeconds(1) / 60;
+    _nextUpdate = XPG::ReadTimer();
+
+    _rotation = 0.0f;
+
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.5f, 0.0f, 0.0f, 1.0f);
 }
@@ -109,11 +115,49 @@ void ColorCubeModule::Open(XPG::Window& window)
     window.UserData(this);
     window.OnKeyDown(OnKeyDown);
 
+    _thread.Start(BeginRenderThread, this);
+}
+
+void ColorCubeModule::Draw()
+{
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     XPG::Matrix4x4<GLfloat> matrix(_projection, _modelView);
     glUniformMatrix4fv(_matrixUniform, 1, GL_FALSE, matrix);
     _vertices.Draw(_indices);
-    window.SwapBuffers();
+    _window->SwapBuffers();
+}
+
+void ColorCubeModule::Loop()
+{
+    const XPG::TimeSpan YieldInterval = XPG::TimeSpan::FromMilliseconds(1);
+    _window->MakeCurrent();
+    _isRunning = true;
+
+    while (_isRunning)
+    {
+        XPG::TimeSpan now = XPG::ReadTimer();
+
+        if (true)
+        {
+            _nextUpdate += _interval;
+
+            OnUpdate();
+            Draw();
+        }
+
+        XPG::Sleep(YieldInterval);
+    }
+}
+
+void ColorCubeModule::OnUpdate()
+{
+    _rotation += 0.5f;
+    if (_rotation > 180.0f) _rotation -= 360.0f;
+
+    _modelView.loadIdentity();
+    _modelView.Translate(0.0f, 0.0f, -10.0f);
+    _modelView.RotateX(_rotation);
+    _modelView.RotateY(_rotation);
 }
 
 void ColorCubeModule::OnKeyDown(XPG::Key::Code key, void* userData)
@@ -121,5 +165,16 @@ void ColorCubeModule::OnKeyDown(XPG::Key::Code key, void* userData)
     ColorCubeModule* ccm = static_cast<ColorCubeModule*>(userData);
 
     if (key == XPG::Key::Escape)
+    {
+        ccm->_isRunning = false;
+        ccm->_thread.Join();
+        ccm->_window->MakeCurrent();
         ccm->_window->Close();
+    }
+}
+
+void ColorCubeModule::BeginRenderThread(void* userData)
+{
+    ColorCubeModule* ccm = static_cast<ColorCubeModule*>(userData);
+    ccm->Loop();
 }
