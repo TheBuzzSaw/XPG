@@ -107,14 +107,15 @@ namespace XPG
             result[i] = source[j];
         }
 
-        return *((T*)result);
+        T* conversion = reinterpret_cast<T*>(result);
+        return *conversion;
     }
 
     template<typename T>
     void WriteInteger(Packet& packet, T data)
     {
 #ifdef XpgLittleEndian
-        data = EndianFlip(data);
+        data = EndianFlip<T>(data);
 #endif
         packet.Write(&data, sizeof(T));
     }

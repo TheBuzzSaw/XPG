@@ -25,7 +25,7 @@ namespace XPG
             void Close();
 
             void SetTitle(const char* title);
-            void MakeCurrent();
+            void MakeCurrent(bool enable);
             void SwapBuffers();
 
             const void* UserData() const;

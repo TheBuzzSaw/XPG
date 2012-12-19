@@ -21,6 +21,7 @@ class ColorCubeModule
         void Draw();
         void Loop();
         void OnUpdate();
+        void Close();
 
         XPG::Window* _window;
         XPG::InterleavedBufferObject _vertices;
@@ -37,6 +38,7 @@ class ColorCubeModule
         volatile bool _isRunning;
 
         static void OnKeyDown(XPG::Key::Code key, void* userData);
+        static bool OnClose(void* userData);
         static void BeginRenderThread(void* userData);
 };
 

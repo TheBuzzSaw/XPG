@@ -114,7 +114,9 @@ void ColorCubeModule::Open(XPG::Window& window)
     window.ClearAllEventCallbacks();
     window.UserData(this);
     window.OnKeyDown(OnKeyDown);
+    window.OnClose(OnClose);
 
+    window.MakeCurrent(false);
     _thread.Start(BeginRenderThread, this);
 }
 
@@ -130,7 +132,7 @@ void ColorCubeModule::Draw()
 void ColorCubeModule::Loop()
 {
     const XPG::TimeSpan YieldInterval = XPG::TimeSpan::FromMilliseconds(1);
-    _window->MakeCurrent();
+    _window->MakeCurrent(true);
     _isRunning = true;
 
     while (_isRunning)
@@ -160,17 +162,28 @@ void ColorCubeModule::OnUpdate()
     _modelView.RotateY(_rotation);
 }
 
+void ColorCubeModule::Close()
+{
+    _isRunning = false;
+    _thread.Join();
+    _window->MakeCurrent(true);
+    _window->Close();
+}
+
 void ColorCubeModule::OnKeyDown(XPG::Key::Code key, void* userData)
 {
-    ColorCubeModule* ccm = static_cast<ColorCubeModule*>(userData);
-
     if (key == XPG::Key::Escape)
     {
-        ccm->_isRunning = false;
-        ccm->_thread.Join();
-        ccm->_window->MakeCurrent();
-        ccm->_window->Close();
+        ColorCubeModule* ccm = static_cast<ColorCubeModule*>(userData);
+        ccm->Close();
     }
+}
+
+bool ColorCubeModule::OnClose(void* userData)
+{
+    ColorCubeModule* ccm = static_cast<ColorCubeModule*>(userData);
+    ccm->Close();
+    return false;
 }
 
 void ColorCubeModule::BeginRenderThread(void* userData)

@@ -475,13 +475,16 @@ namespace XPG
             SetWindowText(meta->window, title);
     }
 
-    void Window::MakeCurrent()
+    void Window::MakeCurrent(bool enable)
     {
-        if (activeWindow != this)
+        if (enable)
         {
             WindowMeta* meta = (WindowMeta*)_native;
-            activeWindow = this;
             wglMakeCurrent(meta->deviceContext, meta->renderContext);
+        }
+        else
+        {
+            wglMakeCurrent(NULL, NULL);
         }
     }
 
