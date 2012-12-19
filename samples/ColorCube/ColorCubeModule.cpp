@@ -137,7 +137,7 @@ void ColorCubeModule::Loop()
     {
         XPG::TimeSpan now = XPG::ReadTimer();
 
-        if (true)
+        if (now >= _nextUpdate)
         {
             _nextUpdate += _interval;
 
