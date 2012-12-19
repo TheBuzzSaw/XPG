@@ -28,6 +28,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-mwindows" />
 					<Add directory="..\..\project\bin\Release" />
 				</Linker>
 			</Target>
