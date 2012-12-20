@@ -70,6 +70,7 @@ namespace XPG
             {
                 case WM_PAINT:
                 {
+                    result = DefWindowProc(window, message, wparam, lparam);
                     if (meta->events.onWindowExpose)
                         meta->events.onWindowExpose(meta->events.userData);
                     break;
@@ -271,6 +272,7 @@ namespace XPG
 
                 case WM_SETFOCUS:
                 {
+                    result = DefWindowProc(window, message, wparam, lparam);
                     if (meta->events.onWindowFocus)
                         meta->events.onWindowFocus(meta->events.userData);
 
@@ -279,6 +281,7 @@ namespace XPG
 
                 case WM_KILLFOCUS:
                 {
+                    result = DefWindowProc(window, message, wparam, lparam);
                     if (meta->events.onWindowBlur)
                         meta->events.onWindowBlur(meta->events.userData);
 
