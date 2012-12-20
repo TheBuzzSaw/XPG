@@ -8,8 +8,8 @@ int main(int argc, char** argv)
 
     {
         ColorCubeModule module;
-
         module.Open(window);
+
         application.Run();
     }
 

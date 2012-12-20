@@ -42,13 +42,6 @@ namespace XPG
         glBufferData(GL_ARRAY_BUFFER, totalBytes, block, GL_STATIC_DRAW);
     }
 
-    void InterleavedBufferObject::Draw(IndexBufferObject& ibo, GLenum mode)
-    {
-        EnableArrays();
-        ibo.DrawElements(mode);
-        DisableArrays();
-    }
-
     void InterleavedBufferObject::EnableArrays()
     {
         glBindBuffer(GL_ARRAY_BUFFER, _handle);

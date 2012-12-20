@@ -11,6 +11,7 @@ namespace XPG
             IndexBufferObject();
             ~IndexBufferObject();
 
+            void Bind();
             void Load(const GLvoid* block, GLuint bytesPerIndex,
                 GLuint indicesPerUnit, GLuint unitCount);
             void DrawElements(GLenum mode = GL_TRIANGLES);

@@ -13,15 +13,14 @@ namespace XPG
 
             void Add(GLuint index, GLuint count);
             void Load(const GLfloat* block, GLuint count);
-            void Draw(IndexBufferObject& ibo, GLenum mode = GL_TRIANGLES);
+
+            void EnableArrays();
+            void DisableArrays();
 
         private:
             InterleavedBufferObject(const InterleavedBufferObject& other);
             InterleavedBufferObject& operator=(const InterleavedBufferObject&
                 other);
-
-            void EnableArrays();
-            void DisableArrays();
 
             struct FieldMapping
             {

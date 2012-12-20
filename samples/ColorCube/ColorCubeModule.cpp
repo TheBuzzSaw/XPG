@@ -92,7 +92,7 @@ ColorCubeModule::ColorCubeModule()
     _modelView.Translate(0.0f, 0.0f, -10.0f);
     _modelView.RotateX(45.0f);
     _modelView.RotateY(45.0f);
-
+    _vertices.EnableArrays();
 
     _interval = XPG::TimeSpan::FromSeconds(1) / 40;
     _nextUpdate = XPG::ReadTimer();
@@ -125,7 +125,7 @@ void ColorCubeModule::Draw()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     XPG::Matrix4x4<GLfloat> matrix(_projection, _modelView);
     glUniformMatrix4fv(_matrixUniform, 1, GL_FALSE, matrix);
-    _vertices.Draw(_indices);
+    _indices.DrawElements(GL_TRIANGLES);
     _window->SwapBuffers();
 }
 

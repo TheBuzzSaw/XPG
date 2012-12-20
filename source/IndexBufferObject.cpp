@@ -20,6 +20,11 @@ namespace XPG
         glDeleteBuffers(1, &_handle);
     }
 
+    void IndexBufferObject::Bind()
+    {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _handle);
+    }
+
     void IndexBufferObject::Load(const GLvoid* block, GLuint bytesPerIndex,
         GLuint indicesPerUnit, GLuint unitCount)
     {
@@ -71,7 +76,6 @@ namespace XPG
 
     void IndexBufferObject::DrawElements(GLenum mode)
     {
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _handle);
         glDrawElements(mode, _unitCount * _indicesPerUnit, _indexType, 0);
     }
 }
