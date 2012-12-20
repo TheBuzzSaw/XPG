@@ -94,7 +94,7 @@ ColorCubeModule::ColorCubeModule()
     _vertices.EnableArrays();
     glBindVertexArray(0);
 
-    _interval = XPG::TimeSpan::FromSeconds(1) / 40;
+    _interval = XPG::TimeSpan::FromSeconds(1) / 120;
     _nextUpdate = XPG::ReadTimer();
 
     _rotation = 0.0f;
@@ -145,13 +145,14 @@ void ColorCubeModule::Loop()
     {
         XPG::TimeSpan now = XPG::ReadTimer();
 
-        if (now >= _nextUpdate)
+        while (now >= _nextUpdate)
         {
             _nextUpdate += _interval;
 
             OnUpdate();
-            Draw();
         }
+
+        Draw();
 
         XPG::Sleep(YieldInterval);
     }
