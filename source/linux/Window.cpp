@@ -95,7 +95,7 @@ namespace XPG
                 True);
         }
 
-        MakeCurrent();
+        MakeCurrent(true);
 
         GLenum e = glewInit();
         (void)e;
@@ -164,12 +164,20 @@ namespace XPG
         }
     }
 
-    void Window::MakeCurrent()
+    void Window::MakeCurrent(bool enable)
     {
-        WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
+        Display* display = theApplicationMeta->display;
 
-        glXMakeCurrent(theApplicationMeta->display, meta->window,
-            meta->context);
+        if (enable)
+        {
+            WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
+
+            glXMakeCurrent(display, meta->window, meta->context);
+        }
+        else
+        {
+            glXMakeCurrent(display, None, NULL);
+        }
     }
 
     void Window::SwapBuffers()

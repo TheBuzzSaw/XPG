@@ -132,7 +132,11 @@ void ColorCubeModule::Draw()
 void ColorCubeModule::Loop()
 {
     const XPG::TimeSpan YieldInterval = XPG::TimeSpan::FromMilliseconds(1);
+
+    cout << "calling MakeCurrent" << endl;
     _window->MakeCurrent(true);
+    cout << "done calling MakeCurrent" << endl;
+
     _isRunning = true;
 
     while (_isRunning)

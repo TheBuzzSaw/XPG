@@ -13,6 +13,7 @@ namespace XPG
 
             memset(theApplicationMeta, 0, sizeof(ApplicationMeta));
 
+            XInitThreads();
             theApplicationMeta->display = XOpenDisplay(NULL);
         }
 
