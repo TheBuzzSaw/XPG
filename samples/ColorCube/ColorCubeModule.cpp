@@ -94,7 +94,7 @@ ColorCubeModule::ColorCubeModule()
     _modelView.RotateY(45.0f);
 
 
-    _interval = XPG::TimeSpan::FromSeconds(1) / 60;
+    _interval = XPG::TimeSpan::FromSeconds(1) / 40;
     _nextUpdate = XPG::ReadTimer();
 
     _rotation = 0.0f;
