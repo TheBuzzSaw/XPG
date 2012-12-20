@@ -27,6 +27,7 @@ class ColorCubeModule
         XPG::InterleavedBufferObject _vertices;
         XPG::IndexBufferObject _indices;
         XPG::Program _program;
+        GLuint _vao;
         GLint _matrixUniform;
 
         XPG::Matrix4x4<GLfloat> _projection;

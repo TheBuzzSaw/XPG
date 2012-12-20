@@ -7,9 +7,8 @@ static const GLuint ColorHandle = 1;
 
 ColorCubeModule::ColorCubeModule()
 {
-    GLuint vao;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
+    glGenVertexArrays(1, &_vao);
+    glBindVertexArray(_vao);
 
     GLfloat cubeBuffer[] = {
         -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
@@ -93,6 +92,7 @@ ColorCubeModule::ColorCubeModule()
     _modelView.RotateX(45.0f);
     _modelView.RotateY(45.0f);
     _vertices.EnableArrays();
+    glBindVertexArray(0);
 
     _interval = XPG::TimeSpan::FromSeconds(1) / 40;
     _nextUpdate = XPG::ReadTimer();
@@ -125,7 +125,9 @@ void ColorCubeModule::Draw()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     XPG::Matrix4x4<GLfloat> matrix(_projection, _modelView);
     glUniformMatrix4fv(_matrixUniform, 1, GL_FALSE, matrix);
+    glBindVertexArray(_vao);
     _indices.DrawElements(GL_TRIANGLES);
+    glBindVertexArray(0);
     _window->SwapBuffers();
 }
 
