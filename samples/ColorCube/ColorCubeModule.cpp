@@ -151,8 +151,8 @@ void ColorCubeModule::Loop()
 
             OnUpdate();
         }
-
         Draw();
+
 
         XPG::Sleep(YieldInterval);
     }
