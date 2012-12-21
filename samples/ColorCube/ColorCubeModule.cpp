@@ -86,8 +86,8 @@ ColorCubeModule::ColorCubeModule()
         cout << "error linking program" << endl;
     }
 
-    glViewport(0, 0, 640, 480);
-    _projection.Perspective(30.0f, 640.0f / 480.0f, 1.0f, 1000.0f);
+    glViewport(0, 0, 1024, 768);
+    _projection.Perspective(30.0f, 1024.0f / 768.0f, 1.0f, 1000.0f);
     _modelView.Translate(0.0f, 0.0f, -10.0f);
     _modelView.RotateX(45.0f);
     _modelView.RotateY(45.0f);
@@ -115,6 +115,7 @@ void ColorCubeModule::Open(XPG::Window& window)
     window.UserData(this);
     window.OnKeyDown(OnKeyDown);
     window.OnClose(OnClose);
+    window.SetVsync(false);
 
     window.MakeCurrent(false);
     _thread.Start(BeginRenderThread, this);

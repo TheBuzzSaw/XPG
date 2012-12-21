@@ -27,6 +27,7 @@ namespace XPG
             void SetTitle(const char* title);
             void MakeCurrent(bool enable);
             void SwapBuffers();
+            void SetVsync(bool enable);
 
             const void* UserData() const;
             void UserData(void* userData);

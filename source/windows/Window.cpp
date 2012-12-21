@@ -413,7 +413,7 @@ namespace XPG
         DWORD style = BaseStyle | WS_OVERLAPPEDWINDOW;
 
         meta->window = CreateWindowEx(exStyle, ClassName, "XPG Reborn",
-            style, CW_USEDEFAULT, 0, 640, 480, NULL, NULL,
+            style, CW_USEDEFAULT, 0, 1024, 768, NULL, NULL,
             GetInstanceModule(NULL), meta);
 
         if (!meta->window)
@@ -426,7 +426,7 @@ namespace XPG
 
         SetupContext(meta);
 
-        glViewport(0, 0, 640, 480);
+        glViewport(0, 0, 1024, 768);
         glClearColor(openWindowCount % 2, 0.5f, 0.5f, 1.0f);
 
 
@@ -495,6 +495,11 @@ namespace XPG
     {
         WindowMeta* meta = (WindowMeta*)_native;
         ::SwapBuffers(meta->deviceContext);
+    }
+
+    void Window::SetVsync(bool enable)
+    {
+        wglSwapIntervalEXT(enable);
     }
 
     void Window::OnLeftMouseButtonDown(MouseEventCallback callback)
