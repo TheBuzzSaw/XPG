@@ -18,6 +18,14 @@ namespace XPG
     UInt32 JoystickManager::GetNumJoysticks()
     {
         UInt32 numPossibleJoysticks = joyGetNumDevs();
-        return 0;
+
+        JOYINFO info;
+        UInt32 numActualJoysticks = 0;
+        for (; numActualJoysticks < numPossibleJoysticks; ++numActualJoysticks)
+        {
+            if (joyGetPos(numActualJoysticks, &info) != JOYERR_NOERROR)
+                break;
+        }
+        return numActualJoysticks;
     }
 }
