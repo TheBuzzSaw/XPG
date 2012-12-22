@@ -1,4 +1,6 @@
 #include "ColorCubeModule.hpp"
+#include <XPG/JoystickManager.hpp>
+
 #include <iostream>
 using namespace std;
 
@@ -7,6 +9,10 @@ static const GLuint ColorHandle = 1;
 
 ColorCubeModule::ColorCubeModule()
 {
+    XPG::JoystickManager joy;
+    XPG::UInt32 numJoysticks = joy.GetNumJoysticks();
+
+
     glGenVertexArrays(1, &_vao);
     glBindVertexArray(_vao);
 

@@ -5,6 +5,7 @@
 #include <XPG/Clock.hpp>
 #include <XPG/Thread.hpp>
 #include <XPG/Matrix4x4.hpp>
+#include <XPG/JoystickManager.hpp>
 #include <XPG/OpenGL/InterleavedBufferObject.hpp>
 #include <XPG/OpenGL/Program.hpp>
 
