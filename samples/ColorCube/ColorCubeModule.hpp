@@ -6,6 +6,7 @@
 #include <XPG/Thread.hpp>
 #include <XPG/Mutex.hpp>
 #include <XPG/Matrix4x4.hpp>
+#include <XPG/OpenGL/VertexArrayObject.hpp>
 #include <XPG/OpenGL/InterleavedBufferObject.hpp>
 #include <XPG/OpenGL/Program.hpp>
 
@@ -25,10 +26,10 @@ class ColorCubeModule
         void Close();
 
         XPG::Window* _window;
+        XPG::VertexArrayObject _vao;
         XPG::InterleavedBufferObject _vertices;
         XPG::IndexBufferObject _indices;
         XPG::Program _program;
-        GLuint _vao;
         GLint _matrixUniform;
 
         XPG::Matrix4x4<GLfloat> _projection;

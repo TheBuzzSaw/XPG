@@ -7,8 +7,7 @@ static const GLuint ColorHandle = 1;
 
 ColorCubeModule::ColorCubeModule()
 {
-    glGenVertexArrays(1, &_vao);
-    glBindVertexArray(_vao);
+    _vao.Bind();
 
     GLfloat cubeBuffer[] = {
         -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
@@ -128,7 +127,7 @@ void ColorCubeModule::Draw()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     XPG::Matrix4x4<GLfloat> matrix(_projection, _modelView);
     glUniformMatrix4fv(_matrixUniform, 1, GL_FALSE, matrix);
-    glBindVertexArray(_vao);
+    _vao.Bind();
     _indices.DrawElements(GL_TRIANGLES);
     glBindVertexArray(0);
     _window->SwapBuffers();
@@ -138,9 +137,7 @@ void ColorCubeModule::Loop()
 {
     const XPG::TimeSpan YieldInterval = XPG::TimeSpan::FromMilliseconds(1);
 
-    cout << "calling MakeCurrent" << endl;
     _window->MakeCurrent(true);
-    cout << "done calling MakeCurrent" << endl;
 
     _isRunning = true;
 
