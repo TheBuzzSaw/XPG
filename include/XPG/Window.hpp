@@ -3,6 +3,7 @@
 
 #include "Platform.hpp"
 #include "MouseState.hpp"
+#include "WindowState.hpp"
 #include "Key.hpp"
 
 namespace XPG
@@ -20,6 +21,7 @@ namespace XPG
             typedef bool (*SuccessCallback)(void*);
 
             typedef void (*KeyboardEventCallback)(Key::Code, void*);
+            typedef void (*WindowEventCallback)(const WindowState&);
 
             void Open();
             void Close();
@@ -53,7 +55,7 @@ namespace XPG
             void OnBlur(BasicCallback callback);
             void OnMouseIn(BasicCallback callback);
             void OnMouseOut(BasicCallback callback);
-            //void OnResize(BasicCallback callback);
+            void OnResize(WindowEventCallback callback);
             void OnClose(SuccessCallback callback);
             void OnExpose(BasicCallback callback);
 

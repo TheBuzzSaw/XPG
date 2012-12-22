@@ -191,6 +191,28 @@ namespace XPG
                     break;
                 }
 
+                case MapNotify:
+                case ConfigureNotify:
+                {
+                    if (meta.events.onWindowResize)
+                    {
+                        WindowState state;
+                        state.UserData(meta.events.userData);
+
+                        XWindowAttributes attributes;
+                        XGetWindowAttributes(theApplicationMeta->display,
+                            meta.window, &attributes);
+                        state.Width(attributes.width);
+                        state.Height(attributes.height);
+                        state.X(attributes.x);
+                        state.Y(attributes.y);
+
+                        meta.events.onWindowResize(state);
+                    }
+
+                    break;
+                }
+
                 case ClientMessage:
                 {
                     if ((Atom)event.xclient.data.l[0] == meta.wmDeleteMessage)

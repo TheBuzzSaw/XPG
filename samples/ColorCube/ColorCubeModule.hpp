@@ -6,6 +6,7 @@
 #include <XPG/Thread.hpp>
 #include <XPG/Matrix4x4.hpp>
 #include <XPG/JoystickManager.hpp>
+#include <XPG/Mutex.hpp>
 #include <XPG/OpenGL/InterleavedBufferObject.hpp>
 #include <XPG/OpenGL/Program.hpp>
 
@@ -37,10 +38,14 @@ class ColorCubeModule
         XPG::TimeSpan _interval;
         XPG::TimeSpan _nextUpdate;
         XPG::Thread _thread;
+        XPG::Mutex _mutex;
+        XPG::WindowState _state;
         volatile bool _isRunning;
+        volatile bool _resetViewport;
 
         static void OnKeyDown(XPG::Key::Code key, void* userData);
         static bool OnClose(void* userData);
+        static void OnResize(const XPG::WindowState& state);
         static void BeginRenderThread(void* userData);
 };
 

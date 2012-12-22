@@ -27,6 +27,7 @@ namespace XPG
         Window::BasicCallback onWindowMouseIn;
         Window::BasicCallback onWindowMouseOut;
         Window::BasicCallback onWindowExpose;
+        Window::WindowEventCallback onWindowResize;
         Window::SuccessCallback onWindowClose;
 
         void* userData;

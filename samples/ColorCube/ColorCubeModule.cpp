@@ -1,5 +1,4 @@
 #include "ColorCubeModule.hpp"
-#include <XPG/JoystickManager.hpp>
 
 #include <iostream>
 using namespace std;
@@ -91,6 +90,7 @@ ColorCubeModule::ColorCubeModule()
         cout << "error linking program" << endl;
     }
 
+    _resetViewport = false;
     glViewport(0, 0, 1024, 768);
     _projection.Perspective(30.0f, 1024.0f / 768.0f, 1.0f, 1000.0f);
     _modelView.Translate(0.0f, 0.0f, -10.0f);
@@ -120,6 +120,7 @@ void ColorCubeModule::Open(XPG::Window& window)
     window.UserData(this);
     window.OnKeyDown(OnKeyDown);
     window.OnClose(OnClose);
+    window.OnResize(OnResize);
     window.SetVsync(false);
 
     window.MakeCurrent(false);
@@ -150,6 +151,14 @@ void ColorCubeModule::Loop()
     while (_isRunning)
     {
         XPG::TimeSpan now = XPG::ReadTimer();
+
+        _mutex.Lock();
+        if (_resetViewport)
+        {
+            glViewport(0, 0, _state.Width(), _state.Height());
+            _resetViewport = false;
+        }
+        _mutex.Unlock();
 
         while (now >= _nextUpdate)
         {
@@ -197,6 +206,19 @@ bool ColorCubeModule::OnClose(void* userData)
     ColorCubeModule* ccm = static_cast<ColorCubeModule*>(userData);
     ccm->Close();
     return false;
+}
+
+void ColorCubeModule::OnResize(const XPG::WindowState& state)
+{
+    ColorCubeModule* ccm = static_cast<ColorCubeModule*>(state.UserData());
+    ccm->_state = state;
+    float ratio = float(state.Width()) / float(state.Height());
+
+    ccm->_mutex.Lock();
+    ccm->_projection.loadIdentity();
+    ccm->_projection.Perspective(30.0f, ratio, 1.0f, 1000.0f);
+    ccm->_resetViewport = true;
+    ccm->_mutex.Unlock();
 }
 
 void ColorCubeModule::BeginRenderThread(void* userData)

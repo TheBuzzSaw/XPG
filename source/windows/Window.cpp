@@ -76,6 +76,37 @@ namespace XPG
                     break;
                 }
 
+                case WM_SIZING:
+                {
+                    if (meta->events.onWindowResize)
+                    {
+                        RECT* rectangle = (RECT*)lparam;
+                        WindowState state;
+                        state.UserData(meta->events.userData);
+                        state.Height(rectangle->bottom - rectangle->top);
+                        state.Width(rectangle->right - rectangle->left);
+                        meta->events.onWindowResize(state);
+                    }
+
+                    break;
+                }
+
+                case WM_SIZE:
+                {
+                    if (meta->events.onWindowResize)
+                    {
+                        if (wparam == SIZE_MAXIMIZED || wparam == SIZE_RESTORED)
+                        {
+                            WindowState state;
+                            state.UserData(meta->events.userData);
+                            state.Width(LOWORD(lparam));
+                            state.Height(HIWORD(lparam));
+                            meta->events.onWindowResize(state);
+                        }
+                    }
+                    break;
+                }
+
                 case WM_MOUSEMOVE:
                 {
                     if (meta->events.onMouseMove)
@@ -614,6 +645,12 @@ namespace XPG
     {
         WindowMeta* meta = (WindowMeta*)_native;
         meta->events.onWindowClose = callback;
+    }
+
+    void Window::OnResize(WindowEventCallback callback)
+    {
+        WindowMeta* meta = (WindowMeta*)_native;
+        meta->events.onWindowResize = callback;
     }
 
     void Window::UserData(void* userData)
