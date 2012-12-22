@@ -3,6 +3,7 @@
 
 #include "Platform.hpp"
 #include "DataTypes.hpp"
+#include "Joystick.hpp"
 
 namespace XPG
 {
@@ -12,9 +13,14 @@ namespace XPG
             JoystickManager();
             virtual ~JoystickManager();
 
+            void ResetAllJoystickInfo();
             UInt32 GetNumJoysticks();
+
+            XPG::Joystick* PollJoystickState(UInt32 numJoystick);
         protected:
         private:
+            UInt32 mNumAvailableJoysticks;
+            XPG::Joystick** mJoysticks;
     };
 }
 

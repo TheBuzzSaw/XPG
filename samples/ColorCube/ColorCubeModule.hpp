@@ -31,6 +31,7 @@ class ColorCubeModule
         XPG::Program _program;
         GLuint _vao;
         GLint _matrixUniform;
+        XPG::JoystickManager mJoyManager;
 
         XPG::Matrix4x4<GLfloat> _projection;
         XPG::Matrix4x4<GLfloat> _modelView;

@@ -8,8 +8,6 @@ static const GLuint ColorHandle = 1;
 
 ColorCubeModule::ColorCubeModule()
 {
-    XPG::JoystickManager joy;
-    XPG::UInt32 numJoysticks = joy.GetNumJoysticks();
 
     glGenVertexArrays(1, &_vao);
     glBindVertexArray(_vao);
@@ -182,6 +180,17 @@ void ColorCubeModule::OnUpdate()
     _modelView.Translate(0.0f, 0.0f, -10.0f);
     _modelView.RotateX(_rotation);
     _modelView.RotateY(_rotation);
+
+    XPG::Joystick* joy = mJoyManager.PollJoystickState(0);
+
+    if (joy != NULL)
+    {
+        cerr << "joystick hat pos: " << joy->HatState(0) << endl;
+    }
+    else
+    {
+        cerr << "joy is null!" << endl;
+    }
 }
 
 void ColorCubeModule::Close()
