@@ -77,6 +77,7 @@
 		<Unit filename="../include/XPG/Thread.hpp" />
 		<Unit filename="../include/XPG/TimeSpan.hpp" />
 		<Unit filename="../include/XPG/Window.hpp" />
+		<Unit filename="../include/XPG/WindowState.hpp" />
 		<Unit filename="../source/Address32.cpp" />
 		<Unit filename="../source/Address32Query.cpp" />
 		<Unit filename="../source/Base.cpp" />
@@ -100,6 +101,7 @@
 		<Unit filename="../source/TickSpans.hpp" />
 		<Unit filename="../source/TimeSpan.cpp" />
 		<Unit filename="../source/UdpSocket.cpp" />
+		<Unit filename="../source/WindowState.cpp" />
 		<Unit filename="../source/glew.cpp">
 			<Option compilerVar="CC" />
 		</Unit>

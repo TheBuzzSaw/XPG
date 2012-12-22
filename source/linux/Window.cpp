@@ -338,6 +338,13 @@ namespace XPG
         meta->events.onWindowExpose = callback;
     }
 
+    void Window::OnResize(WindowEventCallback callback)
+    {
+        WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
+
+        meta->events.onWindowResize = callback;
+    }
+
     void Window::SetVsync(bool enable)
     {
         Display* display = glXGetCurrentDisplay();
