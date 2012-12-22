@@ -64,7 +64,7 @@ namespace XPG
             | CWColormap;
 
         meta->window = XCreateWindow(display,
-            DefaultRootWindow(display), 20, 20, 640, 480, 0,
+            DefaultRootWindow(display), 20, 20, 1024, 768, 0,
             visualInfo->depth, InputOutput, visualInfo->visual, windowMask,
             &windowAttributes);
 
@@ -336,5 +336,16 @@ namespace XPG
         WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
 
         meta->events.onWindowExpose = callback;
+    }
+
+    void Window::SetVsync(bool enable)
+    {
+        Display* display = glXGetCurrentDisplay();
+        GLXDrawable drawable = glXGetCurrentDrawable();
+
+        if (drawable)
+        {
+            glXSwapIntervalEXT(display, drawable, enable);
+        }
     }
 }
