@@ -1,11 +1,12 @@
 #ifndef JOYSTICKMANAGER_H
 #define JOYSTICKMANAGER_H
 
+#include "Platform.hpp"
 #include "DataTypes.hpp"
 
 namespace XPG
 {
-    class JoystickManager
+    XpgClass JoystickManager
     {
         public:
             JoystickManager();

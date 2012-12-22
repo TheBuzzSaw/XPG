@@ -12,7 +12,6 @@ ColorCubeModule::ColorCubeModule()
     XPG::JoystickManager joy;
     XPG::UInt32 numJoysticks = joy.GetNumJoysticks();
 
-
     glGenVertexArrays(1, &_vao);
     glBindVertexArray(_vao);
 
