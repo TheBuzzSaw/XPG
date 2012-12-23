@@ -163,6 +163,9 @@ namespace XPG
     {
         if (joystickToFill != NULL)
         {
+//            cerr << "joy5 " << JOY_BUTTON5 << endl;
+//            cerr << "joy9 " << JOY_BUTTON9 << endl;
+//            cerr << "joy1 " << JOY_BUTTON1 << endl;
 
             switch (joystickToFill->NumAxes())
             {
@@ -185,104 +188,115 @@ namespace XPG
                     joystickToFill->AxisState(0, GetAxisValue(info.dwXpos, joystickToFill->AxisMaximum(0)));
             }
 
-            switch (joystickToFill->NumButtons())
+            if (info.dwFlags & JOY_RETURNBUTTONS)
             {
-                case 32:
-                    joystickToFill->ButtonState(31, info.dwButtons & JOY_BUTTON32);
+                UInt32 buttonFlag = 0;
 
-                case 31:
-                    joystickToFill->ButtonState(30, info.dwButtons & JOY_BUTTON31);
-
-                case 30:
-                    joystickToFill->ButtonState(29, info.dwButtons & JOY_BUTTON30);
-
-                case 29:
-                    joystickToFill->ButtonState(28, info.dwButtons & JOY_BUTTON29);
-
-                case 28:
-                    joystickToFill->ButtonState(27, info.dwButtons & JOY_BUTTON28);
-
-                case 27:
-                    joystickToFill->ButtonState(26, info.dwButtons & JOY_BUTTON27);
-
-                case 26:
-                    joystickToFill->ButtonState(25, info.dwButtons & JOY_BUTTON26);
-
-                case 25:
-                    joystickToFill->ButtonState(24, info.dwButtons & JOY_BUTTON25);
-
-                case 24:
-                    joystickToFill->ButtonState(23, info.dwButtons & JOY_BUTTON24);
-
-                case 23:
-                    joystickToFill->ButtonState(22, info.dwButtons & JOY_BUTTON23);
-
-                case 22:
-                    joystickToFill->ButtonState(21, info.dwButtons & JOY_BUTTON22);
-
-                case 21:
-                    joystickToFill->ButtonState(20, info.dwButtons & JOY_BUTTON21);
-
-                case 20:
-                    joystickToFill->ButtonState(19, info.dwButtons & JOY_BUTTON20);
-
-                case 19:
-                    joystickToFill->ButtonState(18, info.dwButtons & JOY_BUTTON19);
-
-                case 18:
-                    joystickToFill->ButtonState(17, info.dwButtons & JOY_BUTTON18);
-
-                case 17:
-                    joystickToFill->ButtonState(16, info.dwButtons & JOY_BUTTON17);
-
-                case 16:
-                    joystickToFill->ButtonState(15, info.dwButtons & JOY_BUTTON16);
-
-                case 15:
-                    joystickToFill->ButtonState(14, info.dwButtons & JOY_BUTTON15);
-
-                case 14:
-                    joystickToFill->ButtonState(13, info.dwButtons & JOY_BUTTON14);
-
-                case 13:
-                    joystickToFill->ButtonState(12, info.dwButtons & JOY_BUTTON13);
-
-                case 12:
-                    joystickToFill->ButtonState(11, info.dwButtons & JOY_BUTTON12);
-
-                case 11:
-                    joystickToFill->ButtonState(10, info.dwButtons & JOY_BUTTON11);
-
-                case 10:
-                    joystickToFill->ButtonState(9, info.dwButtons & JOY_BUTTON10);
-
-                case 9:
-                    joystickToFill->ButtonState(8, info.dwButtons & JOY_BUTTON9);
-
-                case 8:
-                    joystickToFill->ButtonState(7, info.dwButtons & JOY_BUTTON8);
-
-                case 7:
-                    joystickToFill->ButtonState(6, info.dwButtons & JOY_BUTTON7);
-
-                case 6:
-                    joystickToFill->ButtonState(5, info.dwButtons & JOY_BUTTON6);
-
-                case 5:
-                    joystickToFill->ButtonState(4, info.dwButtons & JOY_BUTTON5);
-
-                case 4:
-                    joystickToFill->ButtonState(3, info.dwButtons & JOY_BUTTON4);
-
-                case 3:
-                    joystickToFill->ButtonState(2, info.dwButtons & JOY_BUTTON3);
-
-                case 2:
-                    joystickToFill->ButtonState(1, info.dwButtons & JOY_BUTTON2);
-
-                case 1:
-                    joystickToFill->ButtonState(0, info.dwButtons & JOY_BUTTON1);
+                for (UInt32 i = 0; i < joystickToFill->NumButtons(); ++i)
+                {
+                    buttonFlag = 1 << i;
+                    joystickToFill->ButtonState(i, info.dwButtons & buttonFlag);
+                }
             }
+
+//            switch (joystickToFill->NumButtons())
+//            {
+//                case 32:
+//                    joystickToFill->ButtonState(31, info.dwButtons & JOY_BUTTON32);
+//
+//                case 31:
+//                    joystickToFill->ButtonState(30, info.dwButtons & JOY_BUTTON31);
+//
+//                case 30:
+//                    joystickToFill->ButtonState(29, info.dwButtons & JOY_BUTTON30);
+//
+//                case 29:
+//                    joystickToFill->ButtonState(28, info.dwButtons & JOY_BUTTON29);
+//
+//                case 28:
+//                    joystickToFill->ButtonState(27, info.dwButtons & JOY_BUTTON28);
+//
+//                case 27:
+//                    joystickToFill->ButtonState(26, info.dwButtons & JOY_BUTTON27);
+//
+//                case 26:
+//                    joystickToFill->ButtonState(25, info.dwButtons & JOY_BUTTON26);
+//
+//                case 25:
+//                    joystickToFill->ButtonState(24, info.dwButtons & JOY_BUTTON25);
+//
+//                case 24:
+//                    joystickToFill->ButtonState(23, info.dwButtons & JOY_BUTTON24);
+//
+//                case 23:
+//                    joystickToFill->ButtonState(22, info.dwButtons & JOY_BUTTON23);
+//
+//                case 22:
+//                    joystickToFill->ButtonState(21, info.dwButtons & JOY_BUTTON22);
+//
+//                case 21:
+//                    joystickToFill->ButtonState(20, info.dwButtons & JOY_BUTTON21);
+//
+//                case 20:
+//                    joystickToFill->ButtonState(19, info.dwButtons & JOY_BUTTON20);
+//
+//                case 19:
+//                    joystickToFill->ButtonState(18, info.dwButtons & JOY_BUTTON19);
+//
+//                case 18:
+//                    joystickToFill->ButtonState(17, info.dwButtons & JOY_BUTTON18);
+//
+//                case 17:
+//                    joystickToFill->ButtonState(16, info.dwButtons & JOY_BUTTON17);
+//
+//                case 16:
+//                    joystickToFill->ButtonState(15, info.dwButtons & JOY_BUTTON16);
+//
+//                case 15:
+//                    joystickToFill->ButtonState(14, info.dwButtons & JOY_BUTTON15);
+//
+//                case 14:
+//                    joystickToFill->ButtonState(13, info.dwButtons & JOY_BUTTON14);
+//
+//                case 13:
+//                    joystickToFill->ButtonState(12, info.dwButtons & JOY_BUTTON13);
+//
+//                case 12:
+//                    joystickToFill->ButtonState(11, info.dwButtons & JOY_BUTTON12);
+//
+//                case 11:
+//                    joystickToFill->ButtonState(10, info.dwButtons & JOY_BUTTON11);
+//
+//                case 10:
+//                    joystickToFill->ButtonState(9, info.dwButtons & JOY_BUTTON10);
+//
+//                case 9:
+//                    joystickToFill->ButtonState(8, info.dwButtons & JOY_BUTTON9);
+//
+//                case 8:
+//                    joystickToFill->ButtonState(7, info.dwButtons & JOY_BUTTON8);
+//
+//                case 7:
+//                    joystickToFill->ButtonState(6, info.dwButtons & JOY_BUTTON7);
+//
+//                case 6:
+//                    joystickToFill->ButtonState(5, info.dwButtons & JOY_BUTTON6);
+//
+//                case 5:
+//                    joystickToFill->ButtonState(4, info.dwButtons & JOY_BUTTON5);
+//
+//                case 4:
+//                    joystickToFill->ButtonState(3, info.dwButtons & JOY_BUTTON4);
+//
+//                case 3:
+//                    joystickToFill->ButtonState(2, info.dwButtons & JOY_BUTTON3);
+//
+//                case 2:
+//                    joystickToFill->ButtonState(1, info.dwButtons & JOY_BUTTON2);
+//
+//                case 1:
+//                    joystickToFill->ButtonState(0, info.dwButtons & JOY_BUTTON1);
+//            }
 
             switch (joystickToFill->NumHats())
             {
