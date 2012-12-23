@@ -11,6 +11,8 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
+				<Option host_application="samples/ColorCube/bin/Debug/colorcube-win32.exe" />
+				<Option run_host_application_in_terminal="1" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
@@ -93,8 +95,8 @@
 		<Unit filename="../source/EventBatch.hpp" />
 		<Unit filename="../source/IndexBufferObject.cpp" />
 		<Unit filename="../source/InterleavedBufferObject.cpp" />
-		<Unit filename="../source/Joystick.cpp" />
 		<Unit filename="../source/JoystickEventBatch.hpp" />
+		<Unit filename="../source/JoystickManager.cpp" />
 		<Unit filename="../source/MersenneTwister19937.cpp" />
 		<Unit filename="../source/MouseState.cpp" />
 		<Unit filename="../source/Network.hpp" />
@@ -113,7 +115,7 @@
 		<Unit filename="../source/glew.cpp" />
 		<Unit filename="../source/windows/Application.cpp" />
 		<Unit filename="../source/windows/Clock.cpp" />
-		<Unit filename="../source/windows/JoystickManager.cpp" />
+		<Unit filename="../source/windows/Joystick.cpp" />
 		<Unit filename="../source/windows/Management.cpp" />
 		<Unit filename="../source/windows/Mutex.cpp" />
 		<Unit filename="../source/windows/Network.cpp" />

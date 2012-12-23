@@ -10,9 +10,17 @@ namespace XPG
     XpgClass Joystick
     {
         public:
-            Joystick(UInt32 numAxes, UInt32 numButtons, UInt32 numHats,
-                     Int32* axisMinimums, Int32* axisMaximums);
+            Joystick(UInt32 numJoystick);
+            Joystick(const Joystick& joystick);
             virtual ~Joystick();
+
+            Joystick& operator =(const Joystick& joystick);
+
+            void PollState();
+
+            inline UInt32 JoystickNum() const { return _numJoystick; }
+
+            static UInt32 NumJoysticks();
 
             inline UInt32 NumAxes() const { return _numAxes; }
             inline Int32 AxisMinimum(UInt32 axis) const
@@ -80,6 +88,7 @@ namespace XPG
 
 
         private:
+            UInt32 _numJoystick;
             UInt32 _numAxes;
             UInt32 _numButtons;
             UInt32 _numHats;
