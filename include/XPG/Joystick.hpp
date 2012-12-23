@@ -36,7 +36,7 @@ namespace XPG
             inline UInt32 NumButtons() { return _numButtons; }
             inline UInt32 NumHats() { return _numHats; }
 
-            inline Int32 AxisState(UInt32 axis)
+            inline const Int32 AxisState(const UInt32 axis) const
             {
                 Int32 result = 0;
                 if (axis < _numAxes)
@@ -50,7 +50,7 @@ namespace XPG
                     _axisStates[axis] = state;
             }
 
-            inline bool ButtonState(UInt32 button)
+            inline bool ButtonState(UInt32 button) const
             {
                 bool result = false;
                 if (button < _numButtons)
@@ -64,7 +64,7 @@ namespace XPG
                     _buttonStates[button] = state;
             }
 
-            inline Int32 HatState(UInt32 hat)
+            inline Int32 HatState(UInt32 hat) const
             {
                 Int32 result = 0;
                 if (hat < _numHats)

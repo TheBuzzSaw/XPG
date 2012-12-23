@@ -13,14 +13,22 @@ namespace XPG
             JoystickManager();
             virtual ~JoystickManager();
 
+            typedef void (*JoystickEventCallback)(UInt32, UInt32, const Joystick&);
+
             void ResetAllJoystickInfo();
             UInt32 GetNumJoysticks();
 
             XPG::Joystick* PollJoystickState(UInt32 numJoystick);
-        protected:
+            void PollJoystickEvents();
+
+            void OnJoyAxis(JoystickEventCallback callback);
+            void OnJoyButtonDown(JoystickEventCallback);
+            void OnJoyButtonUp(JoystickEventCallback);
+            void OnJoyHat(JoystickEventCallback);
         private:
-            UInt32 mNumAvailableJoysticks;
-            XPG::Joystick** mJoysticks;
+            UInt32 _numAvailableJoysticks;
+            XPG::Joystick** _joysticks;
+            UInt8 _native[256];
     };
 }
 

@@ -1,34 +1,44 @@
 #include "../../include/XPG/JoystickManager.hpp"
 
 #include "Windows.hpp"
-#include <Mmsystem.h>
+#include <mmsystem.h>
+#include "../JoystickEventBatch.hpp"
 
+#include <cassert>
 #include <iostream>
 using namespace std;
 
 namespace XPG
 {
+
+    struct JoystickManagerMeta
+    {
+        JoystickEventBatch events;
+    };
+
     JoystickManager::JoystickManager()
     {
-        mJoysticks = NULL;
+        _joysticks = NULL;
         ResetAllJoystickInfo();
+        assert(sizeof(JoystickManagerMeta) <= sizeof(JoystickManager::_native));
+        memset(_native, 0, sizeof(_native));
     }
 
     JoystickManager::~JoystickManager()
     {
-        if (mJoysticks != NULL)
+        if (_joysticks != NULL)
         {
-            for (UInt32 i = 0; i < mNumAvailableJoysticks; ++i)
+            for (UInt32 i = 0; i < _numAvailableJoysticks; ++i)
             {
-                delete mJoysticks[i];
+                delete _joysticks[i];
             }
-            delete [] mJoysticks;
+            delete [] _joysticks;
         }
     }
 
     UInt32 JoystickManager::GetNumJoysticks()
     {
-        return mNumAvailableJoysticks;
+        return _numAvailableJoysticks;
     }
 
     /******************
@@ -61,12 +71,12 @@ namespace XPG
             }
         }
 
-        mNumAvailableJoysticks = numActualJoysticks;
+        _numAvailableJoysticks = numActualJoysticks;
 
-        if (mJoysticks != NULL)
-            delete [] mJoysticks;
+        if (_joysticks != NULL)
+            delete [] _joysticks;
 
-        mJoysticks = new XPG::Joystick*[mNumAvailableJoysticks];
+        _joysticks = new XPG::Joystick*[_numAvailableJoysticks];
         JOYCAPS capsInfo;
 
         for (UInt32 i = JOYSTICKID1; i < numActualJoysticks; ++i)
@@ -126,17 +136,17 @@ namespace XPG
                     }
                 }
 
-                mJoysticks[i] = new XPG::Joystick(capsInfo.wNumAxes, capsInfo.wNumButtons, numHats,
+                _joysticks[i] = new XPG::Joystick(capsInfo.wNumAxes, capsInfo.wNumButtons, numHats,
                                                   axisMins, axisMaxs);
 
-                cerr << "joystick " << i << " num axes: " << mJoysticks[i]->NumAxes() << endl
-                    << "num buttons: " << mJoysticks[i]->NumButtons() << endl
-                    << "num hats: " << mJoysticks[i]->NumHats() << endl;
+                cerr << "joystick " << i << " num axes: " << _joysticks[i]->NumAxes() << endl
+                    << "num buttons: " << _joysticks[i]->NumButtons() << endl
+                    << "num hats: " << _joysticks[i]->NumHats() << endl;
 
                 for (unsigned int j = 0; j < capsInfo.wNumAxes; ++j)
                 {
-                    cerr << "axis " << j << " min: " << mJoysticks[i]->AxisMinimum(j) <<
-                        " max: " << mJoysticks[i]->AxisMaximum(j) << endl;
+                    cerr << "axis " << j << " min: " << _joysticks[i]->AxisMinimum(j) <<
+                        " max: " << _joysticks[i]->AxisMaximum(j) << endl;
                 }
 
                 if (capsInfo.wCaps & JOYCAPS_POVCTS)
@@ -286,7 +296,7 @@ namespace XPG
     {
         XPG::Joystick* joystick = NULL;
 
-        if (numJoystick < mNumAvailableJoysticks)
+        if (numJoystick < _numAvailableJoysticks)
         {
             JOYINFOEX info;
             info.dwSize = sizeof(info);
@@ -294,7 +304,7 @@ namespace XPG
 
             if (joyGetPosEx(numJoystick, &info) == JOYERR_NOERROR)
             {
-                XPG::Joystick* oldValues = mJoysticks[numJoystick];
+                XPG::Joystick* oldValues = _joysticks[numJoystick];
                 Int32* axisMins = new Int32[oldValues->NumAxes()];
                 Int32* axisMaxs = new Int32[oldValues->NumAxes()];
 
@@ -316,4 +326,105 @@ namespace XPG
         return joystick;
     }
 
+    void JoystickManager::PollJoystickEvents()
+    {
+        JoystickManagerMeta* meta = (JoystickManagerMeta*)_native;
+
+        for (UInt32 i = 0; i < _numAvailableJoysticks; ++i)
+        {
+            bool joyStateChanged = false;
+            XPG::Joystick* newJoyState = PollJoystickState(i);
+            XPG::Joystick* oldJoyState = _joysticks[i];
+
+            if (newJoyState != NULL)
+            {
+                if (oldJoyState != NULL)
+                {
+                    if (meta->events.onJoyAxis)
+                    {
+                        for (UInt32 j = 0; j < oldJoyState->NumAxes(); ++j)
+                        {
+                            if (newJoyState->AxisState(j) != oldJoyState->AxisState(j))
+                            {
+                                joyStateChanged = true;
+                                meta->events.onJoyAxis(i, j, *newJoyState);
+                            }
+                        }
+                    }
+
+                    if (meta->events.onJoyButtonDown || meta->events.onJoyButtonUp)
+                    {
+                        for (UInt32 j = 0; j < oldJoyState->NumButtons(); ++j)
+                        {
+                            if (newJoyState->ButtonState(j) != oldJoyState->ButtonState(j))
+                            {
+                                joyStateChanged = true;
+                                if (newJoyState->ButtonState(j))
+                                {
+                                    if (meta->events.onJoyButtonDown)
+                                        meta->events.onJoyButtonDown(i, j + 1, *newJoyState);
+                                }
+                                else
+                                {
+                                    if (meta->events.onJoyButtonUp)
+                                        meta->events.onJoyButtonUp(i, j + 1, *newJoyState);
+                                }
+                            }
+                        }
+                    }
+
+                    if (meta->events.onJoyHat)
+                    {
+                        for (UInt32 j = 0; j < oldJoyState->NumHats(); ++j)
+                        {
+                            if (newJoyState->HatState(j) != oldJoyState->HatState(j))
+                            {
+                                joyStateChanged = true;
+                                meta->events.onJoyHat(i, j, *newJoyState);
+                            }
+                        }
+                    }
+
+                    if (joyStateChanged)
+                    {
+                        delete _joysticks[i];
+                        _joysticks[i] = newJoyState;
+                    }
+                    else
+                    {
+                        delete newJoyState;
+                    }
+                }
+                else
+                {
+                    _joysticks[i] = newJoyState;
+                }
+
+            }
+        }
+    }
+
+    void JoystickManager::OnJoyAxis(JoystickEventCallback callback)
+    {
+        JoystickManagerMeta* meta = (JoystickManagerMeta*)_native;
+        meta->events.onJoyAxis = callback;
+    }
+
+    void JoystickManager::OnJoyButtonDown(JoystickEventCallback callback)
+    {
+        JoystickManagerMeta* meta = (JoystickManagerMeta*)_native;
+        meta->events.onJoyButtonDown = callback;
+    }
+
+    void JoystickManager::OnJoyButtonUp(JoystickEventCallback callback)
+    {
+        JoystickManagerMeta* meta = (JoystickManagerMeta*)_native;
+        meta->events.onJoyButtonUp = callback;
+    }
+
+    void JoystickManager::OnJoyHat(JoystickEventCallback callback)
+    {
+        JoystickManagerMeta* meta = (JoystickManagerMeta*)_native;
+        meta->events.onJoyHat = callback;
+    }
 }

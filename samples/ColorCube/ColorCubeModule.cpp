@@ -8,6 +8,10 @@ static const GLuint ColorHandle = 1;
 
 ColorCubeModule::ColorCubeModule()
 {
+    _joyManager.OnJoyAxis(OnJoyAxis);
+    _joyManager.OnJoyButtonDown(OnJoyButtonDown);
+    _joyManager.OnJoyButtonUp(OnJoyButtonUp);
+    _joyManager.OnJoyHat(OnJoyHat);
 
     glGenVertexArrays(1, &_vao);
     glBindVertexArray(_vao);
@@ -181,16 +185,17 @@ void ColorCubeModule::OnUpdate()
     _modelView.RotateX(_rotation);
     _modelView.RotateY(_rotation);
 
-    XPG::Joystick* joy = mJoyManager.PollJoystickState(0);
-
-    if (joy != NULL)
-    {
-        cerr << "joystick hat pos: " << joy->HatState(0) << endl;
-    }
-    else
-    {
-        cerr << "joy is null!" << endl;
-    }
+    _joyManager.PollJoystickEvents();
+//    XPG::Joystick* joy = _joyManager.PollJoystickState(0);
+//
+//    if (joy != NULL)
+//    {
+//        cerr << "joystick button 10: " << joy->ButtonState(9) << endl;
+//    }
+//    else
+//    {
+//        cerr << "joy is null!" << endl;
+//    }
 }
 
 void ColorCubeModule::Close()
@@ -200,6 +205,27 @@ void ColorCubeModule::Close()
     _window->MakeCurrent(true);
     _window->Close();
 }
+
+void ColorCubeModule::OnJoyAxis(XPG::UInt32 whichJoystick, XPG::UInt32 whichAxis, const XPG::Joystick& joyState)
+{
+    //cout << "Joystick " << whichJoystick << " axis " << whichAxis << " moved to " << joyState.AxisState(whichAxis) << endl;
+}
+
+void ColorCubeModule::OnJoyButtonDown(XPG::UInt32 whichJoystick, XPG::UInt32 whichButton, const XPG::Joystick& joyState)
+{
+    cout << "Joystick " << whichJoystick << " button " << whichButton << " pressed." << endl;
+}
+
+void ColorCubeModule::OnJoyButtonUp(XPG::UInt32 whichJoystick, XPG::UInt32 whichButton, const XPG::Joystick& joyState)
+{
+    cout << "Joystick " << whichJoystick << " button " << whichButton << " released." << endl;
+}
+
+void ColorCubeModule::OnJoyHat(XPG::UInt32 whichJoystick, XPG::UInt32 whichHat, const XPG::Joystick& joyState)
+{
+    cout << "Joystick " << whichJoystick << " hat " << whichHat << " set to " << joyState.HatState(whichHat) << endl;
+}
+
 
 void ColorCubeModule::OnKeyDown(XPG::Key::Code key, void* userData)
 {
