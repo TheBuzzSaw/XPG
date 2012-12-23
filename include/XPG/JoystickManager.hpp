@@ -18,6 +18,10 @@ namespace XPG
             void ResetAllJoystickInfo();
             UInt32 GetNumJoysticks();
 
+            inline void Deadzone(UInt32 deadzone) { if (deadzone <= 100) _deadzone = (double)deadzone / 100; }
+
+            inline UInt32 Deadzone() const { return (UInt32)(_deadzone * 100); }
+
             XPG::Joystick* PollJoystickState(UInt32 numJoystick);
             void PollJoystickEvents();
 
@@ -28,6 +32,7 @@ namespace XPG
         private:
             UInt32 _numAvailableJoysticks;
             XPG::Joystick** _joysticks;
+            double _deadzone;
             UInt8 _native[256];
     };
 }

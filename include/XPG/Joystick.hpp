@@ -14,8 +14,8 @@ namespace XPG
                      Int32* axisMinimums, Int32* axisMaximums);
             virtual ~Joystick();
 
-            inline UInt32 NumAxes() { return _numAxes; }
-            inline Int32 AxisMinimum(UInt32 axis)
+            inline UInt32 NumAxes() const { return _numAxes; }
+            inline Int32 AxisMinimum(UInt32 axis) const
             {
                 Int32 result = 0;
                 if (_axisMinimums != NULL && axis < _numAxes)
@@ -24,7 +24,7 @@ namespace XPG
                 return result;
             }
 
-            inline Int32 AxisMaximum(UInt32 axis)
+            inline Int32 AxisMaximum(UInt32 axis) const
             {
                 Int32 result = 0;
                 if (_axisMaximums != NULL && axis < _numAxes)
@@ -33,8 +33,8 @@ namespace XPG
                 return result;
             }
 
-            inline UInt32 NumButtons() { return _numButtons; }
-            inline UInt32 NumHats() { return _numHats; }
+            inline UInt32 NumButtons() const { return _numButtons; }
+            inline UInt32 NumHats() const { return _numHats; }
 
             inline const Int32 AxisState(const UInt32 axis) const
             {

@@ -12,6 +12,7 @@ ColorCubeModule::ColorCubeModule()
     _joyManager.OnJoyButtonDown(OnJoyButtonDown);
     _joyManager.OnJoyButtonUp(OnJoyButtonUp);
     _joyManager.OnJoyHat(OnJoyHat);
+    _joyManager.Deadzone(20);
 
     glGenVertexArrays(1, &_vao);
     glBindVertexArray(_vao);
@@ -168,6 +169,7 @@ void ColorCubeModule::Loop()
 
             OnUpdate();
         }
+        _joyManager.PollJoystickEvents();
         Draw();
 
 
@@ -185,17 +187,6 @@ void ColorCubeModule::OnUpdate()
     _modelView.RotateX(_rotation);
     _modelView.RotateY(_rotation);
 
-    _joyManager.PollJoystickEvents();
-//    XPG::Joystick* joy = _joyManager.PollJoystickState(0);
-//
-//    if (joy != NULL)
-//    {
-//        cerr << "joystick button 10: " << joy->ButtonState(9) << endl;
-//    }
-//    else
-//    {
-//        cerr << "joy is null!" << endl;
-//    }
 }
 
 void ColorCubeModule::Close()
@@ -208,7 +199,7 @@ void ColorCubeModule::Close()
 
 void ColorCubeModule::OnJoyAxis(XPG::UInt32 whichJoystick, XPG::UInt32 whichAxis, const XPG::Joystick& joyState)
 {
-    //cout << "Joystick " << whichJoystick << " axis " << whichAxis << " moved to " << joyState.AxisState(whichAxis) << endl;
+    cout << "Joystick " << whichJoystick << " axis " << whichAxis << " moved to " << joyState.AxisState(whichAxis) << endl;
 }
 
 void ColorCubeModule::OnJoyButtonDown(XPG::UInt32 whichJoystick, XPG::UInt32 whichButton, const XPG::Joystick& joyState)
