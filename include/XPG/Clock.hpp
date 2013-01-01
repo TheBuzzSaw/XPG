@@ -5,7 +5,7 @@
 
 namespace XPG
 {
-    XpgFunction void Sleep(TimeSpan timeSpan);
+    XpgFunction void Sleep(TimeSpan duration);
     XpgFunction const DateTime HighResolutionUtcTime();
     XpgFunction const DateTime HighResolutionLocalTime();
     XpgFunction void ResetTimer();
