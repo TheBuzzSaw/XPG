@@ -10,50 +10,16 @@
 		6BBFA42916939BF70098826F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BBFA42816939BF70098826F /* Cocoa.framework */; };
 		6BBFA43316939BF70098826F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BBFA43116939BF70098826F /* InfoPlist.strings */; };
 		6BBFA43716939BF70098826F /* XPG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA43616939BF70098826F /* XPG.m */; };
-		6BBFA46716939C480098826F /* Array.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44016939C480098826F /* Array.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA46816939C480098826F /* Clock.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44116939C480098826F /* Clock.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA46916939C480098826F /* DataTypes.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44216939C480098826F /* DataTypes.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA46A16939C480098826F /* DateTime.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44316939C480098826F /* DateTime.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA46B16939C480098826F /* Event.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44416939C480098826F /* Event.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA46C16939C480098826F /* Key.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44516939C480098826F /* Key.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA46D16939C480098826F /* Matrix4x4.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44616939C480098826F /* Matrix4x4.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA46E16939C480098826F /* MersenneTwister19937.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44716939C480098826F /* MersenneTwister19937.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA46F16939C480098826F /* MouseState.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44816939C480098826F /* MouseState.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47016939C480098826F /* Mutex.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44916939C480098826F /* Mutex.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47116939C480098826F /* Address32.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44B16939C480098826F /* Address32.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47216939C480098826F /* Address32Query.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44C16939C480098826F /* Address32Query.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47316939C480098826F /* Datagram32.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44D16939C480098826F /* Datagram32.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47416939C480098826F /* Management.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44E16939C480098826F /* Management.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47516939C480098826F /* Packet.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44F16939C480098826F /* Packet.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47616939C480098826F /* Socket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45016939C480098826F /* Socket.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47716939C480098826F /* TcpListener.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45116939C480098826F /* TcpListener.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47816939C480098826F /* TcpSocket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45216939C480098826F /* TcpSocket.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47916939C480098826F /* UdpSocket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45316939C480098826F /* UdpSocket.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47A16939C480098826F /* Base.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45516939C480098826F /* Base.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47D16939C480098826F /* IndexBufferObject.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45816939C480098826F /* IndexBufferObject.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47E16939C480098826F /* InterleavedBufferObject.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45916939C480098826F /* InterleavedBufferObject.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA47F16939C480098826F /* Program.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45A16939C480098826F /* Program.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA48016939C480098826F /* Shader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45B16939C480098826F /* Shader.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA48216939C480098826F /* Platform.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45D16939C480098826F /* Platform.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA48316939C480098826F /* StreamExtensions.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45F16939C480098826F /* StreamExtensions.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA48416939C480098826F /* Stopwatch.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA46016939C480098826F /* Stopwatch.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA48516939C480098826F /* System.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA46116939C480098826F /* System.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA48616939C480098826F /* Thread.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA46216939C480098826F /* Thread.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA48716939C480098826F /* TimeSpan.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA46316939C480098826F /* TimeSpan.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA48816939C480098826F /* Window.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA46416939C480098826F /* Window.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BBFA48916939C480098826F /* WindowState.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA46516939C480098826F /* WindowState.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		6BBFA4BB16939C570098826F /* Address32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA48B16939C570098826F /* Address32.cpp */; };
 		6BBFA4BC16939C570098826F /* Address32Query.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA48C16939C570098826F /* Address32Query.cpp */; };
 		6BBFA4BD16939C570098826F /* Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA48D16939C570098826F /* Base.cpp */; };
 		6BBFA4BE16939C570098826F /* Datagram32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA48E16939C570098826F /* Datagram32.cpp */; };
 		6BBFA4BF16939C570098826F /* DateTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA48F16939C570098826F /* DateTime.cpp */; };
 		6BBFA4C016939C570098826F /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA49016939C570098826F /* Event.cpp */; };
-		6BBFA4C116939C570098826F /* EventBatch.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA49116939C570098826F /* EventBatch.hpp */; };
 		6BBFA4C316939C570098826F /* IndexBufferObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA49316939C570098826F /* IndexBufferObject.cpp */; };
 		6BBFA4C416939C570098826F /* InterleavedBufferObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA49416939C570098826F /* InterleavedBufferObject.cpp */; };
 		6BBFA4CA16939C570098826F /* MersenneTwister19937.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA49B16939C570098826F /* MersenneTwister19937.cpp */; };
 		6BBFA4CB16939C570098826F /* MouseState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA49C16939C570098826F /* MouseState.cpp */; };
-		6BBFA4CC16939C570098826F /* Network.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA49D16939C570098826F /* Network.hpp */; };
 		6BBFA4CD16939C570098826F /* NativeTimers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA49F16939C570098826F /* NativeTimers.cpp */; };
 		6BBFA4CE16939C570098826F /* Packet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA4A016939C570098826F /* Packet.cpp */; };
 		6BBFA4CF16939C570098826F /* Program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA4A116939C570098826F /* Program.cpp */; };
@@ -61,9 +27,7 @@
 		6BBFA4D116939C570098826F /* Socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA4A316939C570098826F /* Socket.cpp */; };
 		6BBFA4D216939C570098826F /* Stopwatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA4A416939C570098826F /* Stopwatch.cpp */; };
 		6BBFA4D316939C570098826F /* TcpListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA4A516939C570098826F /* TcpListener.cpp */; };
-		6BBFA4D416939C570098826F /* TcpListenerMeta.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA4A616939C570098826F /* TcpListenerMeta.hpp */; };
 		6BBFA4D516939C570098826F /* TcpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA4A716939C570098826F /* TcpSocket.cpp */; };
-		6BBFA4D616939C570098826F /* TickSpans.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA4A816939C570098826F /* TickSpans.hpp */; };
 		6BBFA4D716939C570098826F /* TimeSpan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA4A916939C570098826F /* TimeSpan.cpp */; };
 		6BBFA4D816939C570098826F /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA4AA16939C570098826F /* UdpSocket.cpp */; };
 		6BBFA4D916939C570098826F /* Management.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA4AC16939C570098826F /* Management.cpp */; };
@@ -72,6 +36,39 @@
 		6BBFA4DC16939C570098826F /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA4AF16939C570098826F /* Thread.cpp */; };
 		6BBFA4E616939C570098826F /* WindowState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA4BA16939C570098826F /* WindowState.cpp */; };
 		6BBFA4EC1693A3170098826F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BBFA4EB1693A3170098826F /* OpenGL.framework */; };
+		6BE725011693CFFF007ED9F5 /* Application.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA43F16939C480098826F /* Application.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725021693CFFF007ED9F5 /* Array.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44016939C480098826F /* Array.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725031693CFFF007ED9F5 /* Clock.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44116939C480098826F /* Clock.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725041693CFFF007ED9F5 /* DataTypes.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44216939C480098826F /* DataTypes.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725051693CFFF007ED9F5 /* DateTime.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44316939C480098826F /* DateTime.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725061693CFFF007ED9F5 /* Event.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44416939C480098826F /* Event.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725071693CFFF007ED9F5 /* Key.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44516939C480098826F /* Key.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725081693CFFF007ED9F5 /* Matrix4x4.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44616939C480098826F /* Matrix4x4.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725091693CFFF007ED9F5 /* MersenneTwister19937.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44716939C480098826F /* MersenneTwister19937.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE7250A1693CFFF007ED9F5 /* MouseState.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44816939C480098826F /* MouseState.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE7250B1693CFFF007ED9F5 /* Mutex.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44916939C480098826F /* Mutex.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE7250C1693D023007ED9F5 /* Platform.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45D16939C480098826F /* Platform.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE7250D1693D023007ED9F5 /* Stopwatch.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA46016939C480098826F /* Stopwatch.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE7250E1693D023007ED9F5 /* System.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA46116939C480098826F /* System.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE7250F1693D023007ED9F5 /* Thread.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA46216939C480098826F /* Thread.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725101693D023007ED9F5 /* TimeSpan.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA46316939C480098826F /* TimeSpan.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725111693D023007ED9F5 /* Window.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA46416939C480098826F /* Window.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725121693D023007ED9F5 /* WindowState.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA46516939C480098826F /* WindowState.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725131693E3DD007ED9F5 /* Address32.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44B16939C480098826F /* Address32.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725141693E3DD007ED9F5 /* Address32Query.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44C16939C480098826F /* Address32Query.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725151693E3DD007ED9F5 /* Datagram32.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44D16939C480098826F /* Datagram32.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725161693E3DD007ED9F5 /* Management.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44E16939C480098826F /* Management.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725171693E3DD007ED9F5 /* Packet.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA44F16939C480098826F /* Packet.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725181693E3DD007ED9F5 /* Socket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45016939C480098826F /* Socket.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725191693E3DD007ED9F5 /* TcpListener.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45116939C480098826F /* TcpListener.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE7251A1693E3DD007ED9F5 /* TcpSocket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45216939C480098826F /* TcpSocket.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE7251B1693E3DD007ED9F5 /* UdpSocket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45316939C480098826F /* UdpSocket.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE7251C1693E3E9007ED9F5 /* Base.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45516939C480098826F /* Base.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE7251D1693E3E9007ED9F5 /* IndexBufferObject.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45816939C480098826F /* IndexBufferObject.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE7251E1693E3E9007ED9F5 /* InterleavedBufferObject.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45916939C480098826F /* InterleavedBufferObject.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE7251F1693E3E9007ED9F5 /* Program.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45A16939C480098826F /* Program.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725201693E3E9007ED9F5 /* Shader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45B16939C480098826F /* Shader.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BE725211693E3F2007ED9F5 /* StreamExtensions.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6BBFA45F16939C480098826F /* StreamExtensions.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -355,42 +352,39 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BBFA46716939C480098826F /* Array.hpp in Headers */,
-				6BBFA46816939C480098826F /* Clock.hpp in Headers */,
-				6BBFA46916939C480098826F /* DataTypes.hpp in Headers */,
-				6BBFA46A16939C480098826F /* DateTime.hpp in Headers */,
-				6BBFA46B16939C480098826F /* Event.hpp in Headers */,
-				6BBFA46C16939C480098826F /* Key.hpp in Headers */,
-				6BBFA46D16939C480098826F /* Matrix4x4.hpp in Headers */,
-				6BBFA46E16939C480098826F /* MersenneTwister19937.hpp in Headers */,
-				6BBFA46F16939C480098826F /* MouseState.hpp in Headers */,
-				6BBFA47016939C480098826F /* Mutex.hpp in Headers */,
-				6BBFA47116939C480098826F /* Address32.hpp in Headers */,
-				6BBFA47216939C480098826F /* Address32Query.hpp in Headers */,
-				6BBFA47316939C480098826F /* Datagram32.hpp in Headers */,
-				6BBFA47416939C480098826F /* Management.hpp in Headers */,
-				6BBFA47516939C480098826F /* Packet.hpp in Headers */,
-				6BBFA47616939C480098826F /* Socket.hpp in Headers */,
-				6BBFA47716939C480098826F /* TcpListener.hpp in Headers */,
-				6BBFA47816939C480098826F /* TcpSocket.hpp in Headers */,
-				6BBFA47916939C480098826F /* UdpSocket.hpp in Headers */,
-				6BBFA47A16939C480098826F /* Base.hpp in Headers */,
-				6BBFA47D16939C480098826F /* IndexBufferObject.hpp in Headers */,
-				6BBFA47E16939C480098826F /* InterleavedBufferObject.hpp in Headers */,
-				6BBFA47F16939C480098826F /* Program.hpp in Headers */,
-				6BBFA48016939C480098826F /* Shader.hpp in Headers */,
-				6BBFA48216939C480098826F /* Platform.hpp in Headers */,
-				6BBFA48316939C480098826F /* StreamExtensions.hpp in Headers */,
-				6BBFA48416939C480098826F /* Stopwatch.hpp in Headers */,
-				6BBFA48516939C480098826F /* System.hpp in Headers */,
-				6BBFA48616939C480098826F /* Thread.hpp in Headers */,
-				6BBFA48716939C480098826F /* TimeSpan.hpp in Headers */,
-				6BBFA48816939C480098826F /* Window.hpp in Headers */,
-				6BBFA48916939C480098826F /* WindowState.hpp in Headers */,
-				6BBFA4C116939C570098826F /* EventBatch.hpp in Headers */,
-				6BBFA4CC16939C570098826F /* Network.hpp in Headers */,
-				6BBFA4D416939C570098826F /* TcpListenerMeta.hpp in Headers */,
-				6BBFA4D616939C570098826F /* TickSpans.hpp in Headers */,
+				6BE7250C1693D023007ED9F5 /* Platform.hpp in Headers */,
+				6BE7250D1693D023007ED9F5 /* Stopwatch.hpp in Headers */,
+				6BE7250E1693D023007ED9F5 /* System.hpp in Headers */,
+				6BE7250F1693D023007ED9F5 /* Thread.hpp in Headers */,
+				6BE725101693D023007ED9F5 /* TimeSpan.hpp in Headers */,
+				6BE725111693D023007ED9F5 /* Window.hpp in Headers */,
+				6BE725121693D023007ED9F5 /* WindowState.hpp in Headers */,
+				6BE725011693CFFF007ED9F5 /* Application.hpp in Headers */,
+				6BE725021693CFFF007ED9F5 /* Array.hpp in Headers */,
+				6BE725031693CFFF007ED9F5 /* Clock.hpp in Headers */,
+				6BE725041693CFFF007ED9F5 /* DataTypes.hpp in Headers */,
+				6BE725051693CFFF007ED9F5 /* DateTime.hpp in Headers */,
+				6BE725211693E3F2007ED9F5 /* StreamExtensions.hpp in Headers */,
+				6BE7251C1693E3E9007ED9F5 /* Base.hpp in Headers */,
+				6BE7251D1693E3E9007ED9F5 /* IndexBufferObject.hpp in Headers */,
+				6BE7251E1693E3E9007ED9F5 /* InterleavedBufferObject.hpp in Headers */,
+				6BE7251F1693E3E9007ED9F5 /* Program.hpp in Headers */,
+				6BE725201693E3E9007ED9F5 /* Shader.hpp in Headers */,
+				6BE725131693E3DD007ED9F5 /* Address32.hpp in Headers */,
+				6BE725141693E3DD007ED9F5 /* Address32Query.hpp in Headers */,
+				6BE725151693E3DD007ED9F5 /* Datagram32.hpp in Headers */,
+				6BE725161693E3DD007ED9F5 /* Management.hpp in Headers */,
+				6BE725171693E3DD007ED9F5 /* Packet.hpp in Headers */,
+				6BE725181693E3DD007ED9F5 /* Socket.hpp in Headers */,
+				6BE725191693E3DD007ED9F5 /* TcpListener.hpp in Headers */,
+				6BE7251A1693E3DD007ED9F5 /* TcpSocket.hpp in Headers */,
+				6BE7251B1693E3DD007ED9F5 /* UdpSocket.hpp in Headers */,
+				6BE725061693CFFF007ED9F5 /* Event.hpp in Headers */,
+				6BE725071693CFFF007ED9F5 /* Key.hpp in Headers */,
+				6BE725081693CFFF007ED9F5 /* Matrix4x4.hpp in Headers */,
+				6BE725091693CFFF007ED9F5 /* MersenneTwister19937.hpp in Headers */,
+				6BE7250A1693CFFF007ED9F5 /* MouseState.hpp in Headers */,
+				6BE7250B1693CFFF007ED9F5 /* Mutex.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +399,7 @@
 				6BBFA42116939BF70098826F /* Frameworks */,
 				6BBFA42216939BF70098826F /* Headers */,
 				6BBFA42316939BF70098826F /* Resources */,
+				6BE725001693AEFC007ED9F5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -450,6 +445,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6BE725001693AEFC007ED9F5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export HEADERS=\"${TARGET_BUILD_DIR}/XPG.Framework/Headers\"\n\nmkdir ${HEADERS}/OpenGL\nmv ${HEADERS}/Base.hpp ${HEADERS}/OpenGL/\nmv ${HEADERS}/IndexBufferObject.hpp ${HEADERS}/OpenGL/\nmv ${HEADERS}/InterleavedBufferObject.hpp ${HEADERS}/OpenGL/\nmv ${HEADERS}/Program.hpp ${HEADERS}/OpenGL/\nmv ${HEADERS}/Shader.hpp ${HEADERS}/OpenGL/\n\nmkdir ${HEADERS}/Network\nmv ${HEADERS}/Address32.hpp ${HEADERS}/Network/\nmv ${HEADERS}/Address32Query.hpp ${HEADERS}/Network/\nmv ${HEADERS}/Datagram32.hpp ${HEADERS}/Network/\nmv ${HEADERS}/Management.hpp ${HEADERS}/Network/\nmv ${HEADERS}/Packet.hpp ${HEADERS}/Network/\nmv ${HEADERS}/Socket.hpp ${HEADERS}/Network/\nmv ${HEADERS}/TcpListener.hpp ${HEADERS}/Network/\nmv ${HEADERS}/TcpSocket.hpp ${HEADERS}/Network/\nmv ${HEADERS}/UdpSocket.hpp ${HEADERS}/Network/\n\nmkdir ${HEADERS}/STL\nmv ${HEADERS}/StreamExtensions.hpp ${HEADERS}/STL/\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6BBFA42016939BF70098826F /* Sources */ = {
@@ -593,6 +604,7 @@
 				6BBFA43C16939BF70098826F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
