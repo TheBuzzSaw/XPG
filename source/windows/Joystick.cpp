@@ -1,5 +1,7 @@
 #include "../../include/XPG/Joystick.hpp"
 
+#include "../../source/windows/Windows.hpp"
+
 #include <mmsystem.h>
 using namespace std;
 

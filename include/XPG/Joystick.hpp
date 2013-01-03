@@ -1,7 +1,6 @@
 #ifndef XpgJoystickHpp
 #define XpgJoystickHpp
 
-#include "../../source/windows/Windows.hpp"
 #include "Platform.hpp"
 #include "DataTypes.hpp"
 
@@ -26,7 +25,7 @@ namespace XPG
             inline Int32 AxisMinimum(UInt32 axis) const
             {
                 Int32 result = 0;
-                if (_axisMinimums != NULL && axis < _numAxes)
+                if (_axisMinimums != 0 && axis < _numAxes)
                     result = _axisMinimums[axis];
 
                 return result;
@@ -35,7 +34,7 @@ namespace XPG
             inline Int32 AxisMaximum(UInt32 axis) const
             {
                 Int32 result = 0;
-                if (_axisMaximums != NULL && axis < _numAxes)
+                if (_axisMaximums != 0 && axis < _numAxes)
                     result = _axisMaximums[axis];
 
                 return result;
