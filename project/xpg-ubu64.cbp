@@ -49,6 +49,7 @@
 		<Unit filename="../include/XPG/DataTypes.hpp" />
 		<Unit filename="../include/XPG/DateTime.hpp" />
 		<Unit filename="../include/XPG/Event.hpp" />
+		<Unit filename="../include/XPG/Joystick.hpp" />
 		<Unit filename="../include/XPG/Key.hpp" />
 		<Unit filename="../include/XPG/Matrix4x4.hpp" />
 		<Unit filename="../include/XPG/MersenneTwister19937.hpp" />
@@ -87,6 +88,9 @@
 		<Unit filename="../source/EventBatch.hpp" />
 		<Unit filename="../source/IndexBufferObject.cpp" />
 		<Unit filename="../source/InterleavedBufferObject.cpp" />
+		<Unit filename="../source/Joystick.cpp" />
+		<Unit filename="../source/JoystickEventBatch.hpp" />
+		<Unit filename="../source/JoystickManager.cpp" />
 		<Unit filename="../source/MersenneTwister19937.cpp" />
 		<Unit filename="../source/MouseState.cpp" />
 		<Unit filename="../source/Network.hpp" />
@@ -107,6 +111,7 @@
 		</Unit>
 		<Unit filename="../source/linux/Application.cpp" />
 		<Unit filename="../source/linux/Clock.cpp" />
+		<Unit filename="../source/linux/Joystick.cpp" />
 		<Unit filename="../source/linux/Window.cpp" />
 		<Unit filename="../source/linux/X.cpp" />
 		<Unit filename="../source/linux/X.hpp" />

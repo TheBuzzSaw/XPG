@@ -3,6 +3,7 @@
 #include <XPG/Network/UdpSocket.hpp>
 #include <XPG/Network/TcpSocket.hpp>
 #include <XPG/Network/TcpListener.hpp>
+#include <XPG/Joystick.hpp>
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -108,6 +109,24 @@ void SuperSimpleWebServer()
 
 int main(int argc, char** argv)
 {
+    unsigned int numJoysticks = XPG::Joystick::NumJoysticks();
+    cerr << "Num joysticks: " << numJoysticks << endl;
+
+//    for (unsigned int i = 0; i < numJoysticks; ++i)
+//    {
+//        XPG::Joystick joy(i);
+//        joy.PollState();
+//    }
+
+    XPG::Joystick joy(2);
+
+    XPG::JoystickManager joyManager;
+
+    while(true)
+    {
+        joy.PollState();
+    }
+
     if (XPG::OpenSockets())
     {
         SuperSimpleWebServer();
