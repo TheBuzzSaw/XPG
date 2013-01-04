@@ -4,6 +4,8 @@
 #include "Platform.hpp"
 #include "DataTypes.hpp"
 
+#define SIZE_OF_JOYSTICK_NATIVE 1024
+
 namespace XPG
 {
     XpgClass Joystick
@@ -99,7 +101,7 @@ namespace XPG
             bool* _buttonStates;
             Int32* _hatStates;
 
-            UInt8 _native[1024];
+            UInt8 _native[SIZE_OF_JOYSTICK_NATIVE];
     };
 
 }

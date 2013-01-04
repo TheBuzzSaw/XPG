@@ -7,6 +7,7 @@ using namespace std;
 
 namespace XPG
 {
+
     /******************
     *   Windows joystick axes go from 0 - 65535.  We want to change this
     *   so that 0 occurs at the axes middle, rather than it's minimum point.
@@ -34,6 +35,7 @@ namespace XPG
         _numButtons = 0;
         _numHats = 0;
 
+        memset(_native, 0, SIZE_OF_JOYSTICK_NATIVE);
 
         if (joyGetDevCaps(numJoystick, &capsInfo, sizeof(capsInfo)) == JOYERR_NOERROR)
         {
