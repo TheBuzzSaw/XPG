@@ -4,6 +4,7 @@
 #include <XPG/Network/TcpSocket.hpp>
 #include <XPG/Network/TcpListener.hpp>
 #include <XPG/Joystick.hpp>
+#include <XPG/JoystickManager.hpp>
 #include <iostream>
 #include <fstream>
 #include <cstring>

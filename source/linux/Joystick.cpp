@@ -13,6 +13,11 @@ using namespace std;
 namespace XPG
 {
 
+    struct JoystickMeta
+    {
+        int fileDescriptor;
+    };
+
     struct js_event
     {
         unsigned int time;
@@ -31,6 +36,8 @@ namespace XPG
         _axisMinimums = 0;
         _axisMaximums = 0;
 
+        memset(_native, 0, 1024);
+
         stringstream fileName;
         fileName << "/dev/input/js" << numJoystick;
 
@@ -38,32 +45,26 @@ namespace XPG
 
         if (stat(fileName.str().c_str(), &buffer) > -1)
         {
-            int fd = open(fileName.str().c_str(), O_RDONLY | O_NONBLOCK);
+            JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
 
-            if (fd > -1)
+            meta->fileDescriptor = open(fileName.str().c_str(), O_RDONLY | O_NONBLOCK);
+
+            if (meta->fileDescriptor > -1)
             {
                 char numberOfDevices = 0;
-                if (ioctl(fd, JSIOCGAXES, &numberOfDevices) > -1)
+                if (ioctl(meta->fileDescriptor, JSIOCGAXES, &numberOfDevices) > -1)
                 {
                     _numAxes = numberOfDevices;
-                    _axisMinimums = new Int32[_numAxes];
-                    _axisMaximums = new Int32[_numAxes];
-
-                    for (unsigned int i = 0; i < _numAxes; ++i)
-                    {
-                        _axisMinimums[i] = -32768;
-                        _axisMaximums[i] = 32767;
-                    }
                 }
 
-                if (ioctl(fd, JSIOCGBUTTONS, &numberOfDevices) > -1)
+                if (ioctl(meta->fileDescriptor, JSIOCGBUTTONS, &numberOfDevices) > -1)
                 {
                     _numButtons = numberOfDevices;
                 }
 
                 char name[1024];
                 memset(name, 0, 1024);
-                if (ioctl(fd, JSIOCGNAME(1024), name) < 0)
+                if (ioctl(meta->fileDescriptor, JSIOCGNAME(1024), name) < 0)
                     strncpy(name, "Unknown", 1024);
 
                 cerr << "Joystick " << numJoystick << " details:" << endl;
@@ -71,7 +72,7 @@ namespace XPG
                 cerr << "Num Buttons: " << _numButtons << endl;
                 cerr << "Name: " << name << endl;
 
-                close(fd);
+//                close(fd);
             }
         }
 
@@ -81,55 +82,192 @@ namespace XPG
     }
 
 
+    Joystick::Joystick(const Joystick& joystick)
+    {
+        _numJoystick = joystick._numJoystick;
+        _numAxes = joystick._numAxes;
+        _numButtons = joystick._numButtons;
+        _numHats = joystick._numHats;
+
+        _axisStates = new Int32[_numAxes];
+        _buttonStates = new bool[_numButtons];
+        _hatStates = new Int32[_numHats];
+
+        for (UInt32 i = 0; i < _numAxes; ++i)
+        {
+            _axisStates[i] = joystick._axisStates[i];
+        }
+
+        for (UInt32 i = 0; i < _numButtons; ++i)
+        {
+            _buttonStates[i] = joystick._buttonStates[i];
+        }
+
+        for (UInt32 i = 0; i < _numHats; ++i)
+        {
+            _hatStates[i] = joystick._hatStates[i];
+        }
+
+        JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
+
+        meta->fileDescriptor = ((JoystickMeta*)joystick._native)->fileDescriptor;
+
+    }
+
+
+
+    Joystick::~Joystick()
+    {
+
+        if (_axisStates != 0)
+            delete [] _axisStates;
+
+        if (_buttonStates != 0)
+            delete [] _buttonStates;
+
+        if (_hatStates != 0)
+            delete [] _hatStates;
+
+
+        JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
+        close(meta->fileDescriptor);
+        //delete [] _native;
+    }
+
+    Joystick& Joystick::operator =(const Joystick& joystick)
+    {
+        _numJoystick = joystick._numJoystick;
+        _numAxes = joystick._numAxes;
+        _numButtons = joystick._numButtons;
+        _numHats = joystick._numHats;
+
+
+        if (_axisStates != 0)
+            delete [] _axisStates;
+
+        if (_buttonStates != 0)
+            delete [] _buttonStates;
+
+        if (_hatStates != 0)
+            delete [] _hatStates;
+
+        _axisStates = new Int32[_numAxes];
+        _buttonStates = new bool[_numButtons];
+        _hatStates = new Int32[_numHats];
+
+        for (UInt32 i = 0; i < _numAxes; ++i)
+        {
+            _axisStates[i] = joystick._axisStates[i];
+        }
+
+        for (UInt32 i = 0; i < _numButtons; ++i)
+        {
+            _buttonStates[i] = joystick._buttonStates[i];
+        }
+
+        for (UInt32 i = 0; i < _numHats; ++i)
+        {
+            _hatStates[i] = joystick._hatStates[i];
+        }
+
+        JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
+        //JoystickMeta* copyMeta = reinterpret_cast<JoystickMeta*>(joystick._native);
+
+        meta->fileDescriptor = ((JoystickMeta*)joystick._native)->fileDescriptor;// meta->fileDescriptor;
+
+        return *this;
+    }
+
+
     void Joystick::PollState()
     {
-        struct stat buffer;
+//        struct stat buffer;
+//
+//        string baseFilePath = "/dev/input/js";
+//        stringstream filePath;
+//        filePath << baseFilePath << _numJoystick;
+//        cerr << "opening " << filePath.str() << endl;
 
-        string baseFilePath = "/dev/input/js";
-        stringstream filePath;
-        filePath << baseFilePath << _numJoystick;
-        cerr << "opening " << filePath.str() << endl;
+        JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
 
-        if (stat(filePath.str().c_str(), &buffer) > -1)
+        if (meta->fileDescriptor > -1)
         {
-            int fd = open(filePath.str().c_str(), O_RDONLY | O_NONBLOCK);
+            js_event e;
 
-            if (fd > -1)
+            while (read(meta->fileDescriptor, &e, sizeof(js_event)) > -1)
             {
-                js_event e;
-
-                while (read(fd, &e, sizeof(js_event)) > -1)
+                switch (e.type)
                 {
-                    switch (e.type)
+                    case JS_EVENT_BUTTON | JS_EVENT_INIT:
+                    case JS_EVENT_BUTTON:
                     {
-                        case JS_EVENT_BUTTON | JS_EVENT_INIT:
-                        {
-                            cerr << "button " << (int)e.number << " set to " << e.value << endl;
-                            break;
-                        }
+//                        cerr << "button " << (int)e.number << " set to " << e.value << endl;
+                        _buttonStates[e.number] = e.value == 1;
+                        break;
+                    }
 
-                        case JS_EVENT_BUTTON & ~JS_EVENT_INIT:
-                        {
-                            cerr << "button " << (int)e.number << " changed to " << e.value << endl;
-                            break;
-                        }
+//                    case JS_EVENT_BUTTON & ~JS_EVENT_INIT:
+//                    {
+//                        cerr << "button " << (int)e.number << " changed to " << e.value << endl;
+//                        break;
+//                    }
 
-                        case JS_EVENT_AXIS | JS_EVENT_INIT:
-                        {
-                            cerr << "axis " << (int)e.number << " set to " << e.value << endl;
-                            break;
-                        }
+                    case JS_EVENT_AXIS | JS_EVENT_INIT:
+                    case JS_EVENT_AXIS:
+                    {
+//                        cerr << "axis " << (int)e.number << " set to " << e.value << endl;
+                        _axisStates[e.number] = e.value;
+                        break;
+                    }
 
-                        default:
-                        {
-                            break;
-                        }
+                    default:
+                    {
+                        break;
                     }
                 }
-
-                close(fd);
             }
         }
+//
+//        if (stat(filePath.str().c_str(), &buffer) > -1)
+//        {
+//            int fd = open(filePath.str().c_str(), O_RDONLY | O_NONBLOCK);
+//
+//            if (fd > -1)
+//            {
+//                js_event e;
+//
+//                while (read(fd, &e, sizeof(js_event)) > -1)
+//                {
+//                    switch (e.type)
+//                    {
+//                        case JS_EVENT_BUTTON | JS_EVENT_INIT:
+//                        {
+//                            cerr << "button " << (int)e.number << " set to " << e.value << endl;
+//                            break;
+//                        }
+//
+//                        case JS_EVENT_BUTTON & ~JS_EVENT_INIT:
+//                        {
+//                            cerr << "button " << (int)e.number << " changed to " << e.value << endl;
+//                            break;
+//                        }
+//
+//                        case JS_EVENT_AXIS | JS_EVENT_INIT:
+//                        {
+//                            cerr << "axis " << (int)e.number << " set to " << e.value << endl;
+//                            break;
+//                        }
+//
+//                        default:
+//                        {
+//                            break;
+//                        }
+//                    }
+//                }
+//
+//                close(fd);
+//            }
+//        }
     }
 
     UInt32 Joystick::NumJoysticks()

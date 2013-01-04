@@ -91,12 +91,15 @@ namespace XPG
             UInt32 _numAxes;
             UInt32 _numButtons;
             UInt32 _numHats;
+
             Int32* _axisMinimums;
             Int32* _axisMaximums;
 
             Int32* _axisStates;
             bool* _buttonStates;
             Int32* _hatStates;
+
+            UInt8 _native[1024];
     };
 
 }

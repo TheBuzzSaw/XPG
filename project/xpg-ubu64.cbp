@@ -88,7 +88,6 @@
 		<Unit filename="../source/EventBatch.hpp" />
 		<Unit filename="../source/IndexBufferObject.cpp" />
 		<Unit filename="../source/InterleavedBufferObject.cpp" />
-		<Unit filename="../source/Joystick.cpp" />
 		<Unit filename="../source/JoystickEventBatch.hpp" />
 		<Unit filename="../source/JoystickManager.cpp" />
 		<Unit filename="../source/MersenneTwister19937.cpp" />
