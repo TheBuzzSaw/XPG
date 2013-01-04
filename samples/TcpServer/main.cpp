@@ -5,6 +5,8 @@
 #include <XPG/Network/TcpListener.hpp>
 #include <XPG/Joystick.hpp>
 #include <XPG/JoystickManager.hpp>
+#include <XPG/Clock.hpp>
+#include <XPG/TimeSpan.hpp>
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -108,6 +110,11 @@ void SuperSimpleWebServer()
     }
 }
 
+void OnJoyAxis(XPG::UInt32 whichJoystick, XPG::UInt32 whichAxis, const XPG::Joystick& joyState)
+{
+    cerr << "Joystick axis " << whichAxis << endl;
+}
+
 int main(int argc, char** argv)
 {
     unsigned int numJoysticks = XPG::Joystick::NumJoysticks();
@@ -119,13 +126,15 @@ int main(int argc, char** argv)
 //        joy.PollState();
 //    }
 
-    XPG::Joystick joy(2);
+//    XPG::Joystick joy(2);
 
     XPG::JoystickManager joyManager;
+    joyManager.OnJoyAxis(OnJoyAxis);
 
     while(true)
     {
-        joy.PollState();
+        joyManager.PollJoystickEvents();
+        XPG::Sleep(XPG::TimeSpan::FromMilliseconds(0));
     }
 
     if (XPG::OpenSockets())

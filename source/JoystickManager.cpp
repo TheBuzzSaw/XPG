@@ -88,7 +88,7 @@ namespace XPG
 
                         UInt32 maxDeadzoneValue = oldJoyState->AxisMaximum(j) * _deadzone;
 
-                        if (abs(newAxisState) <= maxDeadzoneValue)
+                        if ((UInt32)abs(newAxisState) <= maxDeadzoneValue)
                         {
                             newJoyState.AxisState(j, 0);
                             newAxisState = 0;
