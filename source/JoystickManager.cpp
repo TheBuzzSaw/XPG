@@ -94,7 +94,7 @@ namespace XPG
 
                         if (newAxisState != oldAxisState)
                         {
-                            meta->events.onJoyAxis(i, j, *newJoyState);
+                            meta->events.onJoyAxis(j, *newJoyState);
                         }
                     }
                 }
@@ -108,12 +108,12 @@ namespace XPG
                             if (newJoyState->ButtonState(j))
                             {
                                 if (meta->events.onJoyButtonDown)
-                                    meta->events.onJoyButtonDown(i, j + 1, *newJoyState);
+                                    meta->events.onJoyButtonDown(j + 1, *newJoyState);
                             }
                             else
                             {
                                 if (meta->events.onJoyButtonUp)
-                                    meta->events.onJoyButtonUp(i, j + 1, *newJoyState);
+                                    meta->events.onJoyButtonUp(j + 1, *newJoyState);
                             }
                         }
                     }
@@ -125,7 +125,7 @@ namespace XPG
                     {
                         if (newJoyState->HatState(j) != oldJoyState.HatState(j))
                         {
-                            meta->events.onJoyHat(i, j, *newJoyState);
+                            meta->events.onJoyHat(j, *newJoyState);
                         }
                     }
                 }

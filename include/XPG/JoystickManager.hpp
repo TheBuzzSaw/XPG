@@ -13,7 +13,7 @@ namespace XPG
             JoystickManager();
             virtual ~JoystickManager();
 
-            typedef void (*JoystickEventCallback)(UInt32, UInt32, const Joystick&);
+            typedef void (*JoystickEventCallback)(UInt32, const Joystick&);
 
             void ResetAllJoystickInfo();
             UInt32 GetNumJoysticks();

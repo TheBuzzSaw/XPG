@@ -8,22 +8,24 @@
 using namespace std;
 
 
-void OnJoyAxis(XPG::UInt32 whichJoystick, XPG::UInt32 whichAxis, const XPG::Joystick& joyState)
+void OnJoyAxis(XPG::UInt32 whichAxis, const XPG::Joystick& joyState)
 {
-    if (whichAxis >= 4)
-    {
-        cerr << "Joystick axis " << whichAxis << " value: " << joyState.AxisState(whichAxis) << endl;
-    }
+    cout << "Joystick " << joyState.JoystickNum() << " axis " << whichAxis << " value: " << joyState.AxisState(whichAxis) << endl;
 }
 
-void OnJoyButtonDown(XPG::UInt32 whichJoystick, XPG::UInt32 whichButton, const XPG::Joystick& joyState)
+void OnJoyButtonDown(XPG::UInt32 whichButton, const XPG::Joystick& joyState)
 {
-    cerr << "Joystick button " << whichButton << endl;
+    cout << "Joystick " << joyState.JoystickNum() << " button " << whichButton << " pressed." << endl;
 }
 
-void OnJoyHat(XPG::UInt32 whichJoystick, XPG::UInt32 whichHat, const XPG::Joystick& joyState)
+void OnJoyButtonUp(XPG::UInt32 whichButton, const XPG::Joystick& joyState)
 {
-    cerr << "Joystick hat " << whichHat << " value: " << joyState.HatState(whichHat) << endl;
+    cout << "Joystick " << joyState.JoystickNum() << " button " << whichButton << " release." << endl;
+}
+
+void OnJoyHat(XPG::UInt32 whichHat, const XPG::Joystick& joyState)
+{
+    cout << "Joystick " << joyState.JoystickNum() << " hat " << whichHat << " value: " << joyState.HatState(whichHat) << endl;
 }
 
 int main(int argc, char** argv)
@@ -31,18 +33,13 @@ int main(int argc, char** argv)
     unsigned int numJoysticks = XPG::Joystick::NumJoysticks();
     cerr << "Num joysticks: " << numJoysticks << endl;
 
-//    for (unsigned int i = 0; i < numJoysticks; ++i)
-//    {
-//        XPG::Joystick joy(i);
-//        joy.PollState();
-//    }
-
-//    XPG::Joystick joy(2);
 
     XPG::JoystickManager joyManager;
     joyManager.OnJoyAxis(OnJoyAxis);
     joyManager.OnJoyHat(OnJoyHat);
     joyManager.OnJoyButtonDown(OnJoyButtonDown);
+    joyManager.OnJoyButtonUp(OnJoyButtonUp);
+    joyManager.Deadzone(20);
 
     while(true)
     {
