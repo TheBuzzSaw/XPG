@@ -28,6 +28,23 @@ namespace XPG
         unsigned char number;
     };
 
+    int OpenJoystickFileDescriptor(UInt32 numJoystick)
+    {
+        int result = -1;
+
+        stringstream fileName;
+        fileName << "/dev/input/js" << numJoystick;
+
+        struct stat buffer;
+
+        if (stat(fileName.str().c_str(), &buffer) > -1)
+        {
+            result = open(fileName.str().c_str(), O_RDONLY | O_NONBLOCK);
+        }
+
+        return result;
+    }
+
     Joystick::Joystick(UInt32 numJoystick)
     {
         _numJoystick = numJoystick;
@@ -40,52 +57,43 @@ namespace XPG
 
         memset(_native, 0, 1024);
 
-        stringstream fileName;
-        fileName << "/dev/input/js" << numJoystick;
+        JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
 
-        struct stat buffer;
+        meta->fileDescriptor = OpenJoystickFileDescriptor(numJoystick);
 
-        if (stat(fileName.str().c_str(), &buffer) > -1)
+        if (meta->fileDescriptor > -1)
         {
-            JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
-
-            meta->fileDescriptor = open(fileName.str().c_str(), O_RDONLY | O_NONBLOCK);
-
-            if (meta->fileDescriptor > -1)
+            cerr << "file descriptor: " << meta->fileDescriptor << endl;
+            char numberOfDevices = 0;
+            if (ioctl(meta->fileDescriptor, JSIOCGAXES, &numberOfDevices) > -1)
             {
-                cerr << "file descriptor: " << meta->fileDescriptor << endl;
-                char numberOfDevices = 0;
-                if (ioctl(meta->fileDescriptor, JSIOCGAXES, &numberOfDevices) > -1)
+                _numAxes = numberOfDevices;
+
+                _axisMinimums = new Int32[_numAxes];
+                _axisMaximums = new Int32[_numAxes];
+
+                for (UInt32 i = 0; i < _numAxes; ++i)
                 {
-                    _numAxes = numberOfDevices;
-
-                    _axisMinimums = new Int32[_numAxes];
-                    _axisMaximums = new Int32[_numAxes];
-
-                    for (UInt32 i = 0; i < _numAxes; ++i)
-                    {
-                        _axisMinimums[i] = -32767;
-                        _axisMaximums[i] = 32768;
-                    }
+                    _axisMinimums[i] = -32767;
+                    _axisMaximums[i] = 32768;
                 }
-
-                if (ioctl(meta->fileDescriptor, JSIOCGBUTTONS, &numberOfDevices) > -1)
-                {
-                    _numButtons = numberOfDevices;
-                }
-
-                char name[1024];
-                memset(name, 0, 1024);
-                if (ioctl(meta->fileDescriptor, JSIOCGNAME(1024), name) < 0)
-                    strncpy(name, "Unknown", 1024);
-
-                cerr << "Joystick " << numJoystick << " details:" << endl;
-                cerr << "Num Axes: " << _numAxes << endl;
-                cerr << "Num Buttons: " << _numButtons << endl;
-                cerr << "Name: " << name << endl;
-
-//                close(meta->fileDescriptor);
             }
+
+            if (ioctl(meta->fileDescriptor, JSIOCGBUTTONS, &numberOfDevices) > -1)
+            {
+                _numButtons = numberOfDevices;
+            }
+
+            char name[1024];
+            memset(name, 0, 1024);
+            if (ioctl(meta->fileDescriptor, JSIOCGNAME(1024), name) < 0)
+                strncpy(name, "Unknown", 1024);
+
+            cerr << "Joystick " << numJoystick << " details:" << endl;
+            cerr << "Num Axes: " << _numAxes << endl;
+            cerr << "Num Buttons: " << _numButtons << endl;
+            cerr << "Name: " << name << endl;
+
         }
 
         _axisStates = new Int32[_numAxes];
@@ -145,7 +153,10 @@ namespace XPG
 
         JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
 
-        meta->fileDescriptor = ((JoystickMeta*)joystick._native)->fileDescriptor;
+//        meta->fileDescriptor = ((JoystickMeta*)joystick._native)->fileDescriptor;
+        ///We don't want to open a new file handle every time a copy is made
+        ///If PollState is called on the copy, a new handle will be created then
+        meta->fileDescriptor = -1;
 
     }
 
@@ -171,7 +182,9 @@ namespace XPG
 
 
         JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
-        close(meta->fileDescriptor);
+
+        if (meta->fileDescriptor > -1)
+            close(meta->fileDescriptor);
     }
 
     Joystick& Joystick::operator =(const Joystick& joystick)
@@ -237,7 +250,11 @@ namespace XPG
 
         JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
 
-        meta->fileDescriptor = ((JoystickMeta*)joystick._native)->fileDescriptor;
+//        meta->fileDescriptor = ((JoystickMeta*)joystick._native)->fileDescriptor;
+
+        ///We don't want to create a new file handle every time a copy is made
+        ///If PollState is called on the copy, a file handle will be created then
+        meta->fileDescriptor = -1;
 
         return *this;
     }
@@ -245,18 +262,17 @@ namespace XPG
 
     void Joystick::PollState()
     {
-//        struct stat buffer;
-//
-//        string baseFilePath = "/dev/input/js";
-//        stringstream filePath;
-//        filePath << baseFilePath << _numJoystick;
-        //cerr << "opening " << filePath.str() << endl;
-
         JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
+
+        //If the file is no longer open, try opening it again first
+        if (meta->fileDescriptor < 0)
+        {
+            meta->fileDescriptor = OpenJoystickFileDescriptor(_numJoystick);
+
+        }
 
         if (meta->fileDescriptor > -1)
         {
-            //cerr << "file descriptor: " << meta->fileDescriptor << endl;
             js_event e;
 
             while (read(meta->fileDescriptor, &e, sizeof(js_event)) > 0)
@@ -266,21 +282,14 @@ namespace XPG
                     case JS_EVENT_BUTTON | JS_EVENT_INIT:
                     case JS_EVENT_BUTTON:
                     {
-//                        cerr << "button " << (int)e.number << " set to " << e.value << endl;
                         _buttonStates[e.number] = e.value == 1;
                         break;
                     }
 
-//                    case JS_EVENT_BUTTON & ~JS_EVENT_INIT:
-//                    {
-//                        cerr << "button " << (int)e.number << " changed to " << e.value << endl;
-//                        break;
-//                    }
 
                     case JS_EVENT_AXIS | JS_EVENT_INIT:
                     case JS_EVENT_AXIS:
                     {
-//                        cerr << "axis " << (int)e.number << " set to " << e.value << endl;
                         _axisStates[e.number] = e.value;
                         break;
                     }
@@ -298,51 +307,6 @@ namespace XPG
                 errno = 0;
             }
         }
-
-//        if (stat(filePath.str().c_str(), &buffer) > -1)
-//        {
-//            int fd = open(filePath.str().c_str(), O_RDONLY | O_NONBLOCK);
-//
-//            if (fd > -1)
-//            {
-//                js_event e;
-//
-//                while (read(fd, &e, sizeof(js_event)) > -1)
-//                {
-//                    switch (e.type)
-//                    {
-//                        case JS_EVENT_BUTTON | JS_EVENT_INIT:
-//                        case JS_EVENT_BUTTON:
-//                        {
-//                            //cerr << "button " << (int)e.number << " set to " << e.value << endl;
-//                            _buttonStates[e.number] = e.value == 1;
-//                            break;
-//                        }
-//
-////                        case JS_EVENT_BUTTON & ~JS_EVENT_INIT:
-////                        {
-////                            cerr << "button " << (int)e.number << " changed to " << e.value << endl;
-////                            break;
-////                        }
-//
-//                        case JS_EVENT_AXIS | JS_EVENT_INIT:
-//                        case JS_EVENT_AXIS:
-//                        {
-//                            //cerr << "axis " << (int)e.number << " set to " << e.value << endl;
-//                            _axisStates[e.number] = e.value;
-//                            break;
-//                        }
-//
-//                        default:
-//                        {
-//                            break;
-//                        }
-//                    }
-//                }
-//
-//                close(fd);
-//            }
-//        }
     }
 
     UInt32 Joystick::NumJoysticks()
