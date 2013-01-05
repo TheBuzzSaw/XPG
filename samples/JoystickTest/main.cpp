@@ -21,6 +21,11 @@ void OnJoyButtonDown(XPG::UInt32 whichJoystick, XPG::UInt32 whichButton, const X
     cerr << "Joystick button " << whichButton << endl;
 }
 
+void OnJoyHat(XPG::UInt32 whichJoystick, XPG::UInt32 whichHat, const XPG::Joystick& joyState)
+{
+    cerr << "Joystick hat " << whichHat << " value: " << joyState.HatState(whichHat) << endl;
+}
+
 int main(int argc, char** argv)
 {
     unsigned int numJoysticks = XPG::Joystick::NumJoysticks();
@@ -36,6 +41,7 @@ int main(int argc, char** argv)
 
     XPG::JoystickManager joyManager;
     joyManager.OnJoyAxis(OnJoyAxis);
+    joyManager.OnJoyHat(OnJoyHat);
     joyManager.OnJoyButtonDown(OnJoyButtonDown);
 
     while(true)
