@@ -47,7 +47,7 @@ int main(int argc, char** argv)
     while(true)
     {
         joyManager.PollJoystickEvents();
-        XPG::Sleep(XPG::TimeSpan::FromMilliseconds(0));
+        XPG::Sleep(XPG::TimeSpan::FromMilliseconds(1));
     }
 
 

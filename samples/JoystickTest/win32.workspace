@@ -2,6 +2,8 @@
 <CodeBlocks_workspace_file>
 	<Workspace title="Workspace">
 		<Project filename="../../project/xpg-win32.cbp" />
-		<Project filename="win32" />
+		<Project filename="win32.cbp">
+			<Depends filename="../../project/xpg-win32.cbp" />
+		</Project>
 	</Workspace>
 </CodeBlocks_workspace_file>
