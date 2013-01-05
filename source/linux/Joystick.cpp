@@ -84,7 +84,7 @@ namespace XPG
                 cerr << "Num Buttons: " << _numButtons << endl;
                 cerr << "Name: " << name << endl;
 
-                close(meta->fileDescriptor);
+//                close(meta->fileDescriptor);
             }
         }
 
@@ -245,104 +245,104 @@ namespace XPG
 
     void Joystick::PollState()
     {
-        struct stat buffer;
-
-        string baseFilePath = "/dev/input/js";
-        stringstream filePath;
-        filePath << baseFilePath << _numJoystick;
+//        struct stat buffer;
+//
+//        string baseFilePath = "/dev/input/js";
+//        stringstream filePath;
+//        filePath << baseFilePath << _numJoystick;
         //cerr << "opening " << filePath.str() << endl;
 
-//        JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
-//
-//        if (meta->fileDescriptor > -1)
-//        {
-//            //cerr << "file descriptor: " << meta->fileDescriptor << endl;
-//            js_event e;
-//
-//            while (read(meta->fileDescriptor, &e, sizeof(js_event)) > 0)
-//            {
-//                switch (e.type)
-//                {
-//                    case JS_EVENT_BUTTON | JS_EVENT_INIT:
-//                    case JS_EVENT_BUTTON:
-//                    {
-//                        cerr << "button " << (int)e.number << " set to " << e.value << endl;
-//                        _buttonStates[e.number] = e.value == 1;
-//                        break;
-//                    }
-//
-////                    case JS_EVENT_BUTTON & ~JS_EVENT_INIT:
-////                    {
-////                        cerr << "button " << (int)e.number << " changed to " << e.value << endl;
-////                        break;
-////                    }
-//
-//                    case JS_EVENT_AXIS | JS_EVENT_INIT:
-//                    case JS_EVENT_AXIS:
-//                    {
-//                        cerr << "axis " << (int)e.number << " set to " << e.value << endl;
-//                        _axisStates[e.number] = e.value;
-//                        break;
-//                    }
-//
-//                    default:
-//                    {
-//                        break;
-//                    }
-//                }
-//            }
-//
-//            if (errno != EAGAIN)
-//            {
-//                //perror("something went wrong");
-//                errno = 0;
-//            }
-//        }
+        JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
 
-        if (stat(filePath.str().c_str(), &buffer) > -1)
+        if (meta->fileDescriptor > -1)
         {
-            int fd = open(filePath.str().c_str(), O_RDONLY | O_NONBLOCK);
+            //cerr << "file descriptor: " << meta->fileDescriptor << endl;
+            js_event e;
 
-            if (fd > -1)
+            while (read(meta->fileDescriptor, &e, sizeof(js_event)) > 0)
             {
-                js_event e;
-
-                while (read(fd, &e, sizeof(js_event)) > -1)
+                switch (e.type)
                 {
-                    switch (e.type)
+                    case JS_EVENT_BUTTON | JS_EVENT_INIT:
+                    case JS_EVENT_BUTTON:
                     {
-                        case JS_EVENT_BUTTON | JS_EVENT_INIT:
-                        case JS_EVENT_BUTTON:
-                        {
-                            //cerr << "button " << (int)e.number << " set to " << e.value << endl;
-                            _buttonStates[e.number] = e.value == 1;
-                            break;
-                        }
+//                        cerr << "button " << (int)e.number << " set to " << e.value << endl;
+                        _buttonStates[e.number] = e.value == 1;
+                        break;
+                    }
 
-//                        case JS_EVENT_BUTTON & ~JS_EVENT_INIT:
-//                        {
-//                            cerr << "button " << (int)e.number << " changed to " << e.value << endl;
-//                            break;
-//                        }
+//                    case JS_EVENT_BUTTON & ~JS_EVENT_INIT:
+//                    {
+//                        cerr << "button " << (int)e.number << " changed to " << e.value << endl;
+//                        break;
+//                    }
 
-                        case JS_EVENT_AXIS | JS_EVENT_INIT:
-                        case JS_EVENT_AXIS:
-                        {
-                            //cerr << "axis " << (int)e.number << " set to " << e.value << endl;
-                            _axisStates[e.number] = e.value;
-                            break;
-                        }
+                    case JS_EVENT_AXIS | JS_EVENT_INIT:
+                    case JS_EVENT_AXIS:
+                    {
+//                        cerr << "axis " << (int)e.number << " set to " << e.value << endl;
+                        _axisStates[e.number] = e.value;
+                        break;
+                    }
 
-                        default:
-                        {
-                            break;
-                        }
+                    default:
+                    {
+                        break;
                     }
                 }
+            }
 
-                close(fd);
+            if (errno != EAGAIN)
+            {
+                //perror("something went wrong");
+                errno = 0;
             }
         }
+
+//        if (stat(filePath.str().c_str(), &buffer) > -1)
+//        {
+//            int fd = open(filePath.str().c_str(), O_RDONLY | O_NONBLOCK);
+//
+//            if (fd > -1)
+//            {
+//                js_event e;
+//
+//                while (read(fd, &e, sizeof(js_event)) > -1)
+//                {
+//                    switch (e.type)
+//                    {
+//                        case JS_EVENT_BUTTON | JS_EVENT_INIT:
+//                        case JS_EVENT_BUTTON:
+//                        {
+//                            //cerr << "button " << (int)e.number << " set to " << e.value << endl;
+//                            _buttonStates[e.number] = e.value == 1;
+//                            break;
+//                        }
+//
+////                        case JS_EVENT_BUTTON & ~JS_EVENT_INIT:
+////                        {
+////                            cerr << "button " << (int)e.number << " changed to " << e.value << endl;
+////                            break;
+////                        }
+//
+//                        case JS_EVENT_AXIS | JS_EVENT_INIT:
+//                        case JS_EVENT_AXIS:
+//                        {
+//                            //cerr << "axis " << (int)e.number << " set to " << e.value << endl;
+//                            _axisStates[e.number] = e.value;
+//                            break;
+//                        }
+//
+//                        default:
+//                        {
+//                            break;
+//                        }
+//                    }
+//                }
+//
+//                close(fd);
+//            }
+//        }
     }
 
     UInt32 Joystick::NumJoysticks()
