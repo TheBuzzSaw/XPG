@@ -12,7 +12,10 @@ namespace XPG
     {
         public:
             Joystick(UInt32 numJoystick);
+            Joystick(const Joystick& joystick);
             virtual ~Joystick();
+
+            Joystick& operator =(const Joystick& joystick);
 
             void PollState();
 
@@ -86,9 +89,6 @@ namespace XPG
 
 
         private:
-            Joystick(const Joystick& joystick);
-            Joystick& operator =(const Joystick& joystick);
-
             UInt32 _numJoystick;
             UInt32 _numAxes;
             UInt32 _numButtons;
