@@ -10,7 +10,10 @@ using namespace std;
 
 void OnJoyAxis(XPG::UInt32 whichJoystick, XPG::UInt32 whichAxis, const XPG::Joystick& joyState)
 {
-    cerr << "Joystick axis " << whichAxis << " value: " << joyState.AxisState(whichAxis) << endl;
+    if (whichAxis >= 4)
+    {
+        cerr << "Joystick axis " << whichAxis << " value: " << joyState.AxisState(whichAxis) << endl;
+    }
 }
 
 void OnJoyButtonDown(XPG::UInt32 whichJoystick, XPG::UInt32 whichButton, const XPG::Joystick& joyState)

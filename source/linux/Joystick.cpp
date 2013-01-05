@@ -18,6 +18,7 @@ namespace XPG
     struct JoystickMeta
     {
         int fileDescriptor;
+        Int32 hatState[2];
     };
 
     struct js_event
@@ -59,6 +60,9 @@ namespace XPG
 
         JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
 
+        meta->hatState[0] = 0;
+        meta->hatState[1] = 0;
+
         meta->fileDescriptor = OpenJoystickFileDescriptor(numJoystick);
 
         if (meta->fileDescriptor > -1)
@@ -68,6 +72,17 @@ namespace XPG
             if (ioctl(meta->fileDescriptor, JSIOCGAXES, &numberOfDevices) > -1)
             {
                 _numAxes = numberOfDevices;
+
+                //In linux, the last 2 axes appear to always be the hat
+                if (numberOfDevices > 1)
+                {
+                    _numHats = 1;
+                    _numAxes = numberOfDevices - 2;
+                }
+                else
+                {
+                    _numAxes = numberOfDevices;
+                }
 
                 _axisMinimums = new Int32[_numAxes];
                 _axisMaximums = new Int32[_numAxes];
@@ -290,7 +305,62 @@ namespace XPG
                     case JS_EVENT_AXIS | JS_EVENT_INIT:
                     case JS_EVENT_AXIS:
                     {
-                        _axisStates[e.number] = e.value;
+                        if (_numHats == 1 && e.number >= _numAxes - 2)
+                        {
+                            int numHatAxis = e.number - _numAxes;
+                            JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
+                            meta->hatState[numHatAxis] = e.value;
+
+                            if (meta->hatState[0] < 0)
+                            {
+                                if (meta->hatState[1] < 0)
+                                {
+                                    _hatStates[0]
+                                }
+                                else if (meta->hatState[1] > 0)
+                                {
+
+                                }
+                                else
+                                {
+
+                                }
+                            }
+                            else if (meta->hatState[0] > 0)
+                            {
+                                if (meta->hatState[1] < 0)
+                                {
+
+                                }
+                                else if (meta->hatState[1] > 0)
+                                {
+
+                                }
+                                else
+                                {
+
+                                }
+                            }
+                            else
+                            {
+                                if (meta->hatState[1] < 0)
+                                {
+
+                                }
+                                else if (meta->hatState[1] > 0)
+                                {
+
+                                }
+                                else
+                                {
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            _axisStates[e.number] = e.value;
+                        }
                         break;
                     }
 
