@@ -98,7 +98,7 @@ namespace XPG
 
         _axisStates = new Int32[_numAxes];
         _buttonStates = new bool[_numButtons];
-        _hatStates = new Int32[_numHats];
+        _hatStates = new Int16[_numHats];
     }
 
     Joystick::Joystick(const Joystick& joystick)
@@ -110,7 +110,7 @@ namespace XPG
 
         _axisStates = new Int32[_numAxes];
         _buttonStates = new bool[_numButtons];
-        _hatStates = new Int32[_numHats];
+        _hatStates = new Int16[_numHats];
 
         _axisMinimums = 0;
         _axisMaximums = 0;
@@ -225,7 +225,7 @@ namespace XPG
 
         _axisStates = new Int32[_numAxes];
         _buttonStates = new bool[_numButtons];
-        _hatStates = new Int32[_numHats];
+        _hatStates = new Int16[_numHats];
 
         for (UInt32 i = 0; i < _numAxes; ++i)
         {

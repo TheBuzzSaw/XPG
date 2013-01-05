@@ -73,9 +73,9 @@ namespace XPG
                     _buttonStates[button] = state;
             }
 
-            inline Int32 HatState(UInt32 hat) const
+            inline Int16 HatState(UInt32 hat) const
             {
-                Int32 result = 0;
+                Int16 result = 0;
                 if (hat < _numHats)
                     result = _hatStates[hat];
                 return result;
@@ -99,7 +99,7 @@ namespace XPG
 
             Int32* _axisStates;
             bool* _buttonStates;
-            Int32* _hatStates;
+            Int16* _hatStates;
 
             UInt8 _native[SIZE_OF_JOYSTICK_NATIVE];
     };
