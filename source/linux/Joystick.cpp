@@ -305,7 +305,7 @@ namespace XPG
                     case JS_EVENT_AXIS | JS_EVENT_INIT:
                     case JS_EVENT_AXIS:
                     {
-                        if (_numHats == 1 && e.number >= _numAxes - 2)
+                        if (_numHats == 1 && e.number >= _numAxes)
                         {
                             int numHatAxis = e.number - _numAxes;
                             JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
