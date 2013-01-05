@@ -76,28 +76,28 @@ namespace XPG
 
             if (oldJoyState != NULL)
             {
-                XPG::Joystick newJoyState = *_joysticks[i];
-                newJoyState.PollState();
+                XPG::Joystick* newJoyState = _joysticks[i];
+                newJoyState->PollState();
 
                 if (meta->events.onJoyAxis)
                 {
                     for (UInt32 j = 0; j < oldJoyState->NumAxes(); ++j)
                     {
                         Int32 oldAxisState = oldJoyState->AxisState(j);
-                        Int32 newAxisState = newJoyState.AxisState(j);
+                        Int32 newAxisState = newJoyState->AxisState(j);
 
                         UInt32 maxDeadzoneValue = oldJoyState->AxisMaximum(j) * _deadzone;
 
                         if ((UInt32)abs(newAxisState) <= maxDeadzoneValue)
                         {
-                            newJoyState.AxisState(j, 0);
+                            newJoyState->AxisState(j, 0);
                             newAxisState = 0;
                         }
 
                         if (newAxisState != oldAxisState)
                         {
                             joyStateChanged = true;
-                            meta->events.onJoyAxis(i, j, newJoyState);
+                            meta->events.onJoyAxis(i, j, *newJoyState);
                         }
                     }
                 }
@@ -106,18 +106,18 @@ namespace XPG
                 {
                     for (UInt32 j = 0; j < oldJoyState->NumButtons(); ++j)
                     {
-                        if (newJoyState.ButtonState(j) != oldJoyState->ButtonState(j))
+                        if (newJoyState->ButtonState(j) != oldJoyState->ButtonState(j))
                         {
                             joyStateChanged = true;
-                            if (newJoyState.ButtonState(j))
+                            if (newJoyState->ButtonState(j))
                             {
                                 if (meta->events.onJoyButtonDown)
-                                    meta->events.onJoyButtonDown(i, j + 1, newJoyState);
+                                    meta->events.onJoyButtonDown(i, j + 1, *newJoyState);
                             }
                             else
                             {
                                 if (meta->events.onJoyButtonUp)
-                                    meta->events.onJoyButtonUp(i, j + 1, newJoyState);
+                                    meta->events.onJoyButtonUp(i, j + 1, *newJoyState);
                             }
                         }
                     }
@@ -127,17 +127,17 @@ namespace XPG
                 {
                     for (UInt32 j = 0; j < oldJoyState->NumHats(); ++j)
                     {
-                        if (newJoyState.HatState(j) != oldJoyState->HatState(j))
+                        if (newJoyState->HatState(j) != oldJoyState->HatState(j))
                         {
                             joyStateChanged = true;
-                            meta->events.onJoyHat(i, j, newJoyState);
+                            meta->events.onJoyHat(i, j, *newJoyState);
                         }
                     }
                 }
 
                 if (joyStateChanged)
                 {
-                    *_joysticks[i] = newJoyState;
+                    _joysticks[i] = newJoyState;
                 }
 
             }

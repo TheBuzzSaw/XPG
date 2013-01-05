@@ -294,7 +294,7 @@ namespace XPG
 
             if (errno != EAGAIN)
             {
-                //perror("something went wrong");
+                perror("something went wrong");
                 errno = 0;
             }
         }
