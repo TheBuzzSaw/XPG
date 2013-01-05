@@ -305,7 +305,7 @@ namespace XPG
                     case JS_EVENT_AXIS | JS_EVENT_INIT:
                     case JS_EVENT_AXIS:
                     {
-                        if (_numHats == 1 && e.number >= _numAxes - 2)
+                        if (_numHats == 1 && e.number >= _numAxes)
                         {
                             int numHatAxis = e.number - _numAxes;
                             JoystickMeta* meta = reinterpret_cast<JoystickMeta*>(_native);
@@ -315,45 +315,45 @@ namespace XPG
                             {
                                 if (meta->hatState[1] < 0)
                                 {
-                                    _hatStates[0]
+                                    _hatStates[0] = 31500;
                                 }
                                 else if (meta->hatState[1] > 0)
                                 {
-
+                                    _hatStates[0] = 22500;
                                 }
                                 else
                                 {
-
+                                    _hatStates[0] = 27000;
                                 }
                             }
                             else if (meta->hatState[0] > 0)
                             {
                                 if (meta->hatState[1] < 0)
                                 {
-
+                                    _hatStates[0] = 4500;
                                 }
                                 else if (meta->hatState[1] > 0)
                                 {
-
+                                    _hatStates[0] = 13500;
                                 }
                                 else
                                 {
-
+                                    _hatStates[0] = 9000;
                                 }
                             }
                             else
                             {
                                 if (meta->hatState[1] < 0)
                                 {
-
+                                    _hatStates[0] = 0;
                                 }
                                 else if (meta->hatState[1] > 0)
                                 {
-
+                                    _hatStates[0] = 18000;
                                 }
                                 else
                                 {
-
+                                    _hatStates[0] = -1;
                                 }
                             }
                         }
