@@ -30,6 +30,7 @@ namespace XPG
             void MakeCurrent(bool enable);
             void SwapBuffers();
             void SetVsync(bool enable);
+            void SetFullScreen(bool fullscreen);
 
             const void* UserData() const;
             void UserData(void* userData);

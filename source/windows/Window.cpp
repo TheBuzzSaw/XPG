@@ -533,6 +533,24 @@ namespace XPG
         wglSwapIntervalEXT(enable);
     }
 
+    void Window::SetFullScreen(bool fullscreen)
+    {
+        WindowMeta* meta = reinterpret_cast<WindowMeta*>(_native);
+        DWORD exStyle = BaseExStyle | WS_EX_WINDOWEDGE;
+        DWORD style = BaseStyle;
+
+        if (fullscreen)
+        {
+            int x = GetSystemMetrics(SM_CXSCREEN);
+            int y = GetSystemMetrics(SM_CYSCREEN);
+
+            style |= WS_MAXIMIZE;
+
+            SetWindowLongPtr(meta->window, GWL_STYLE, style);
+            SetWindowPos(meta->window, HWND_TOPMOST, 0, 0, x, y, SWP_SHOWWINDOW);
+        }
+    }
+
     void Window::OnLeftMouseButtonDown(MouseEventCallback callback)
     {
         WindowMeta* meta = (WindowMeta*)_native;

@@ -46,10 +46,10 @@ class ColorCubeModule
         volatile bool _isRunning;
         volatile bool _resetViewport;
 
-        static void OnJoyAxis(XPG::UInt32 whichJoystick, XPG::UInt32 whichAxis, const XPG::Joystick& joyState);
-        static void OnJoyButtonDown(XPG::UInt32 whichJoystick, XPG::UInt32 whichButton, const XPG::Joystick& joyState);
-        static void OnJoyButtonUp(XPG::UInt32 whichJoystick, XPG::UInt32 whichButton, const XPG::Joystick& joyState);
-        static void OnJoyHat(XPG::UInt32 whichJoystick, XPG::UInt32 whichHat, const XPG::Joystick& joyState);
+        static void OnJoyAxis(XPG::UInt32 whichAxis, const XPG::Joystick& joyState);
+        static void OnJoyButtonDown(XPG::UInt32 whichButton, const XPG::Joystick& joyState);
+        static void OnJoyButtonUp(XPG::UInt32 whichButton, const XPG::Joystick& joyState);
+        static void OnJoyHat(XPG::UInt32 whichHat, const XPG::Joystick& joyState);
         static void OnKeyDown(XPG::Key::Code key, void* userData);
         static bool OnClose(void* userData);
         static void OnResize(const XPG::WindowState& state);

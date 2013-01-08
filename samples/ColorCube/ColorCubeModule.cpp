@@ -197,33 +197,50 @@ void ColorCubeModule::Close()
     _window->Close();
 }
 
-void ColorCubeModule::OnJoyAxis(XPG::UInt32 whichJoystick, XPG::UInt32 whichAxis, const XPG::Joystick& joyState)
+void ColorCubeModule::OnJoyAxis(XPG::UInt32 whichAxis, const XPG::Joystick& joyState)
 {
-    cout << "Joystick " << whichJoystick << " axis " << whichAxis << " moved to " << joyState.AxisState(whichAxis) << endl;
+    cout << "Joystick " << joyState.JoystickNum() << " axis " << whichAxis << " moved to " << joyState.AxisState(whichAxis) << endl;
 }
 
-void ColorCubeModule::OnJoyButtonDown(XPG::UInt32 whichJoystick, XPG::UInt32 whichButton, const XPG::Joystick& joyState)
+void ColorCubeModule::OnJoyButtonDown(XPG::UInt32 whichButton, const XPG::Joystick& joyState)
 {
-    cout << "Joystick " << whichJoystick << " button " << whichButton << " pressed." << endl;
+    cout << "Joystick " << joyState.JoystickNum() << " button " << whichButton << " pressed." << endl;
 }
 
-void ColorCubeModule::OnJoyButtonUp(XPG::UInt32 whichJoystick, XPG::UInt32 whichButton, const XPG::Joystick& joyState)
+void ColorCubeModule::OnJoyButtonUp(XPG::UInt32 whichButton, const XPG::Joystick& joyState)
 {
-    cout << "Joystick " << whichJoystick << " button " << whichButton << " released." << endl;
+    cout << "Joystick " << joyState.JoystickNum() << " button " << whichButton << " released." << endl;
 }
 
-void ColorCubeModule::OnJoyHat(XPG::UInt32 whichJoystick, XPG::UInt32 whichHat, const XPG::Joystick& joyState)
+void ColorCubeModule::OnJoyHat(XPG::UInt32 whichHat, const XPG::Joystick& joyState)
 {
-    cout << "Joystick " << whichJoystick << " hat " << whichHat << " set to " << joyState.HatState(whichHat) << endl;
+    cout << "Joystick " << joyState.JoystickNum() << " hat " << whichHat << " set to " << joyState.HatState(whichHat) << endl;
 }
 
 
 void ColorCubeModule::OnKeyDown(XPG::Key::Code key, void* userData)
 {
-    if (key == XPG::Key::Escape)
+    switch (key)
     {
-        ColorCubeModule* ccm = static_cast<ColorCubeModule*>(userData);
-        ccm->Close();
+        case XPG::Key::Escape:
+        {
+            ColorCubeModule* ccm = static_cast<ColorCubeModule*>(userData);
+            ccm->Close();
+            break;
+        }
+
+        case XPG::Key::F11:
+        {
+            ColorCubeModule* ccm = static_cast<ColorCubeModule*>(userData);
+            ccm->_window->SetFullScreen(true);
+
+            break;
+        }
+
+        default:
+        {
+            break;
+        }
     }
 }
 
