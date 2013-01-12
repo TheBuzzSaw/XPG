@@ -22,8 +22,8 @@ namespace XPG
             XpgTestError(GL_INVALID_OPERATION);
             XpgTestError(GL_INVALID_FRAMEBUFFER_OPERATION);
             XpgTestError(GL_OUT_OF_MEMORY);
-            XpgTestError(GL_STACK_UNDERFLOW);
-            XpgTestError(GL_STACK_OVERFLOW);
+            //XpgTestError(GL_STACK_UNDERFLOW);
+            //XpgTestError(GL_STACK_OVERFLOW);
 
             default: result = "unknown GL error"; break;
         }

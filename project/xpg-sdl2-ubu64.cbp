@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="XPG (ubu64)" />
+		<Option title="XPG (SDL2-ubu64)" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -37,11 +37,13 @@
 			<Add option="-fno-exceptions" />
 			<Add option="-fno-rtti" />
 			<Add option="-fPIC" />
+			<Add directory="/usr/local/include/SDL2" />
 		</Compiler>
 		<Linker>
-			<Add library="rt" />
-			<Add library="X11" />
+			<Add library="SDL2main" />
+			<Add library="SDL2" />
 			<Add library="GL" />
+			<Add directory="/usr/local/lib" />
 		</Linker>
 		<Unit filename="../include/XPG/Application.hpp" />
 		<Unit filename="../include/XPG/Array.hpp" />
@@ -108,12 +110,12 @@
 		<Unit filename="../source/glew.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../source/linux/Application.cpp" />
 		<Unit filename="../source/linux/Clock.cpp" />
 		<Unit filename="../source/linux/Joystick.cpp" />
-		<Unit filename="../source/linux/Window.cpp" />
-		<Unit filename="../source/linux/X.cpp" />
-		<Unit filename="../source/linux/X.hpp" />
+		<Unit filename="../source/sdl2/Application.cpp" />
+		<Unit filename="../source/sdl2/ApplicationMeta.hpp" />
+		<Unit filename="../source/sdl2/Window.cpp" />
+		<Unit filename="../source/sdl2/WindowMeta.hpp" />
 		<Unit filename="../source/unix/Management.cpp" />
 		<Unit filename="../source/unix/Mutex.cpp" />
 		<Unit filename="../source/unix/Network.cpp" />

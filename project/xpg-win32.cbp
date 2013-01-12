@@ -11,6 +11,8 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
+				<Option host_application="samples/ColorCube/bin/Debug/colorcube-win32.exe" />
+				<Option run_host_application_in_terminal="1" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
@@ -49,6 +51,7 @@
 			<Add library="kernel32" />
 			<Add library="gdi32" />
 			<Add library="ws2_32" />
+			<Add library="winmm" />
 		</Linker>
 		<Unit filename="../include/XPG/Application.hpp" />
 		<Unit filename="../include/XPG/Array.hpp" />
@@ -56,6 +59,8 @@
 		<Unit filename="../include/XPG/DataTypes.hpp" />
 		<Unit filename="../include/XPG/DateTime.hpp" />
 		<Unit filename="../include/XPG/Event.hpp" />
+		<Unit filename="../include/XPG/Joystick.hpp" />
+		<Unit filename="../include/XPG/JoystickManager.hpp" />
 		<Unit filename="../include/XPG/Key.hpp" />
 		<Unit filename="../include/XPG/MouseState.hpp" />
 		<Unit filename="../include/XPG/Mutex.hpp" />
@@ -90,6 +95,8 @@
 		<Unit filename="../source/EventBatch.hpp" />
 		<Unit filename="../source/IndexBufferObject.cpp" />
 		<Unit filename="../source/InterleavedBufferObject.cpp" />
+		<Unit filename="../source/JoystickEventBatch.hpp" />
+		<Unit filename="../source/JoystickManager.cpp" />
 		<Unit filename="../source/MersenneTwister19937.cpp" />
 		<Unit filename="../source/MouseState.cpp" />
 		<Unit filename="../source/Network.hpp" />
@@ -108,6 +115,7 @@
 		<Unit filename="../source/glew.cpp" />
 		<Unit filename="../source/windows/Application.cpp" />
 		<Unit filename="../source/windows/Clock.cpp" />
+		<Unit filename="../source/windows/Joystick.cpp" />
 		<Unit filename="../source/windows/Management.cpp" />
 		<Unit filename="../source/windows/Mutex.cpp" />
 		<Unit filename="../source/windows/Network.cpp" />

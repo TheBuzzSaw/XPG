@@ -1,4 +1,5 @@
 #include "ColorCubeModule.hpp"
+
 #include <iostream>
 using namespace std;
 
@@ -162,6 +163,7 @@ void ColorCubeModule::Loop()
 
             OnUpdate();
         }
+
         Draw();
 
 
@@ -178,6 +180,7 @@ void ColorCubeModule::OnUpdate()
     _modelView.Translate(0.0f, 0.0f, -10.0f);
     _modelView.RotateX(_rotation);
     _modelView.RotateY(_rotation);
+
 }
 
 void ColorCubeModule::Close()

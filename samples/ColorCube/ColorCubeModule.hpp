@@ -4,8 +4,9 @@
 #include <XPG/Window.hpp>
 #include <XPG/Clock.hpp>
 #include <XPG/Thread.hpp>
-#include <XPG/Mutex.hpp>
 #include <XPG/Matrix4x4.hpp>
+#include <XPG/Mutex.hpp>
+#include <XPG/DataTypes.hpp>
 #include <XPG/OpenGL/InterleavedBufferObject.hpp>
 #include <XPG/OpenGL/Program.hpp>
 

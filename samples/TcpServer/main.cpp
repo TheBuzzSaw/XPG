@@ -3,6 +3,10 @@
 #include <XPG/Network/UdpSocket.hpp>
 #include <XPG/Network/TcpSocket.hpp>
 #include <XPG/Network/TcpListener.hpp>
+#include <XPG/Joystick.hpp>
+#include <XPG/JoystickManager.hpp>
+#include <XPG/Clock.hpp>
+#include <XPG/TimeSpan.hpp>
 #include <iostream>
 #include <fstream>
 #include <cstring>

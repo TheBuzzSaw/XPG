@@ -10,7 +10,9 @@
 #   include <OpenGL/OpenGL.h>
 #   include <OpenGL/gl3.h>
 #else
-#   include "glew.h"
+//#   include "glew.h"
+#   define GL3_PROTOTYPES 1
+#   include "gl3.h"
 #endif
 
 namespace XPG
