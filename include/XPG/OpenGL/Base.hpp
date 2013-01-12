@@ -7,7 +7,9 @@
 #   include <GLES2/gl2.h>
 #   include <GLES2/gl2ext.h>
 #else
-#   include "glew.h"
+//#   include "glew.h"
+#   define GL3_PROTOTYPES 1
+#   include "gl3.h"
 #endif
 
 namespace XPG
