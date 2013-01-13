@@ -1,0 +1,270 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6BB9DD7E16A20D2D0044870C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB9DD7D16A20D2D0044870C /* Foundation.framework */; };
+		6BB9DD8516A20D2D0044870C /* ColorCube.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6BB9DD8416A20D2D0044870C /* ColorCube.1 */; };
+		6BB9DD8E16A20D730044870C /* ColorCubeModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BB9DD8B16A20D730044870C /* ColorCubeModule.cpp */; };
+		6BB9DD8F16A20D730044870C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BB9DD8D16A20D730044870C /* main.cpp */; };
+		6BB9DD9116A20D8E0044870C /* XPG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB9DD9016A20D8E0044870C /* XPG.framework */; };
+		6BB9DD9816A20E470044870C /* XPG.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6BB9DD9016A20D8E0044870C /* XPG.framework */; };
+		6BB9DD9A16A20E6E0044870C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB9DD9916A20E6E0044870C /* OpenGL.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6BB9DD7716A20D2D0044870C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				6BB9DD8516A20D2D0044870C /* ColorCube.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		6BB9DD9716A20E3D0044870C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6BB9DD9816A20E470044870C /* XPG.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6BB9DD7916A20D2D0044870C /* ColorCube */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ColorCube; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BB9DD7D16A20D2D0044870C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6BB9DD8316A20D2D0044870C /* ColorCube-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ColorCube-Prefix.pch"; sourceTree = "<group>"; };
+		6BB9DD8416A20D2D0044870C /* ColorCube.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = ColorCube.1; sourceTree = "<group>"; };
+		6BB9DD8B16A20D730044870C /* ColorCubeModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorCubeModule.cpp; path = ../../ColorCubeModule.cpp; sourceTree = "<group>"; };
+		6BB9DD8C16A20D730044870C /* ColorCubeModule.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ColorCubeModule.hpp; path = ../../ColorCubeModule.hpp; sourceTree = "<group>"; };
+		6BB9DD8D16A20D730044870C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../main.cpp; sourceTree = "<group>"; };
+		6BB9DD9016A20D8E0044870C /* XPG.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XPG.framework; path = ../../../project/xcode/DerivedData/XPG/Build/Products/Debug/XPG.framework; sourceTree = "<group>"; };
+		6BB9DD9916A20E6E0044870C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = ../../../../../../../../System/Library/Frameworks/OpenGL.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6BB9DD7616A20D2D0044870C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BB9DD7E16A20D2D0044870C /* Foundation.framework in Frameworks */,
+				6BB9DD9116A20D8E0044870C /* XPG.framework in Frameworks */,
+				6BB9DD9A16A20E6E0044870C /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6BB9DD6E16A20D2D0044870C = {
+			isa = PBXGroup;
+			children = (
+				6BB9DD9916A20E6E0044870C /* OpenGL.framework */,
+				6BB9DD9016A20D8E0044870C /* XPG.framework */,
+				6BB9DD7F16A20D2D0044870C /* ColorCube */,
+				6BB9DD7C16A20D2D0044870C /* Frameworks */,
+				6BB9DD7A16A20D2D0044870C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6BB9DD7A16A20D2D0044870C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6BB9DD7916A20D2D0044870C /* ColorCube */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6BB9DD7C16A20D2D0044870C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6BB9DD7D16A20D2D0044870C /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6BB9DD7F16A20D2D0044870C /* ColorCube */ = {
+			isa = PBXGroup;
+			children = (
+				6BB9DD8B16A20D730044870C /* ColorCubeModule.cpp */,
+				6BB9DD8C16A20D730044870C /* ColorCubeModule.hpp */,
+				6BB9DD8D16A20D730044870C /* main.cpp */,
+				6BB9DD8416A20D2D0044870C /* ColorCube.1 */,
+				6BB9DD8216A20D2D0044870C /* Supporting Files */,
+			);
+			path = ColorCube;
+			sourceTree = "<group>";
+		};
+		6BB9DD8216A20D2D0044870C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6BB9DD8316A20D2D0044870C /* ColorCube-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6BB9DD7816A20D2D0044870C /* ColorCube */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6BB9DD8816A20D2D0044870C /* Build configuration list for PBXNativeTarget "ColorCube" */;
+			buildPhases = (
+				6BB9DD7516A20D2D0044870C /* Sources */,
+				6BB9DD7616A20D2D0044870C /* Frameworks */,
+				6BB9DD7716A20D2D0044870C /* CopyFiles */,
+				6BB9DD9716A20E3D0044870C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ColorCube;
+			productName = ColorCube;
+			productReference = 6BB9DD7916A20D2D0044870C /* ColorCube */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6BB9DD7016A20D2D0044870C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 6BB9DD7316A20D2D0044870C /* Build configuration list for PBXProject "ColorCube" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6BB9DD6E16A20D2D0044870C;
+			productRefGroup = 6BB9DD7A16A20D2D0044870C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6BB9DD7816A20D2D0044870C /* ColorCube */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6BB9DD7516A20D2D0044870C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BB9DD8E16A20D730044870C /* ColorCubeModule.cpp in Sources */,
+				6BB9DD8F16A20D730044870C /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6BB9DD8616A20D2D0044870C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6BB9DD8716A20D2D0044870C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		6BB9DD8916A20D2D0044870C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../project/xcode/DerivedData/XPG/Build/Products/Debug\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ColorCube/ColorCube-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6BB9DD8A16A20D2D0044870C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../project/xcode/DerivedData/XPG/Build/Products/Debug\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ColorCube/ColorCube-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6BB9DD7316A20D2D0044870C /* Build configuration list for PBXProject "ColorCube" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6BB9DD8616A20D2D0044870C /* Debug */,
+				6BB9DD8716A20D2D0044870C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6BB9DD8816A20D2D0044870C /* Build configuration list for PBXNativeTarget "ColorCube" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6BB9DD8916A20D2D0044870C /* Debug */,
+				6BB9DD8A16A20D2D0044870C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6BB9DD7016A20D2D0044870C /* Project object */;
+}

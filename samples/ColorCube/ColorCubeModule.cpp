@@ -1,5 +1,5 @@
 #include "ColorCubeModule.hpp"
-
+#include <XPG/Clock.hpp>
 #include <iostream>
 using namespace std;
 
@@ -8,6 +8,10 @@ static const GLuint ColorHandle = 1;
 
 ColorCubeModule::ColorCubeModule()
 {
+    XPG::ResetTimer(); 
+    
+    cout << "shader: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << endl;
+    
     glGenVertexArrays(1, &_vao);
     glBindVertexArray(_vao);
 

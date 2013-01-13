@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B95613A16A20B92007321C2 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B95613616A20B92007321C2 /* Application.cpp */; };
+		6B95613B16A20B92007321C2 /* ApplicationMeta.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6B95613716A20B92007321C2 /* ApplicationMeta.hpp */; };
+		6B95613C16A20B92007321C2 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B95613816A20B92007321C2 /* Window.cpp */; };
+		6B95613D16A20B92007321C2 /* WindowMeta.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6B95613916A20B92007321C2 /* WindowMeta.hpp */; };
 		6BBFA42916939BF70098826F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BBFA42816939BF70098826F /* Cocoa.framework */; };
 		6BBFA43316939BF70098826F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BBFA43116939BF70098826F /* InfoPlist.strings */; };
-		6BBFA43716939BF70098826F /* XPG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA43616939BF70098826F /* XPG.m */; };
 		6BBFA4BB16939C570098826F /* Address32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA48B16939C570098826F /* Address32.cpp */; };
 		6BBFA4BC16939C570098826F /* Address32Query.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA48C16939C570098826F /* Address32Query.cpp */; };
 		6BBFA4BD16939C570098826F /* Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA48D16939C570098826F /* Base.cpp */; };
@@ -72,6 +75,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B95613616A20B92007321C2 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
+		6B95613716A20B92007321C2 /* ApplicationMeta.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ApplicationMeta.hpp; sourceTree = "<group>"; };
+		6B95613816A20B92007321C2 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
+		6B95613916A20B92007321C2 /* WindowMeta.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WindowMeta.hpp; sourceTree = "<group>"; };
 		6BBFA42516939BF70098826F /* XPG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XPG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BBFA42816939BF70098826F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		6BBFA42B16939BF70098826F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -80,8 +87,6 @@
 		6BBFA43016939BF70098826F /* XPG-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XPG-Info.plist"; sourceTree = "<group>"; };
 		6BBFA43216939BF70098826F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6BBFA43416939BF70098826F /* XPG-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XPG-Prefix.pch"; sourceTree = "<group>"; };
-		6BBFA43516939BF70098826F /* XPG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XPG.h; sourceTree = "<group>"; };
-		6BBFA43616939BF70098826F /* XPG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XPG.m; sourceTree = "<group>"; };
 		6BBFA43F16939C480098826F /* Application.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
 		6BBFA44016939C480098826F /* Array.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Array.hpp; sourceTree = "<group>"; };
 		6BBFA44116939C480098826F /* Clock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Clock.hpp; sourceTree = "<group>"; };
@@ -160,6 +165,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B95613516A20B92007321C2 /* sdl2 */ = {
+			isa = PBXGroup;
+			children = (
+				6B95613616A20B92007321C2 /* Application.cpp */,
+				6B95613716A20B92007321C2 /* ApplicationMeta.hpp */,
+				6B95613816A20B92007321C2 /* Window.cpp */,
+				6B95613916A20B92007321C2 /* WindowMeta.hpp */,
+			);
+			path = sdl2;
+			sourceTree = "<group>";
+		};
 		6BBFA41916939BF70098826F = {
 			isa = PBXGroup;
 			children = (
@@ -202,8 +218,6 @@
 			children = (
 				6BBFA48A16939C570098826F /* source */,
 				6BBFA43D16939C480098826F /* include */,
-				6BBFA43516939BF70098826F /* XPG.h */,
-				6BBFA43616939BF70098826F /* XPG.m */,
 				6BBFA42F16939BF70098826F /* Supporting Files */,
 			);
 			path = XPG;
@@ -295,6 +309,7 @@
 		6BBFA48A16939C570098826F /* source */ = {
 			isa = PBXGroup;
 			children = (
+				6B95613516A20B92007321C2 /* sdl2 */,
 				6BBFA48B16939C570098826F /* Address32.cpp */,
 				6BBFA48C16939C570098826F /* Address32Query.cpp */,
 				6BBFA48D16939C570098826F /* Base.cpp */,
@@ -385,6 +400,8 @@
 				6BE725091693CFFF007ED9F5 /* MersenneTwister19937.hpp in Headers */,
 				6BE7250A1693CFFF007ED9F5 /* MouseState.hpp in Headers */,
 				6BE7250B1693CFFF007ED9F5 /* Mutex.hpp in Headers */,
+				6B95613B16A20B92007321C2 /* ApplicationMeta.hpp in Headers */,
+				6B95613D16A20B92007321C2 /* WindowMeta.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,7 +484,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BBFA43716939BF70098826F /* XPG.m in Sources */,
 				6BBFA4BB16939C570098826F /* Address32.cpp in Sources */,
 				6BBFA4BC16939C570098826F /* Address32Query.cpp in Sources */,
 				6BBFA4BD16939C570098826F /* Base.cpp in Sources */,
@@ -493,6 +509,8 @@
 				6BBFA4DB16939C570098826F /* Network.cpp in Sources */,
 				6BBFA4DC16939C570098826F /* Thread.cpp in Sources */,
 				6BBFA4E616939C570098826F /* WindowState.cpp in Sources */,
+				6B95613A16A20B92007321C2 /* Application.cpp in Sources */,
+				6B95613C16A20B92007321C2 /* Window.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,7 +583,13 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XPG/XPG-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/usr/local/include/SDL2/**";
 				INFOPLIST_FILE = "XPG/XPG-Info.plist";
+				LIBRARY_SEARCH_PATHS = "/usr/local/lib/**";
+				OTHER_LDFLAGS = (
+					"-lSDL2main",
+					"-lSDL2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -579,7 +603,13 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XPG/XPG-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/usr/local/include/SDL2/**";
 				INFOPLIST_FILE = "XPG/XPG-Info.plist";
+				LIBRARY_SEARCH_PATHS = "/usr/local/lib/**";
+				OTHER_LDFLAGS = (
+					"-lSDL2main",
+					"-lSDL2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
