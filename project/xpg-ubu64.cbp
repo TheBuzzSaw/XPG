@@ -45,6 +45,7 @@
 		</Linker>
 		<Unit filename="../include/XPG/Application.hpp" />
 		<Unit filename="../include/XPG/Array.hpp" />
+		<Unit filename="../include/XPG/Character.hpp" />
 		<Unit filename="../include/XPG/Clock.hpp" />
 		<Unit filename="../include/XPG/DataTypes.hpp" />
 		<Unit filename="../include/XPG/DateTime.hpp" />
@@ -74,6 +75,7 @@
 		<Unit filename="../include/XPG/Platform.hpp" />
 		<Unit filename="../include/XPG/STL/StreamExtensions.hpp" />
 		<Unit filename="../include/XPG/Stopwatch.hpp" />
+		<Unit filename="../include/XPG/String.hpp" />
 		<Unit filename="../include/XPG/System.hpp" />
 		<Unit filename="../include/XPG/Thread.hpp" />
 		<Unit filename="../include/XPG/TimeSpan.hpp" />
@@ -98,6 +100,7 @@
 		<Unit filename="../source/Shader.cpp" />
 		<Unit filename="../source/Socket.cpp" />
 		<Unit filename="../source/Stopwatch.cpp" />
+		<Unit filename="../source/String.cpp" />
 		<Unit filename="../source/TcpListener.cpp" />
 		<Unit filename="../source/TcpListenerMeta.hpp" />
 		<Unit filename="../source/TcpSocket.cpp" />
