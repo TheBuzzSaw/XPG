@@ -1,5 +1,4 @@
 #include "../include/XPG/DateTime.hpp"
-#include "TickSpans.hpp"
 #include <ctime>
 
 namespace XPG
@@ -8,7 +7,7 @@ namespace XPG
         31, 30, 31 };
 
     static const Int64 DaysPerYear = 365;
-    static const Int64 TicksPerYear = TicksPerDay * DaysPerYear;
+    static const Int64 TicksPerYear = TimeSpan::TicksPerDay * DaysPerYear;
     static const Int64 DaysPerFourCenturies = DaysPerYear * 400 + 97;
     static const Int64 DaysPerCentury = DaysPerYear * 100 + 24;
     static const Int64 DaysPerFourYears = DaysPerYear * 4 + 1;
@@ -28,7 +27,7 @@ namespace XPG
         Set(year, month, day, hour, minute, second, millisecond, microsecond);
     }
 
-    DateTime::DateTime(const DateTime& dateTime) : _ticks(dateTime._ticks)
+    DateTime::DateTime(const DateTime& other) : _ticks(other._ticks)
     {
     }
 
@@ -92,15 +91,15 @@ namespace XPG
         return month;
     }
 
-    const TimeSpan DateTime::TimeSinceMidnight() const
+    const TimeSpan DateTime::TimeOfDay() const
     {
-        return TimeSpan(_ticks % TicksPerDay);
+        return TimeSpan(_ticks % TimeSpan::TicksPerDay);
     }
 
-    const DateTime DateTime::DateOnly() const
+    const DateTime DateTime::Date() const
     {
-        Int64 days = _ticks / TicksPerDay;
-        return DateTime(days * TicksPerDay);
+        Int64 days = _ticks / TimeSpan::TicksPerDay;
+        return DateTime(days * TimeSpan::TicksPerDay);
     }
 
     bool DateTime::Set(int year, int month, int day, int hour, int minute,
@@ -125,12 +124,12 @@ namespace XPG
             days += (year * DaysPerYear) + (year / 4) - (year / 100)
                 + (year / 400);
 
-            _ticks = days * TicksPerDay;
-            _ticks += hour * TicksPerHour;
-            _ticks += minute * TicksPerMinute;
-            _ticks += second * TicksPerSecond;
-            _ticks += millisecond * TicksPerMillisecond;
-            _ticks += microsecond * TicksPerMicrosecond;
+            _ticks = days * TimeSpan::TicksPerDay;
+            _ticks += hour * TimeSpan::TicksPerHour;
+            _ticks += minute * TimeSpan::TicksPerMinute;
+            _ticks += second * TimeSpan::TicksPerSecond;
+            _ticks += millisecond * TimeSpan::TicksPerMillisecond;
+            _ticks += microsecond * TimeSpan::TicksPerMicrosecond;
 
             isValidDate = true;
         }
@@ -140,25 +139,25 @@ namespace XPG
 
     int DateTime::DayOfWeek() const
     {
-        return (_ticks / TicksPerDay) % 7;
+        return (_ticks / TimeSpan::TicksPerDay) % 7;
     }
 
     int DateTime::Year() const
     {
-        Int64 days = _ticks / TicksPerDay;
+        Int64 days = _ticks / TimeSpan::TicksPerDay;
         return ExtractYears(days);
     }
 
     int DateTime::Month() const
     {
-        Int64 days = _ticks / TicksPerDay;
+        Int64 days = _ticks / TimeSpan::TicksPerDay;
         Int64 year = ExtractYears(days);
         return ExtractMonth(days, year);
     }
 
     int DateTime::Day() const
     {
-        Int64 days = _ticks / TicksPerDay;
+        Int64 days = _ticks / TimeSpan::TicksPerDay;
         Int64 year = ExtractYears(days);
         ExtractMonth(days, year);
         return days + 1;
@@ -166,97 +165,97 @@ namespace XPG
 
     int DateTime::Hour() const
     {
-        Int64 hours = _ticks / TicksPerHour;
+        Int64 hours = _ticks / TimeSpan::TicksPerHour;
         return hours % 24;
     }
 
     int DateTime::Minute() const
     {
-        Int64 minutes = _ticks / TicksPerMinute;
+        Int64 minutes = _ticks / TimeSpan::TicksPerMinute;
         return minutes % 60;
     }
 
     int DateTime::Second() const
     {
-        Int64 seconds = _ticks / TicksPerSecond;
+        Int64 seconds = _ticks / TimeSpan::TicksPerSecond;
         return seconds % 60;
     }
 
     int DateTime::Millisecond() const
     {
-        Int64 milliseconds = _ticks / TicksPerMillisecond;
+        Int64 milliseconds = _ticks / TimeSpan::TicksPerMillisecond;
         return milliseconds % 1000;
     }
 
     int DateTime::Microsecond() const
     {
-        Int64 microseconds = _ticks / TicksPerMicrosecond;
+        Int64 microseconds = _ticks / TimeSpan::TicksPerMicrosecond;
         return microseconds % 1000;
     }
 
-    DateTime& DateTime::operator=(const DateTime& dateTime)
+    DateTime& DateTime::operator=(const DateTime& other)
     {
-        _ticks = dateTime._ticks;
+        _ticks = other._ticks;
         return *this;
     }
 
-    DateTime& DateTime::operator+=(const TimeSpan& timeSpan)
+    DateTime& DateTime::operator+=(const TimeSpan& time)
     {
-        _ticks += timeSpan.Ticks();
+        _ticks += time.Ticks();
         Validate();
         return *this;
     }
 
-    DateTime& DateTime::operator-=(const TimeSpan& timeSpan)
+    DateTime& DateTime::operator-=(const TimeSpan& time)
     {
-        _ticks -= timeSpan.Ticks();
+        _ticks -= time.Ticks();
         Validate();
         return *this;
     }
 
-    bool DateTime::operator==(const DateTime& dateTime) const
+    bool DateTime::operator==(const DateTime& other) const
     {
-        return _ticks == dateTime._ticks;
+        return _ticks == other._ticks;
     }
 
-    bool DateTime::operator!=(const DateTime& dateTime) const
+    bool DateTime::operator!=(const DateTime& other) const
     {
-        return _ticks != dateTime._ticks;
+        return _ticks != other._ticks;
     }
 
-    bool DateTime::operator<(const DateTime& dateTime) const
+    bool DateTime::operator<(const DateTime& other) const
     {
-        return _ticks < dateTime._ticks;
+        return _ticks < other._ticks;
     }
 
-    bool DateTime::operator<=(const DateTime& dateTime) const
+    bool DateTime::operator<=(const DateTime& other) const
     {
-        return _ticks <= dateTime._ticks;
+        return _ticks <= other._ticks;
     }
 
-    bool DateTime::operator>(const DateTime& dateTime) const
+    bool DateTime::operator>(const DateTime& other) const
     {
-        return _ticks > dateTime._ticks;
+        return _ticks > other._ticks;
     }
 
-    bool DateTime::operator>=(const DateTime& dateTime) const
+    bool DateTime::operator>=(const DateTime& other) const
     {
-        return _ticks >= dateTime._ticks;
+        return _ticks >= other._ticks;
     }
 
-    const DateTime DateTime::operator+(const TimeSpan& timeSpan) const
+    const DateTime DateTime::operator+(const TimeSpan& time) const
     {
-        return DateTime(_ticks + timeSpan.Ticks());
+        return DateTime(_ticks + time.Ticks());
     }
 
-    const DateTime DateTime::operator-(const TimeSpan& timeSpan) const
+    const DateTime DateTime::operator-(const TimeSpan& time) const
     {
-        return DateTime(_ticks - timeSpan.Ticks());
+        return DateTime(_ticks - time.Ticks());
     }
 
-    const TimeSpan DateTime::operator-(const DateTime& dateTime) const
+    const TimeSpan DateTime::operator-(const DateTime& other) const
     {
-        return TimeSpan(_ticks - dateTime._ticks);
+        return TimeSpan(_ticks - other._ticks);
     }
 
     int DateTime::DaysInMonth(int month, int year)

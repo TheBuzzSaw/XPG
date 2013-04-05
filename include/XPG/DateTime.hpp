@@ -13,29 +13,29 @@ namespace XPG
             explicit DateTime(Int64 ticks);
             DateTime(int year, int month, int day, int hour = 0, int minute = 0,
                 int second = 0, int millisecond = 0, int microsecond = 0);
-            DateTime(const DateTime& dateTime);
+            DateTime(const DateTime& other);
             ~DateTime();
 
             inline Int64 Ticks() const { return _ticks; }
             inline operator bool() const { return _ticks > 0; }
 
-            DateTime& operator=(const DateTime& dateTime);
-            DateTime& operator+=(const TimeSpan& timeSpan);
-            DateTime& operator-=(const TimeSpan& timeSpan);
+            DateTime& operator=(const DateTime& other);
+            DateTime& operator+=(const TimeSpan& time);
+            DateTime& operator-=(const TimeSpan& time);
 
-            bool operator==(const DateTime& dateTime) const;
-            bool operator!=(const DateTime& dateTime) const;
-            bool operator<(const DateTime& dateTime) const;
-            bool operator<=(const DateTime& dateTime) const;
-            bool operator>(const DateTime& dateTime) const;
-            bool operator>=(const DateTime& dateTime) const;
+            bool operator==(const DateTime& other) const;
+            bool operator!=(const DateTime& other) const;
+            bool operator<(const DateTime& other) const;
+            bool operator<=(const DateTime& other) const;
+            bool operator>(const DateTime& other) const;
+            bool operator>=(const DateTime& other) const;
 
-            const DateTime operator+(const TimeSpan& timeSpan) const;
-            const DateTime operator-(const TimeSpan& timeSpan) const;
-            const TimeSpan operator-(const DateTime& dateTime) const;
+            const DateTime operator+(const TimeSpan& time) const;
+            const DateTime operator-(const TimeSpan& time) const;
+            const TimeSpan operator-(const DateTime& other) const;
 
-            const TimeSpan TimeSinceMidnight() const;
-            const DateTime DateOnly() const;
+            const TimeSpan TimeOfDay() const;
+            const DateTime Date() const;
             bool Set(int year, int month, int day, int hour = 0,
                 int minute = 0, int second = 0, int millisecond = 0,
                 int microsecond = 0);

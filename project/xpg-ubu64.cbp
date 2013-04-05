@@ -104,7 +104,6 @@
 		<Unit filename="../source/TcpListener.cpp" />
 		<Unit filename="../source/TcpListenerMeta.hpp" />
 		<Unit filename="../source/TcpSocket.cpp" />
-		<Unit filename="../source/TickSpans.hpp" />
 		<Unit filename="../source/TimeSpan.cpp" />
 		<Unit filename="../source/UdpSocket.cpp" />
 		<Unit filename="../source/WindowState.cpp" />

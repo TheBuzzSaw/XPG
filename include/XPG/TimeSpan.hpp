@@ -11,24 +11,24 @@ namespace XPG
         public:
             TimeSpan();
             explicit TimeSpan(Int64 ticks);
-            TimeSpan(const TimeSpan& timeSpan);
+            TimeSpan(const TimeSpan& other);
             ~TimeSpan();
 
             inline Int64 Ticks() const { return _ticks; }
 
-            TimeSpan& operator=(const TimeSpan& timeSpan);
-            TimeSpan& operator+=(const TimeSpan& timeSpan);
-            TimeSpan& operator-=(const TimeSpan& timeSpan);
+            TimeSpan& operator=(const TimeSpan& other);
+            TimeSpan& operator+=(const TimeSpan& other);
+            TimeSpan& operator-=(const TimeSpan& other);
 
-            bool operator==(const TimeSpan& timeSpan) const;
-            bool operator!=(const TimeSpan& timeSpan) const;
-            bool operator<(const TimeSpan& timeSpan) const;
-            bool operator<=(const TimeSpan& timeSpan) const;
-            bool operator>(const TimeSpan& timeSpan) const;
-            bool operator>=(const TimeSpan& timeSpan) const;
+            bool operator==(const TimeSpan& other) const;
+            bool operator!=(const TimeSpan& other) const;
+            bool operator<(const TimeSpan& other) const;
+            bool operator<=(const TimeSpan& other) const;
+            bool operator>(const TimeSpan& other) const;
+            bool operator>=(const TimeSpan& other) const;
 
-            const TimeSpan operator+(const TimeSpan& timeSpan) const;
-            const TimeSpan operator-(const TimeSpan& timeSpan) const;
+            const TimeSpan operator+(const TimeSpan& other) const;
+            const TimeSpan operator-(const TimeSpan& other) const;
             const TimeSpan operator/(Int64 operand) const;
             const TimeSpan operator-() const;
 
@@ -49,6 +49,15 @@ namespace XPG
             static const TimeSpan FromHours(Int64 hours);
             static const TimeSpan FromDays(Int64 days);
             static const TimeSpan FromWeeks(Int64 weeks);
+
+            static const Int64 NanosecondsPerTick = 100;
+            static const Int64 TicksPerMicrosecond = 10;
+            static const Int64 TicksPerMillisecond = TicksPerMicrosecond * 1000;
+            static const Int64 TicksPerSecond = TicksPerMillisecond * 1000;
+            static const Int64 TicksPerMinute = TicksPerSecond * 60;
+            static const Int64 TicksPerHour = TicksPerMinute * 60;
+            static const Int64 TicksPerDay = TicksPerHour * 24;
+            static const Int64 TicksPerWeek = TicksPerDay * 7;
 
         private:
             Int64 _ticks;
