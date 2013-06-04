@@ -114,7 +114,8 @@ int main(int argc, char** argv)
 {
     if (XPG::OpenSockets())
     {
-        SuperSimpleWebServer();
+        //SuperSimpleWebServer();
+        HttpGoogle();
         XPG::CloseSockets();
     }
     else

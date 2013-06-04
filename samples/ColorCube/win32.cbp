@@ -44,7 +44,6 @@
 			<Add library="kernel32" />
 			<Add library="winmm" />
 		</Linker>
-		<Unit filename="../../source/JoystickEventBatch.hpp" />
 		<Unit filename="ColorCubeModule.cpp" />
 		<Unit filename="ColorCubeModule.hpp" />
 		<Unit filename="main.cpp" />
