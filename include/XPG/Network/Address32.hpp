@@ -6,7 +6,7 @@
 
 namespace XPG
 {
-    XpgClass Address32
+    class XpgApi Address32
     {
         public:
             Address32();

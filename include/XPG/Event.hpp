@@ -5,7 +5,7 @@
 
 namespace XPG
 {
-    XpgClass Event
+    class XpgApi Event
     {
         public:
             typedef void (*Listener)(void*);

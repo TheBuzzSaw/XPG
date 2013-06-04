@@ -6,7 +6,7 @@
 
 namespace XPG
 {
-    XpgClass UdpSocket : public Socket
+    class XpgApi UdpSocket : public Socket
     {
         public:
             UdpSocket();

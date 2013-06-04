@@ -12,7 +12,7 @@
 
 namespace XPG
 {
-    XpgFunction const char* GlErrorText();
+    XpgApi const char* GlErrorText();
 }
 
 #endif

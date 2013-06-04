@@ -6,7 +6,7 @@
 
 namespace XPG
 {
-    XpgClass Character
+    class XpgApi Character
     {
         public:
             inline Character()

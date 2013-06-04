@@ -9,7 +9,7 @@ namespace XPG
 {
     class TcpListener;
 
-    XpgClass TcpSocket : public Socket
+    class XpgApi TcpSocket : public Socket
     {
         public:
             TcpSocket();

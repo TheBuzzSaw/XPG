@@ -5,7 +5,7 @@
 
 namespace XPG
 {
-    XpgClass Address32Query
+    class XpgApi Address32Query
     {
         public:
             Address32Query(const char* address, const char* port);

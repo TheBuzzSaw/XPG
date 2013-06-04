@@ -6,7 +6,7 @@
 
 namespace XPG
 {
-    XpgClass Datagram32 : public Packet
+    class XpgApi Datagram32 : public Packet
     {
         public:
             Datagram32(UInt16 capacity);

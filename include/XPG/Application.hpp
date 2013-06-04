@@ -6,7 +6,7 @@
 
 namespace XPG
 {
-    XpgClass Application
+    class XpgApi Application
     {
         public:
             Application();

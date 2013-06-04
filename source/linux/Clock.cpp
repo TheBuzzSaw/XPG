@@ -2,6 +2,14 @@
 #include <ctime>
 #include <unistd.h>
 
+#ifdef CLOCK_MONOTONIC_RAW
+#   define XpgClockMonotonic CLOCK_MONOTONIC_RAW
+#elif defined(CLOCK_MONOTONIC)
+#   define XpgClockMonotonic CLOCK_MONOTONIC
+#else
+#   error No available clock macro!
+#endif
+
 namespace XPG
 {
     static const DateTime Epoch(1970, 1, 1);
@@ -34,7 +42,7 @@ namespace XPG
     const TimeSpan RawTimer()
     {
         timespec ts;
-        clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
+        clock_gettime(XpgClockMonotonic, &ts);
 
         return TimeSpan::FromSeconds(ts.tv_sec)
             + TimeSpan::FromNanoseconds(ts.tv_nsec);

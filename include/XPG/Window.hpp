@@ -8,7 +8,7 @@
 
 namespace XPG
 {
-    XpgClass Window
+    class XpgApi Window
     {
         public:
             Window();

@@ -18,19 +18,15 @@
 #endif
 
 #ifdef XpgStatic
-#   define XpgFunction extern
-#   define XpgClass class
+#   define XpgApi
 #elif defined(XpgPlatformWindows)
 #   ifdef XpgBuild
-#       define XpgFunction extern __declspec(dllexport)
-#       define XpgClass class __declspec(dllexport)
+#       define XpgApi __declspec(dllexport)
 #   else
-#       define XpgFunction extern __declspec(dllimport)
-#       define XpgClass class __declspec(dllimport)
+#       define XpgApi __declspec(dllimport)
 #   endif
 #else
-#   define XpgFunction extern __attribute__ ((visibility("default")))
-#   define XpgClass class __attribute__ ((visibility("default")))
+#   define XpgApi __attribute__ ((visibility("default")))
 #endif
 
 #endif

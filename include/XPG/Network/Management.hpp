@@ -5,8 +5,8 @@
 
 namespace XPG
 {
-    XpgFunction bool OpenSockets();
-    XpgFunction void CloseSockets();
+    XpgApi bool OpenSockets();
+    XpgApi void CloseSockets();
 }
 
 #endif

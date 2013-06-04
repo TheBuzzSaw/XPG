@@ -5,7 +5,7 @@
 
 namespace XPG
 {
-    XpgClass IndexBufferObject
+    class XpgApi IndexBufferObject
     {
         public:
             IndexBufferObject();

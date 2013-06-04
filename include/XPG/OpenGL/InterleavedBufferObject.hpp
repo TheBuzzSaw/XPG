@@ -5,7 +5,7 @@
 
 namespace XPG
 {
-    XpgClass InterleavedBufferObject
+    class XpgApi InterleavedBufferObject
     {
         public:
             InterleavedBufferObject();

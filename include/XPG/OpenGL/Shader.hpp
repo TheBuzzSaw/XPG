@@ -5,7 +5,7 @@
 
 namespace XPG
 {
-    XpgClass Shader
+    class XpgApi Shader
     {
         public:
             friend class Program;

@@ -8,7 +8,7 @@
 
 namespace XPG
 {
-    XpgClass Joystick
+    class XpgApi Joystick
     {
         public:
             Joystick(UInt32 numJoystick);

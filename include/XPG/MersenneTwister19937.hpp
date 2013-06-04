@@ -7,7 +7,7 @@
 
 namespace XPG
 {
-    XpgClass MersenneTwister19937
+    class XpgApi MersenneTwister19937
     {
         public:
             MersenneTwister19937(int seed);

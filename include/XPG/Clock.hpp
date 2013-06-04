@@ -5,11 +5,11 @@
 
 namespace XPG
 {
-    XpgFunction void Sleep(TimeSpan timeSpan);
-    XpgFunction const DateTime HighResolutionUtcTime();
-    XpgFunction const DateTime HighResolutionLocalTime();
-    XpgFunction void ResetTimer();
-    XpgFunction const TimeSpan ReadTimer();
+    XpgApi void Sleep(TimeSpan timeSpan);
+    XpgApi const DateTime HighResolutionUtcTime();
+    XpgApi const DateTime HighResolutionLocalTime();
+    XpgApi void ResetTimer();
+    XpgApi const TimeSpan ReadTimer();
 }
 
 #endif

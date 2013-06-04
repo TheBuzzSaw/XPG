@@ -6,7 +6,7 @@
 
 namespace XPG
 {
-    XpgClass DateTime
+    class XpgApi DateTime
     {
         public:
             DateTime();

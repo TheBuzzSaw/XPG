@@ -6,7 +6,7 @@
 
 namespace XPG
 {
-    XpgClass MouseState
+    class XpgApi MouseState
     {
         public:
             enum Button {

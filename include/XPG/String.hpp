@@ -5,7 +5,7 @@
 
 namespace XPG
 {
-    XpgClass String
+    class XpgApi String
     {
         public:
             String();

@@ -6,7 +6,7 @@
 
 namespace XPG
 {
-    XpgClass Thread
+    class XpgApi Thread
     {
         public:
             typedef void (*Entry)(void*);

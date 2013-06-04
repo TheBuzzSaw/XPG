@@ -6,7 +6,7 @@
 
 namespace XPG
 {
-    XpgClass TcpListener
+    class XpgApi TcpListener
     {
         public:
             friend class TcpSocket;

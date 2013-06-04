@@ -7,7 +7,7 @@
 
 namespace XPG
 {
-    XpgClass JoystickManager
+    class XpgApi JoystickManager
     {
         public:
             JoystickManager();

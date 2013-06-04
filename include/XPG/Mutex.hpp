@@ -5,7 +5,7 @@
 
 namespace XPG
 {
-    XpgClass Mutex
+    class XpgApi Mutex
     {
         public:
             Mutex();

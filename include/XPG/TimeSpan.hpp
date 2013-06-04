@@ -6,7 +6,7 @@
 
 namespace XPG
 {
-    XpgClass TimeSpan
+    class XpgApi TimeSpan
     {
         public:
             TimeSpan();

@@ -6,7 +6,7 @@
 
 namespace XPG
 {
-    XpgClass Packet
+    class XpgApi Packet
     {
         public:
             Packet(UInt32 capacity);
@@ -79,25 +79,25 @@ namespace XPG
             bool _failedToStream;
     };
 
-    XpgFunction Packet& operator<<(Packet& packet, const char* data);
+    XpgApi Packet& operator<<(Packet& packet, const char* data);
 
-    XpgFunction Packet& operator<<(Packet& packet, Int8 data);
-    XpgFunction Packet& operator<<(Packet& packet, UInt8 data);
-    XpgFunction Packet& operator<<(Packet& packet, Int16 data);
-    XpgFunction Packet& operator<<(Packet& packet, UInt16 data);
-    XpgFunction Packet& operator<<(Packet& packet, Int32 data);
-    XpgFunction Packet& operator<<(Packet& packet, UInt32 data);
-    XpgFunction Packet& operator<<(Packet& packet, Int64 data);
-    XpgFunction Packet& operator<<(Packet& packet, UInt64 data);
+    XpgApi Packet& operator<<(Packet& packet, Int8 data);
+    XpgApi Packet& operator<<(Packet& packet, UInt8 data);
+    XpgApi Packet& operator<<(Packet& packet, Int16 data);
+    XpgApi Packet& operator<<(Packet& packet, UInt16 data);
+    XpgApi Packet& operator<<(Packet& packet, Int32 data);
+    XpgApi Packet& operator<<(Packet& packet, UInt32 data);
+    XpgApi Packet& operator<<(Packet& packet, Int64 data);
+    XpgApi Packet& operator<<(Packet& packet, UInt64 data);
 
-    XpgFunction Packet& operator>>(Packet& packet, Int8& data);
-    XpgFunction Packet& operator>>(Packet& packet, UInt8& data);
-    XpgFunction Packet& operator>>(Packet& packet, Int16& data);
-    XpgFunction Packet& operator>>(Packet& packet, UInt16& data);
-    XpgFunction Packet& operator>>(Packet& packet, Int32& data);
-    XpgFunction Packet& operator>>(Packet& packet, UInt32& data);
-    XpgFunction Packet& operator>>(Packet& packet, Int64& data);
-    XpgFunction Packet& operator>>(Packet& packet, UInt64& data);
+    XpgApi Packet& operator>>(Packet& packet, Int8& data);
+    XpgApi Packet& operator>>(Packet& packet, UInt8& data);
+    XpgApi Packet& operator>>(Packet& packet, Int16& data);
+    XpgApi Packet& operator>>(Packet& packet, UInt16& data);
+    XpgApi Packet& operator>>(Packet& packet, Int32& data);
+    XpgApi Packet& operator>>(Packet& packet, UInt32& data);
+    XpgApi Packet& operator>>(Packet& packet, Int64& data);
+    XpgApi Packet& operator>>(Packet& packet, UInt64& data);
 }
 
 #endif

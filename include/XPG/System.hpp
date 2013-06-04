@@ -5,7 +5,7 @@
 
 namespace XPG
 {
-    XpgClass System
+    class XpgApi System
     {
         public:
             System();

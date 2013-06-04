@@ -6,7 +6,7 @@
 
 namespace XPG
 {
-    XpgClass WindowState
+    class XpgApi WindowState
     {
         public:
             WindowState();
