@@ -14,6 +14,8 @@ ColorCubeModule::ColorCubeModule()
     _joyManager.OnJoyHat(OnJoyHat);
     _joyManager.Deadzone(20);
 
+    _isFullscreen = false;
+
     glGenVertexArrays(1, &_vao);
     glBindVertexArray(_vao);
 
@@ -232,7 +234,8 @@ void ColorCubeModule::OnKeyDown(XPG::Key::Code key, void* userData)
         case XPG::Key::F11:
         {
             ColorCubeModule* ccm = static_cast<ColorCubeModule*>(userData);
-            ccm->_window->SetFullScreen(true);
+            ccm->_isFullscreen = !ccm->_isFullscreen;
+            ccm->_window->SetFullScreen(ccm->_isFullscreen);
 
             break;
         }

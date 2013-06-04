@@ -45,6 +45,7 @@ class ColorCubeModule
         XPG::WindowState _state;
         volatile bool _isRunning;
         volatile bool _resetViewport;
+        bool _isFullscreen;
 
         static void OnJoyAxis(XPG::UInt32 whichAxis, const XPG::Joystick& joyState);
         static void OnJoyButtonDown(XPG::UInt32 whichButton, const XPG::Joystick& joyState);

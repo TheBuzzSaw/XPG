@@ -539,15 +539,25 @@ namespace XPG
         DWORD exStyle = BaseExStyle | WS_EX_WINDOWEDGE;
         DWORD style = BaseStyle;
 
+        int x = GetSystemMetrics(SM_CXSCREEN);
+        int y = GetSystemMetrics(SM_CYSCREEN);
+
         if (fullscreen)
         {
-            int x = GetSystemMetrics(SM_CXSCREEN);
-            int y = GetSystemMetrics(SM_CYSCREEN);
 
             style |= WS_MAXIMIZE;
 
             SetWindowLongPtr(meta->window, GWL_STYLE, style);
+            SetWindowLongPtr(meta->window, GWL_EXSTYLE, 0);
             SetWindowPos(meta->window, HWND_TOPMOST, 0, 0, x, y, SWP_SHOWWINDOW);
+        }
+        else
+        {
+            style |= WS_OVERLAPPEDWINDOW;
+
+            SetWindowLongPtr(meta->window, GWL_STYLE, style);
+            SetWindowLongPtr(meta->window, GWL_EXSTYLE, exStyle);
+            SetWindowPos(meta->window, HWND_TOPMOST, (x / 2) - (1024 / 2), (y / 2) - (768 / 2), 1024, 768, SWP_SHOWWINDOW);
         }
     }
 
