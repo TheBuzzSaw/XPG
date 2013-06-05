@@ -36,6 +36,12 @@ namespace XPG
         return *this;
     }
 
+    TimeSpan& TimeSpan::operator/=(Int64 operand)
+    {
+        _ticks /= operand;
+        return *this;
+    }
+
     bool TimeSpan::operator==(const TimeSpan& other) const
     {
         return _ticks == other._ticks;

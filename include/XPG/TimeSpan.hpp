@@ -19,6 +19,7 @@ namespace XPG
             TimeSpan& operator=(const TimeSpan& other);
             TimeSpan& operator+=(const TimeSpan& other);
             TimeSpan& operator-=(const TimeSpan& other);
+            TimeSpan& operator/=(Int64 operand);
 
             bool operator==(const TimeSpan& other) const;
             bool operator!=(const TimeSpan& other) const;
