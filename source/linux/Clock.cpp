@@ -16,9 +16,15 @@ namespace XPG
 
     void Sleep(TimeSpan timeSpan)
     {
-#ifndef XpgPlatformAndroid
-        usleep(timeSpan.ToMicroseconds());
-#endif
+        const Int64 NanoUnits = 1000000000;
+        Int64 nanoseconds = timeSpan.ToNanoseconds();
+        Int64 seconds = nanoseconds / NanoUnits;
+        nanoseconds -= seconds * NanoUnits;
+
+        timespec ts;
+        ts.tv_sec = seconds;
+        ts.tv_nsec = nanoseconds;
+        while (nanosleep(&ts, &ts) == -1);
     }
 
     const DateTime HighResolutionUtcTime()

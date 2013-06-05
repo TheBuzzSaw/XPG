@@ -3,10 +3,9 @@
 #include <XPG/Network/UdpSocket.hpp>
 #include <XPG/Network/TcpSocket.hpp>
 #include <XPG/Network/TcpListener.hpp>
-#include <XPG/Joystick.hpp>
-#include <XPG/JoystickManager.hpp>
 #include <XPG/Clock.hpp>
 #include <XPG/TimeSpan.hpp>
+#include <XPG/STL/StreamExtensions.hpp>
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -112,11 +111,18 @@ void SuperSimpleWebServer()
 
 int main(int argc, char** argv)
 {
+    XPG::ResetTimer();
+
     if (XPG::OpenSockets())
     {
         //SuperSimpleWebServer();
         HttpGoogle();
         XPG::CloseSockets();
+
+        XPG::TimeSpan start = XPG::ReadTimer();
+        XPG::Sleep(XPG::TimeSpan::FromMilliseconds(1234));
+        XPG::TimeSpan finish = XPG::ReadTimer();
+        cout << (finish - start) << endl;
     }
     else
     {
